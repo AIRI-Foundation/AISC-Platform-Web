@@ -1,4 +1,5 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface FAQItem {
   id: number;
@@ -7,6 +8,7 @@ interface FAQItem {
 }
 
 const BuildCompanyProfile = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: "",
     websiteUrl: "",
@@ -75,7 +77,7 @@ const BuildCompanyProfile = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Company profile form submitted", formData);
+    navigate("/success");
   };
 
   return (
