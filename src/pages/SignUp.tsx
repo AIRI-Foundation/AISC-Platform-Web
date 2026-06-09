@@ -1,4 +1,5 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface FAQItem {
   id: number;
@@ -7,6 +8,7 @@ interface FAQItem {
 }
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -75,8 +77,7 @@ const SignUp = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // TODO: Add signup submission logic
-    console.log("Signup form submitted", formData);
+    navigate("/verify-email");
   };
 
   return (
@@ -239,9 +240,6 @@ const SignUp = () => {
                 >
                   <option>Founder</option>
                   <option>Investor</option>
-                  <option>Startup</option>
-                  <option>Advisor</option>
-                  <option>Partner</option>
                 </select>
               </label>
             </div>

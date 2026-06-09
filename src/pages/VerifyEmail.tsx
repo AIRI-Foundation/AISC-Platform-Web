@@ -1,6 +1,8 @@
 import { type FormEvent, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -34,8 +36,7 @@ const VerifyEmail = () => {
     event.preventDefault();
     const otpCode = otp.join("");
     if (otpCode.length === 5) {
-      console.log("OTP submitted:", otpCode);
-      // TODO: Add OTP verification logic
+      navigate("/build-company-profile");
     }
   };
 
