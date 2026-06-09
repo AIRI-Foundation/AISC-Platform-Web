@@ -1,4 +1,8 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../services/authService";
+import { setSession } from "../lib/auth";
+import { getErrorMessage } from "../lib/api";
 
 interface FAQItem {
   id: number;
@@ -14,6 +18,10 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
+
+  const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const faqItems: FAQItem[] = [
     {
@@ -63,9 +71,29 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Login form submitted", formData);
+    setError(null);
+    setSubmitting(true);
+    try {
+      const auth = await login({
+        email: formData.email,
+        password: formData.password,
+      });
+      setSession(auth.token, auth.email, auth.role);
+      // TEMP: remove before merge: confirms login succeeded + token is stored.
+      console.log("Logged in:", {
+        email: auth.email,
+        role: auth.role,
+        token: auth.token,
+        tokenInStorage: localStorage.getItem("aisc_token"),
+      });
+      navigate("/"); // or "/founder-portal"
+    } catch (err) {
+      setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -135,7 +163,7 @@ const Login = () => {
             </label>
 
             <label className="space-y-2 text-sm font-medium text-slate-800">
-              Confirm password
+              Password
               <div className="relative">
                 <input
                   name="password"
@@ -177,11 +205,18 @@ const Login = () => {
               </div>
             </label>
 
+            {error && (
+              <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+                {error}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
+              disabled={submitting}
+              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Login
+              {submitting ? "Logging in..." : "Login"}
             </button>
 
             <p className="text-center text-sm text-slate-600">
