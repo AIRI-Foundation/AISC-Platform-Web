@@ -1,8 +1,20 @@
 import { type FormEvent, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { verifyOtp } from "../services/authService";
+import { setSession } from "../lib/auth";
+import { getErrorMessage } from "../lib/api";
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const navigate = useNavigate();
+
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const location = useLocation();
+  const email = location.state?.email;
 
   const handleChange = (index: number, value: string) => {
     const newOtp = [...otp];
@@ -30,14 +42,49 @@ const VerifyEmail = () => {
     }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const otpCode = otp.join("");
-    if (otpCode.length === 5) {
-      console.log("OTP submitted:", otpCode);
-      // TODO: Add OTP verification logic
+
+    if (otpCode.length !== 5) {
+      setError("Please enter the full verification code.");
+      return;
     }
-  };
+
+    if (!email) {
+      setError("Email information is missing.");
+      return;
+    }
+
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const auth = await verifyOtp({
+        email,
+        otp: otpCode,
+      });
+
+      setSession(
+        auth.token,
+        auth.email,
+        auth.role,
+      );
+
+      console.log("Verified:", {
+        email: auth.email,
+        role: auth.role,
+        token: auth.token,
+      });
+
+      navigate("/");
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setSubmitting(false);
+    }
+  };  
+
 
   return (
     <div className="min-h-screen bg-[#0f2b5c] text-white">

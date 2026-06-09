@@ -103,7 +103,10 @@ const SignUp = () => {
     setSuccess(
       "Account created. Check your email for a verification code."
     );    
-    navigate("/login"); // or "/verify-email"
+    navigate("/verify-email", {
+      state: {
+      email: formData.businessEmail,
+      },});
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
