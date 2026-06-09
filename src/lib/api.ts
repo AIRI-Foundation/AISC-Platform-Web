@@ -2,9 +2,10 @@ import axios from "axios";
 import { getToken, clearSession } from "./auth";
 
 // The address of our backend. Comes from .env.local, or falls back to the live one.
-const BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://aisc-platform-api.fly.dev";
-
+//const BASE_URL =
+  //import.meta.env.VITE_API_BASE_URL || "https://aisc-platform-api.fly.dev";
+const BASE_URL = "http://localhost:5044";
+console.log("BASE_URL =", BASE_URL);
 // One axios object we use for all our requests.
 export const api = axios.create({
   baseURL: BASE_URL,

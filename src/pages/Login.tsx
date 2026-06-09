@@ -1,4 +1,8 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
+import { login } from "../services/authService";
+import { setSession } from "../lib/auth";
+import { getErrorMessage } from "../lib/api";
+import { useNavigate } from "react-router-dom";
 
 interface FAQItem {
   id: number;
@@ -7,6 +11,7 @@ interface FAQItem {
 }
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -63,14 +68,37 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("Login form submitted", formData);
-  };
+  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   console.log("Login form submitted", formData);
+  // };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => 
+{
+  event.preventDefault();
+
+  try {
+    const auth = await login({
+      email: formData.email,
+      password: formData.password,
+    });
+    
+    setSession(
+      auth.token,
+      auth.email,
+      auth.role
+    );
+    navigate("/");
+  }
+  catch (error) {
+    console.error(error);
+    alert(getErrorMessage(error));
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#0f2b5c] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-6">
+      <div className="mx-auto max-sw-7xl px-6 py-6">
         <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
             <div className="rounded-2xl border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-slate-100">
