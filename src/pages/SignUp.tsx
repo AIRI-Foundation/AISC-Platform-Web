@@ -1,4 +1,8 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { register } from "../services/authService";
+//import { setSession } from "../lib/auth";
+import { getErrorMessage } from "../lib/api";
 
 interface FAQItem {
   id: number;
@@ -14,11 +18,17 @@ const SignUp = () => {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
-    role: "Founder",
+    role: 1,
     agreeTerms: false,
   });
 
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
+  
+  const navigate = useNavigate();
+
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const faqItems: FAQItem[] = [
     {
@@ -73,11 +83,37 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // TODO: Add signup submission logic
-    console.log("Signup form submitted", formData);
+    setSubmitting(true);
+    setError(null);  
+
+  try {
+    await register({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.businessEmail,
+      phoneNumber: formData.phoneNumber,
+      password: formData.password,
+      confirmPassword: formData.confirmPassword,
+      role: formData.role,
+      agreeToTerms: formData.agreeTerms
+    }); 
+
+    setSuccess(
+      "Account created. Check your email for a verification code."
+    );    
+    navigate("/verify-email", {
+      state: {
+      email: formData.businessEmail,
+      },});
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setSubmitting(false);
+    } 
   };
+console.log("Registration successful");
 
   return (
     <div className="min-h-screen bg-[#0f2b5c] text-white">
