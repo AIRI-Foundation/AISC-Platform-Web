@@ -29,7 +29,7 @@ const SignUp = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const faqItems: FAQItem[] = [
     {
       id: 0,
@@ -77,6 +77,8 @@ const SignUp = () => {
     const checked =
       type === "checkbox" && "checked" in target ? target.checked : false;
 
+    const newValue = type === "checkbox" ? checked : value;
+
     setFormData((current) => ({
       ...current,
       [name]:
@@ -85,6 +87,22 @@ const SignUp = () => {
           : name === "role"
             ? Number(value)
             : value,
+    }));
+
+    if (typeof newValue === "string") {
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: validateField(name, newValue),
+      }));
+    }    
+  };
+
+  const handleBlur = (name: string, value: string) => {
+    setTouched((prev) => ({ ...prev, [name]: true }));
+
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: validateField(name, value),
     }));
   };
 
@@ -103,6 +121,30 @@ const SignUp = () => {
     return null;
   };
 
+  const [formErrors, setFormErrors] = useState<{
+  firstName?: string;
+  lastName?: string;
+  businessEmail?: string;
+  phoneNumber?: number;
+  }>({});
+
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case "firstName":
+        return value.trim() ? "" : "First name is required";
+      case "lastName":
+        return value.trim() ? "" : "Last name is required";
+      case "businessEmail":
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+          ? ""
+          : "Valid email required";
+      case "phoneNumber":
+        return value.trim() ? "" : "Phone number is required";          
+      default:
+        return "";
+    }
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
@@ -118,6 +160,10 @@ const SignUp = () => {
       return;
     }
 
+    if (formData.agreeTerms !== true) {
+      setError("Please accept the terms & conditions");
+      return;
+    }
     setSubmitting(true);
 
   try {
@@ -209,10 +255,16 @@ console.log("Registration successful");
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
+                  onBlur={(e) => handleBlur(e.target.name, e.target.value)}
                   className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                   type="text"
                   placeholder="First name"
                 />
+              {formErrors.firstName && formErrors.firstName &&(
+                <p className="text-sm text-red-500">
+                  {formErrors.firstName}
+                </p>
+              )}                
               </label>
               <label className="space-y-2 text-sm font-medium text-slate-800">
                 Last name
@@ -220,10 +272,16 @@ console.log("Registration successful");
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
+                  onBlur={(e) => handleBlur(e.target.name, e.target.value)}
                   className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                   type="text"
                   placeholder="Last name"
                 />
+              {formErrors.lastName && formErrors.lastName &&(
+                  <p className="text-sm text-red-500">
+                    {formErrors.lastName}
+                  </p>
+                )}                
               </label>
             </div>
 
@@ -233,10 +291,16 @@ console.log("Registration successful");
                 name="businessEmail"
                 value={formData.businessEmail}
                 onChange={handleChange}
+                onBlur={(e) => handleBlur(e.target.name, e.target.value)}
                 className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                 type="email"
                 placeholder="you@business.com"
               />
+                {formErrors.businessEmail && formErrors.businessEmail &&(
+                  <p className="text-sm text-red-500">
+                    {formErrors.businessEmail}
+                  </p>
+                )}              
             </label>
 
             <label className="space-y-2 text-sm font-medium text-slate-800">
@@ -245,10 +309,16 @@ console.log("Registration successful");
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
+                onBlur={(e) => handleBlur(e.target.name, e.target.value)}
                 className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                 type="tel"
                 placeholder="(123) 456-7890"
               />
+              {formErrors.phoneNumber && formErrors.phoneNumber && (
+                <p className="text-sm text-red-500">
+                  {formErrors.phoneNumber}
+                </p>
+              )}                 
             </label>
 
             <div className="grid gap-4 sm:grid-cols-2">
