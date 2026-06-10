@@ -169,7 +169,11 @@ const VerifyEmail = () => {
                 Verify email
               </button>
             </form>
-
+            {error && (
+              <div className="mt-6 mx-auto w-full max-w-sm rounded-xl bg-red-500/10 border border-red-500/30 p-3 text-sm text-red-300">
+                {error}
+              </div>
+            )}
             <p className="mt-8 text-sm text-slate-400">
               Didn't receive the code?{" "}
               <a
