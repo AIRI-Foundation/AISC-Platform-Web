@@ -25,6 +25,6 @@ export async function sendOtp(body: SendOtpRequest): Promise<void> {
 
   // Send the code back to confirm the email returns the token, email and role
   export async function verifyOtp(body: VerifyOtpRequest): Promise<AuthData> {
-    const res = await api.post("/api/Notifications/verify-otp", body);
+    const res = await api.post("/api/Notifications/verify-email", body);
     return res.data.data;
   }
