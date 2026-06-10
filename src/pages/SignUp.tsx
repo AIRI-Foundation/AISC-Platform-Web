@@ -79,14 +79,46 @@ const SignUp = () => {
 
     setFormData((current) => ({
       ...current,
-      [name]: type === "checkbox" ? checked : value,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : name === "role"
+            ? Number(value)
+            : value,
     }));
+  };
+
+  // Returns an error message if the password fails a rule, otherwise null.
+  const validatePassword = (password: string): string | null => {
+    if (password.length < 8)
+      return "Password must be at least 8 characters long.";
+    if (!/[a-z]/.test(password))
+      return "Password must include at least one lowercase character.";
+    if (!/[A-Z]/.test(password))
+      return "Password must include at least one uppercase character.";
+    if (!/[0-9]/.test(password))
+      return "Password must include at least one number.";
+    if (!/[^A-Za-z0-9]/.test(password))
+      return "Password must include at least one symbol.";
+    return null;
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setError(null);
+
+    const passwordError = validatePassword(formData.password);
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     setSubmitting(true);
-    setError(null);  
 
   try {
     await register({
@@ -262,6 +294,14 @@ console.log("Registration successful");
                     <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
                     a symbol
                   </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
+                    At least one lowercase character
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
+                    At least one uppercase character
+                  </li>
                 </ul>
               </div>
 
@@ -273,11 +313,11 @@ console.log("Registration successful");
                   onChange={handleChange}
                   className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                 >
-                  <option>Founder</option>
-                  <option>Investor</option>
-                  <option>Startup</option>
-                  <option>Advisor</option>
-                  <option>Partner</option>
+                  <option value={1}>Founder</option>
+                  <option value={2}>Investor</option>
+                  <option value={3}>Startup</option>
+                  <option value={4}>Advisor</option>
+                  <option value={5}>Partner</option>
                 </select>
               </label>
             </div>
@@ -299,11 +339,23 @@ console.log("Registration successful");
               </label>
             </div>
 
+            {error && (
+              <div className="rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+                {error}
+              </div>
+            )}
+            {success && (
+              <div className="rounded-2xl border border-green-300 bg-green-50 px-4 py-3 text-sm text-green-700">
+                {success}
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
+              disabled={submitting}
+              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Create Account
+              {submitting ? "Creating account..." : "Create Account"}
             </button>
 
             <p className="text-center text-sm text-slate-600">

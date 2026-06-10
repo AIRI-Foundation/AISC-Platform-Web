@@ -134,8 +134,8 @@ const VerifyEmail = () => {
             </h1>
             <p className="mx-auto mt-6 max-w-md text-base text-slate-300">
               A 5-digit code has been sent to{" "}
-              <span className="font-semibold">[insert email]</span>, please
-              enter it below
+              <span className="font-semibold">{email ?? "your email"}</span>,
+              please enter it below
             </p>
 
             <form
