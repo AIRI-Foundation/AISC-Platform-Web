@@ -60,24 +60,24 @@ const VerifyEmail = () => {
     setError(null);
 
     try {
-      const auth = await verifyOtp({
+      await verifyOtp({
         email,
         otp: otpCode,
       });
 
-      setSession(
-        auth.token,
-        auth.email,
-        auth.role,
-      );
+      // setSession(
+      //   auth.token,
+      //   auth.email,
+      //   auth.role,
+      // );
 
-      console.log("Verified:", {
-        email: auth.email,
-        role: auth.role,
-        token: auth.token,
-      });
+      // console.log("Verified:", {
+      //   email: auth.email,
+      //   role: auth.role,
+      //   token: auth.token,
+      // });
 
-      navigate("/");
+      navigate("/success");
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
