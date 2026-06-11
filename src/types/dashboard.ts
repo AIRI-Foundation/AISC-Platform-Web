@@ -1,0 +1,66 @@
+export interface UserProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+}
+
+export interface DashboardStats {
+  spectrumLevel: number;
+  spectrumLevelLabel: string;
+  spectrumLevelSublabel: string;
+  stagesCompleted: number;
+  totalStages: number;
+  allStagesVerified: boolean;
+  profileVisibility: string;
+  profileVisibilitySublabel: string;
+  daysOnPlatform: number;
+  memberSince: string;
+}
+
+export interface DashboardStage {
+  stageNumber: number;
+  title: string;
+  status: string;
+  milestonesVerified: number;
+  totalMilestones: number;
+  levelBoundaryAfter: number | null;
+}
+
+export interface StageOverviewData {
+  stagesCompleted: number;
+  totalStages: number;
+  stages: DashboardStage[];
+}
+
+export interface DashboardAction {
+  priority: string;
+  stageNumber: number;
+  milestoneNumber: number;
+  stageLabel: string;
+  milestoneTitle: string;
+  description: string;
+  status: string;
+}
+
+export interface NextActionsData {
+  actions: DashboardAction[];
+  progressMessage: string;
+}
+
+export interface DashboardActivity {
+  type: string;
+  headline: string;
+  detail: string;
+  occurredAt: string;
+}
+
+export interface DashboardUser {
+  firstName: string;
+  fullName: string;
+  email: string;
+  initials: string;
+  companyName: string;
+  spectrumLevel: number;
+  notificationCount: number;
+}
