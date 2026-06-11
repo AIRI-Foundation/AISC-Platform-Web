@@ -29,7 +29,7 @@ const SignUp = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [, setTouched] = useState<Record<string, boolean>>({});
   const faqItems: FAQItem[] = [
     {
       id: 0,
