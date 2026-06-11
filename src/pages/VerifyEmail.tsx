@@ -1,10 +1,20 @@
 import { type FormEvent, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { verifyOtp } from "../services/authService";
+import { setSession } from "../lib/auth";
+import { getErrorMessage } from "../lib/api";
 
 const VerifyEmail = () => {
-  const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const navigate = useNavigate();
+
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const location = useLocation();
+  const email = location.state?.email;
 
   const handleChange = (index: number, value: string) => {
     const newOtp = [...otp];
@@ -32,13 +42,49 @@ const VerifyEmail = () => {
     }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const otpCode = otp.join("");
-    if (otpCode.length === 5) {
-      navigate("/build-company-profile");
+
+    if (otpCode.length !== 5) {
+      setError("Please enter the full verification code.");
+      return;
     }
-  };
+
+    if (!email) {
+      setError("Email information is missing.");
+      return;
+    }
+
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      await verifyOtp({
+        email,
+        otp: otpCode,
+      });
+
+      // setSession(
+      //   auth.token,
+      //   auth.email,
+      //   auth.role,
+      // );
+
+      // console.log("Verified:", {
+      //   email: auth.email,
+      //   role: auth.role,
+      //   token: auth.token,
+      // });
+
+      navigate("/success");
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setSubmitting(false);
+    }
+  };  
+
 
   return (
     <div className="min-h-screen bg-[#0f2b5c] text-white">
@@ -88,8 +134,8 @@ const VerifyEmail = () => {
             </h1>
             <p className="mx-auto mt-6 max-w-md text-base text-slate-300">
               A 5-digit code has been sent to{" "}
-              <span className="font-semibold">[insert email]</span>, please
-              enter it below
+              <span className="font-semibold">{email ?? "your email"}</span>,
+              please enter it below
             </p>
 
             <form
@@ -123,7 +169,11 @@ const VerifyEmail = () => {
                 Verify email
               </button>
             </form>
-
+            {error && (
+              <div className="mt-6 mx-auto w-full max-w-sm rounded-xl bg-red-500/10 border border-red-500/30 p-3 text-sm text-red-300">
+                {error}
+              </div>
+            )}
             <p className="mt-8 text-sm text-slate-400">
               Didn't receive the code?{" "}
               <a
