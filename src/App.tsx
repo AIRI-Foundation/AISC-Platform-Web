@@ -13,6 +13,7 @@ import Success from "./pages/Success";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Pricing from "./pages/Pricing";
+import ChangePassword from "./pages/ChangePassword";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/error" element={<Error />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/change-password" element={<ChangePassword />} />        
       </Routes>
     </BrowserRouter>
   );

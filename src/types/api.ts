@@ -31,3 +31,9 @@ export interface AuthData {
   email: string;
   role: string;
 }
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
