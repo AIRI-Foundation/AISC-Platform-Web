@@ -17,7 +17,8 @@ const ForgotPassword = () => {
     otp: "",
     newPassword: "",
     confirmPassword: "",  
-  });  
+  });
+
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -202,7 +203,7 @@ return (
 
 
                 {/* NEW PASSWORD */}
-                <label className="space-y-2 text-sm font-medium text-slate-800">
+                <label className="text-sm font-medium text-slate-800">
                   New password
                   <input
                     name="newPassword"
@@ -214,15 +215,17 @@ return (
                     onBlur={() => handleBlur("newPassword")}
                   />
                 {getError("newPassword", formData.newPassword) && (
-                  <p className="text-red-500 text-sm mt-1">
+                  <p className="text-red-500 text-sm">
                     {getError("newPassword", formData.newPassword)}
                   </p>
-                )}                  
+                )}
+                <p className="mb-2">
+                  </p>                             
                 </label>
 
 
                 {/* CONFIRM PASSWORD */}
-                <label className="space-y-2 text-sm font-medium text-slate-800">
+                <label className="text-sm font-medium text-slate-800">
                   Confirm password
                   <input
                     name="confirmPassword"
@@ -234,10 +237,12 @@ return (
                     onBlur={() => handleBlur("confirmPassword")}
                   />
                 {getError("confirmPassword", formData.confirmPassword) && (
-                  <p className="text-red-500 text-sm mt-1">
+                  <p className="text-red-500 text-sm">
                     {getError("confirmPassword", formData.confirmPassword)}
                   </p>     
-                )}                                  
+                )}
+                <p className="mb-2">
+                  </p>                                             
                 </label>
 
 

@@ -87,24 +87,22 @@ const SignUp = () => {
           : name === "role"
             ? Number(value)
             : value,
-    }));
-
-    if (typeof newValue === "string") {
-      setFormErrors((prev) => ({
-        ...prev,
-        [name]: validateField(name, newValue),
-      }));
-    }    
+    })); 
   };
 
-  const handleBlur = (name: string, value: string) => {
-    setTouched((prev) => ({ ...prev, [name]: true }));
+  const isEmpty = (value: string) => value.trim() === "";
 
-    setFormErrors((prev) => ({
+  const handleBlur = (name: string) => {
+    setTouched((prev) => ({
       ...prev,
-      [name]: validateField(name, value),
+      [name]: true,
     }));
   };
+
+  const getError = (name: string, value: string) => {
+    if (!touched[name]) return "";
+    return value.trim() === "" ? "This field is required" : "";
+  };  
 
   // Returns an error message if the password fails a rule, otherwise null.
   const validatePassword = (password: string): string | null => {
@@ -121,29 +119,29 @@ const SignUp = () => {
     return null;
   };
 
-  const [formErrors, setFormErrors] = useState<{
-  firstName?: string;
-  lastName?: string;
-  businessEmail?: string;
-  phoneNumber?: number;
-  }>({});
+  // const [formErrors, setFormErrors] = useState<{
+  // firstName?: string;
+  // lastName?: string;
+  // businessEmail?: string;
+  // phoneNumber?: number;
+  // }>({});
 
-  const validateField = (name: string, value: string) => {
-    switch (name) {
-      case "firstName":
-        return value.trim() ? "" : "First name is required";
-      case "lastName":
-        return value.trim() ? "" : "Last name is required";
-      case "businessEmail":
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-          ? ""
-          : "Valid email required";
-      case "phoneNumber":
-        return value.trim() ? "" : "Phone number is required";          
-      default:
-        return "";
-    }
-  };
+  // const validateField = (name: string, value: string) => {
+  //   switch (name) {
+  //     case "firstName":
+  //       return value.trim() ? "" : "First name is required";
+  //     case "lastName":
+  //       return value.trim() ? "" : "Last name is required";
+  //     case "businessEmail":
+  //       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+  //         ? ""
+  //         : "Valid email required";
+  //     case "phoneNumber":
+  //       return value.trim() ? "" : "Phone number is required";          
+  //     default:
+  //       return "";
+  //   }
+  // };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -250,80 +248,84 @@ console.log("Registration successful");
         <div className="mx-auto mt-12 max-w-4xl rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="space-y-2 text-sm font-medium text-slate-800">
+              <label className="text-sm font-medium text-slate-800">
                 First name
                 <input
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  onBlur={(e) => handleBlur(e.target.name, e.target.value)}
+                  onBlur={() => handleBlur("firstName")}
                   className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                   type="text"
                   placeholder="First name"
                 />
-              {formErrors.firstName && formErrors.firstName &&(
-                <p className="text-sm text-red-500">
-                  {formErrors.firstName}
-                </p>
-              )}                
+                {getError("firstName", formData.firstName) && (
+                  <p className="text-red-500 text-sm">
+                    {getError("firstName", formData.firstName)}
+                  </p>
+                )}               
               </label>
-              <label className="space-y-2 text-sm font-medium text-slate-800">
+              <label className="text-sm font-medium text-slate-800">
                 Last name
                 <input
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  onBlur={(e) => handleBlur(e.target.name, e.target.value)}
+                  onBlur={() => handleBlur("lastName")}
                   className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                   type="text"
                   placeholder="Last name"
                 />
-              {formErrors.lastName && formErrors.lastName &&(
-                  <p className="text-sm text-red-500">
-                    {formErrors.lastName}
+                {getError("lastName", formData.lastName) && (
+                  <p className="text-red-500 text-sm">
+                    {getError("lastName", formData.lastName)}
                   </p>
                 )}                
               </label>
             </div>
 
-            <label className="space-y-2 text-sm font-medium text-slate-800">
+            <label className="text-sm font-medium text-slate-800">
               Business email
               <input
                 name="businessEmail"
                 value={formData.businessEmail}
                 onChange={handleChange}
-                onBlur={(e) => handleBlur(e.target.name, e.target.value)}
+                onBlur={() => handleBlur("businessEmail")}
                 className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                 type="email"
                 placeholder="you@business.com"
               />
-                {formErrors.businessEmail && formErrors.businessEmail &&(
-                  <p className="text-sm text-red-500">
-                    {formErrors.businessEmail}
+                {getError("businessEmail", formData.businessEmail) && (
+                  <p className="text-red-500 text-sm">
+                    {getError("businessEmail", formData.businessEmail)}
                   </p>
-                )}              
+                )}   
+                <p className="mb-2">
+                  </p>                              
             </label>
 
-            <label className="space-y-2 text-sm font-medium text-slate-800">
+            <label className="text-sm font-medium text-slate-800">
               Phone number
               <input
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                onBlur={(e) => handleBlur(e.target.name, e.target.value)}
+                onBlur={() => handleBlur("phoneNumber")}
                 className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                 type="tel"
                 placeholder="(123) 456-7890"
               />
-              {formErrors.phoneNumber && formErrors.phoneNumber && (
-                <p className="text-sm text-red-500">
-                  {formErrors.phoneNumber}
-                </p>
-              )}                 
+                {getError("phoneNumber", formData.phoneNumber) && (
+                  <p className="text-red-500 text-sm">
+                    {getError("phoneNumber", formData.phoneNumber)}
+                  </p>
+                )}    
+                <p className="mb-2">
+                  </p>               
             </label>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="space-y-2 text-sm font-medium text-slate-800">
+              <label className="text-sm font-medium text-slate-800">
                 Create password
                 <input
                   name="password"
@@ -332,9 +334,15 @@ console.log("Registration successful");
                   className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                   type="password"
                   placeholder="Create password"
+                  onBlur={() => handleBlur("password")}
                 />
+                {getError("password", formData.password) && (
+                  <p className="text-red-500 text-sm">
+                    {getError("password", formData.password)}
+                  </p>
+                )}                   
               </label>
-              <label className="space-y-2 text-sm font-medium text-slate-800">
+              <label className="text-sm font-medium text-slate-800">
                 Confirm password
                 <input
                   name="confirmPassword"
@@ -343,7 +351,13 @@ console.log("Registration successful");
                   className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                   type="password"
                   placeholder="Confirm password"
+                  onBlur={() => handleBlur("confirmPassword")}
                 />
+                {getError("confirmPassword", formData.confirmPassword) && (
+                  <p className="text-red-500 text-sm">
+                    {getError("confirmPassword", formData.confirmPassword)}
+                  </p>
+                )}                   
               </label>
             </div>
 
