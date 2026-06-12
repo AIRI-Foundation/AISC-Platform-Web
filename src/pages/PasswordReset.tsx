@@ -1,7 +1,6 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { login } from "../services/authService";
-import { setSession } from "../lib/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { PasswordReset } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 
 interface FAQItem {
@@ -10,19 +9,20 @@ interface FAQItem {
   answer: string;
 }
 
-const Login = () => {
+const ForgotPassword = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
-  });
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
-
-  const navigate = useNavigate();
-  const [submitting, setSubmitting] = useState(false);
+    otp: "",
+    newPassword: "",
+    confirmPassword: "",  
+  });  
   const [error, setError] = useState<string | null>(null);
-
+  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
+    
   const faqItems: FAQItem[] = [
     {
       id: 0,
@@ -69,34 +69,32 @@ const Login = () => {
       ...current,
       [name]: value,
     }));
-  };
+  };  
+  const handleSubmit = async (
+    e: React.FormEvent
+  ) => {
+    e.preventDefault();
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     setError(null);
-    setSubmitting(true);
+    setLoading(true);
+
     try {
-      const auth = await login({
+      await PasswordReset({
         email: formData.email,
-        password: formData.password,
+        Otp: formData.otp,
+        NewPassword: formData.newPassword,
+        ConfirmPassword: formData.confirmPassword
       });
-      setSession(auth.token, auth.email, auth.role);
-      // TEMP: remove before merge: confirms login succeeded + token is stored.
-      console.log("Logged in:", {
-        email: auth.email,
-        role: auth.role,
-        token: auth.token,
-        tokenInStorage: localStorage.getItem("aisc_token"),
-      });
-      navigate("/"); // or "/founder-portal"
+
+    navigate("/verify-email")
     } catch (err) {
-      setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API
+      setError(getErrorMessage(err));
     } finally {
-      setSubmitting(false);
+      setLoading(false);
     }
   };
 
-  return (
+return (
     <div className="min-h-screen bg-[#0f2b5c] text-white">
       <div className="mx-auto max-w-7xl px-6 py-6">
         <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -139,16 +137,16 @@ const Login = () => {
 
         <section className="mt-16 text-center">
           <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
-            Welcome back
+            PASSWORD RESETTER!!!
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
-            Lorem ipsum dolor sit amet consectetur.
+            If an account with that email exists an email will be sent
             <br />
-            Sed nibh consequat eget in.
+            with instructions on how to reset your password.
           </p>
         </section>
 
-        <div className="mx-auto mt-12 max-w-md rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
+        <div className="mx-auto mt-12 max-w-xl rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <label className="space-y-2 text-sm font-medium text-slate-800">
               Email
@@ -160,71 +158,29 @@ const Login = () => {
                 type="email"
                 placeholder="you@business.com"
               />
-            </label>
-
-            <label className="space-y-2 text-sm font-medium text-slate-800">
-              Password
-              <div className="relative">
-                <input
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-slate-700"
-                  aria-label="Toggle password visibility"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    {showPassword ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-4.803m5.596-3.856a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    ) : (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7C7.523 19 3.732 16.057 2.458 12z"
-                      />
-                    )}
-                  </svg>
-                </button>
-              </div>
-            </label>
-            <p className="mt-2 text-right text-xs text-slate-600">
-              <a
-                href="/reset-otp"
-                className="font-semibold text-black hover:underline"
-              >
-                Forgot Password?
-              </a>
-            </p>       
+            </label>            
             {error && (
               <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
                 {error}
               </p>
             )}
+            <div className="flex gap-3 mt-2">
+              <button
+                type="submit"
+                disabled={submitting}
+                className="flex-1 rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {submitting ? "Sending Verification Code..." : "Reset Password"}
+              </button>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {submitting ? "Logging in..." : "Login"}
-            </button>
+              <button
+                type="button"
+                onClick={() => window.history.back()}
+                className="flex-1 rounded-2xl bg-[#0f2b5c] text-white border border-slate-300 px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-slate-700 transition hover:bg-slate-100"
+              >
+                Back
+              </button>
+            </div>
 
             <p className="text-center text-sm text-slate-600">
               Don't have an account?{" "}
@@ -451,4 +407,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

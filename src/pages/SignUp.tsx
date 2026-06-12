@@ -184,6 +184,7 @@ const SignUp = () => {
     navigate("/verify-email", {
       state: {
       email: formData.businessEmail,
+      mode: "email-verification",
       },});
     } catch (err) {
       setError(getErrorMessage(err));

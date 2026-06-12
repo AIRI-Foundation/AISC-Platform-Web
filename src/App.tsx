@@ -7,7 +7,7 @@ import Advisory from "./pages/Advisory";
 import InvestorHub from "./pages/InvestorHub";
 import FounderPortal from "./pages/FounderPortal";
 import SignUp from "./pages/SignUp";
-import VerifyEmail from "./pages/VerifyEmail";
+import VerifyOtp from "./pages/VerifyOtp";
 import BuildCompanyProfile from "./pages/BuildCompanyProfile";
 import Success from "./pages/Success";
 import Error from "./pages/Error";
@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import Pricing from "./pages/Pricing";
 import ChangePassword from "./pages/ChangePassword";
 import SendPasswordResetOtp from "./pages/sendPasswordResetOtp";
+import PasswordReset from "./pages/PasswordReset";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route path="/investor-hub" element={<InvestorHub />} />
         <Route path="/founder-portal" element={<FounderPortal />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/verify-email" element={<VerifyOtp />} />
         <Route
           path="/build-company-profile"
           element={<BuildCompanyProfile />}
@@ -38,7 +39,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/change-password" element={<ChangePassword />} />   
-        <Route path="/reset-otp" element={<SendPasswordResetOtp />} />               
+        <Route path="/reset-otp" element={<SendPasswordResetOtp />} />
+        <Route path="/reset-password" element={<PasswordReset />} />                       
       </Routes>
     </BrowserRouter>
   );

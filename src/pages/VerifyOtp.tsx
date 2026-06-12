@@ -1,6 +1,7 @@
 import { type FormEvent, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { verifyOtp } from "../services/authService";
+import { sendPasswordResetOtp } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 
 const VerifyEmail = () => {
@@ -14,7 +15,8 @@ const VerifyEmail = () => {
 
   const location = useLocation();
   const email = location.state?.email;
-
+  const mode = location.state?.mode;
+  
   const handleChange = (index: number, value: string) => {
     const newOtp = [...otp];
 
@@ -57,31 +59,38 @@ const VerifyEmail = () => {
 
     setSubmitting(true);
     setError(null);
+    if (mode === "email-verification") {
+      try {
+        await verifyOtp({
+          email,
+          otp: otpCode,
+        });
 
-    try {
-      await verifyOtp({
-        email,
-        otp: otpCode,
-      });
-
-      // setSession(
-      //   auth.token,
-      //   auth.email,
-      //   auth.role,
-      // );
-
-      // console.log("Verified:", {
-      //   email: auth.email,
-      //   role: auth.role,
-      //   token: auth.token,
-      // });
-
-      navigate("/success");
-    } catch (err) {
-      setError(getErrorMessage(err));
-    } finally {
-      setSubmitting(false);
+        navigate("/success");
+      } catch (err) {
+        setError(getErrorMessage(err));
+      } finally {
+        setSubmitting(false);
+      }
     }
+    if (mode === "password-reset") {
+      try {
+        await verifyOtp({ //CHANGE
+          email,
+          otp: otpCode,
+        });   
+        navigate("/reset-password", {
+          state: {
+          email,
+          otp: otpCode,
+          },
+        });
+      } catch (err) {
+        setError(getErrorMessage(err));
+      } finally {
+        setSubmitting(false);
+      }
+    }               
   };  
 
 
