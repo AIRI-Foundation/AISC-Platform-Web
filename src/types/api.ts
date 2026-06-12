@@ -37,3 +37,7 @@ export interface ChangePasswordRequest {
   newPassword: string;
   confirmPassword: string;
 }
+
+export interface sendPasswordResetOtpRequest {
+  email: string;
+}

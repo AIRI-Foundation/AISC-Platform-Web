@@ -18,7 +18,6 @@ const ChangePassword = () => {
     setSuccess(null);
     setLoading(true);
 
-    // frontend validation (important)
     if (formData.newPassword !== formData.confirmPassword) {
       setError("Passwords do not match");
       setLoading(false);
