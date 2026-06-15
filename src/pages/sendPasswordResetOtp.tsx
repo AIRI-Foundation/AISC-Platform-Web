@@ -81,7 +81,7 @@ const ForgotPassword = () => {
     navigate("/verify-email", {
       state: {
       email: formData.email,
-      mode: "email-verification",
+      mode: "password-reset",
       },});
     } catch (err) {
       setError(getErrorMessage(err));

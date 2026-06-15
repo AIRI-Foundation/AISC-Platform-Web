@@ -206,7 +206,7 @@ return (
                     value={formData.currentPassword}
                     onChange={handleChange}
                     className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                    type="text"
+                    type="password"
                     placeholder="Enter current password"
                     onBlur={() => handleBlur("currentPassword")}
                   />

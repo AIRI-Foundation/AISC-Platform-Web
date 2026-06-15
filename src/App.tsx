@@ -9,7 +9,8 @@ import FounderPortal from "./pages/FounderPortal";
 import SignUp from "./pages/SignUp";
 import VerifyOtp from "./pages/VerifyOtp";
 import BuildCompanyProfile from "./pages/BuildCompanyProfile";
-import Success from "./pages/Success";
+import AuthenticationSuccess from "./pages/AuthenticationSuccess";
+import PasswordResetSuccess from "./pages/PasswordResetSuccess";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Pricing from "./pages/Pricing";
@@ -34,13 +35,14 @@ function App() {
           path="/build-company-profile"
           element={<BuildCompanyProfile />}
         />
-        <Route path="/success" element={<Success />} />
+        <Route path="/authentication-success" element={<AuthenticationSuccess />} />
+        <Route path="/password-success" element={<PasswordResetSuccess />} />        
         <Route path="/error" element={<Error />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/change-password" element={<ChangePassword />} />   
         <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
-        <Route path="/reset-password" element={<PasswordReset />} />                       
+        <Route path="/password-reset" element={<PasswordReset />} />                       
       </Routes>
     </BrowserRouter>
   );

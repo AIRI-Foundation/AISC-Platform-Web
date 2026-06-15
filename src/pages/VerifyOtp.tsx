@@ -66,7 +66,7 @@ const VerifyEmail = () => {
           otp: otpCode,
         });
 
-        navigate("/success");
+        navigate("/authentication-success");
       } catch (err) {
         setError(getErrorMessage(err));
       } finally {
@@ -79,7 +79,7 @@ const VerifyEmail = () => {
           email,
           otp: otpCode,
         });   
-        navigate("/reset-password", {
+        navigate("/password-reset", {
           state: {
           email,
           otp: otpCode,

@@ -2,6 +2,7 @@ import { type ChangeEvent, type FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PasswordReset } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
+import { useLocation } from "react-router-dom";
 
 interface FAQItem {
   id: number;
@@ -13,8 +14,6 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: "",
-    otp: "",
     newPassword: "",
     confirmPassword: "",  
   });
@@ -26,6 +25,9 @@ const ForgotPassword = () => {
   const [success, setSuccess] = useState<string | null>(null);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
+  const location = useLocation();
+  const stateEmail = location.state?.email;
+  const stateOtp = location.state?.otp;
   const faqItems: FAQItem[] = [
     {
       id: 0,
@@ -133,13 +135,13 @@ const getError = (name: string, value: string) => {
 
     try {
       await PasswordReset({
-        email: formData.email,
-        Otp: formData.otp,
+        email: stateEmail,
+        Otp: stateOtp,
         NewPassword: formData.newPassword,
         ConfirmPassword: formData.confirmPassword
       });
 
-    navigate("/verify-email")
+    navigate("/password-success")
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
@@ -210,7 +212,7 @@ return (
                     value={formData.newPassword}
                     onChange={handleChange}
                     className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                    type="text"
+                    type="password"
                     placeholder="Enter new password"
                     onBlur={() => handleBlur("newPassword")}
                   />

@@ -43,6 +43,6 @@ export async function sendPasswordResetOtp(body: sendPasswordResetOtpRequest): P
 }
 
 export async function PasswordReset(body: PasswordResetRequest): Promise<void> {
-  const res = await api.post("/api/Auth/reset-password", body);
+  const res = await api.post("/api/Auth/password-reset", body);
   return res.data;
 }
