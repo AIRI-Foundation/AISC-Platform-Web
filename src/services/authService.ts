@@ -23,7 +23,7 @@ export async function login(body: LoginRequest): Promise<AuthData> {
 
 // Ask the backend to email a code
 export async function sendOtp(body: SendOtpRequest): Promise<void> {
-  await api.post("/api/Notifications/send-otp", body);
+  await api.post("/api/Notifications/send-email", body);
 }
 
   // Send the code back to confirm the email returns the token, email and role
