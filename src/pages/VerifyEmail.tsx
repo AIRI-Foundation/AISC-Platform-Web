@@ -82,7 +82,7 @@ const VerifyEmail = () => {
     } finally {
       setSubmitting(false);
     }
-  };  
+  };
 
 
   return (
