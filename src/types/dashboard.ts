@@ -55,6 +55,19 @@ export interface DashboardActivity {
   occurredAt: string;
 }
 
+export interface UserCompany {
+  id: string;
+  name: string;
+  industry: string;
+  city: string;
+  province: string;
+  aiCategory: string;
+  productStage: string;
+  teamSize: number | null;
+  fundingYear: number | null;
+  website: string;
+}
+
 export interface DashboardUser {
   firstName: string;
   fullName: string;

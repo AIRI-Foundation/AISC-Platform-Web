@@ -1,7 +1,6 @@
 import { type FormEvent, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { verifyOtp } from "../services/authService";
-import { setSession } from "../lib/auth";
 import { getErrorMessage } from "../lib/api";
 
 const VerifyEmail = () => {
@@ -83,7 +82,7 @@ const VerifyEmail = () => {
     } finally {
       setSubmitting(false);
     }
-  };  
+  };
 
 
   return (
@@ -163,7 +162,7 @@ const VerifyEmail = () => {
 
               <button
                 type="submit"
-                disabled={otp.some((digit) => !digit)}
+                disabled={submitting || otp.some((digit) => !digit)}
                 className="rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition enabled:hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Verify email

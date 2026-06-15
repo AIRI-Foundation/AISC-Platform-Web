@@ -13,7 +13,6 @@ import Success from "./pages/Success";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Pricing from "./pages/Pricing";
-import Overview from "./pages/Overview";
 
 function App() {
   return (
@@ -36,7 +35,6 @@ function App() {
         <Route path="/error" element={<Error />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/overview" element={<Overview />} />
       </Routes>
     </BrowserRouter>
   );

@@ -22,7 +22,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Overview", href: "/overview", icon: OverviewIcon, active: true },
+  { label: "Overview", href: "/founder-portal", icon: OverviewIcon, active: true },
   {
     label: "Milestone Tracker",
     href: "/milestone-tracker",

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { api } from "../lib/api";
 import type {
   UserProfile,
@@ -5,6 +6,7 @@ import type {
   StageOverviewData,
   NextActionsData,
   DashboardActivity,
+  UserCompany,
 } from "../types/dashboard";
 
 export async function getProfile(): Promise<UserProfile> {
@@ -30,4 +32,16 @@ export async function getNextActions(): Promise<NextActionsData> {
 export async function getRecentActivity(): Promise<DashboardActivity[]> {
   const res = await api.get("/api/Dashboard/recent-activity");
   return res.data.data.activities;
+}
+
+export async function getUserCompany(): Promise<UserCompany | null> {
+  try {
+    const res = await api.get("/api/Company/get-user-company");
+    return res.data.data as UserCompany;
+  } catch (err) {
+    if (axios.isAxiosError(err) && err.response?.status === 404) {
+      return null;
+    }
+    throw err;
+  }
 }
