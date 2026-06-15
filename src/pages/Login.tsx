@@ -206,7 +206,7 @@ const Login = () => {
             </label>
             <p className="mt-2 text-right text-xs text-slate-600">
               <a
-                href="/reset-otp"
+                href="/password-reset-otp"
                 className="font-semibold text-black hover:underline"
               >
                 Forgot Password?

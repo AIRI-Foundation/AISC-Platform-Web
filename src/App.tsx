@@ -39,7 +39,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/change-password" element={<ChangePassword />} />   
-        <Route path="/reset-otp" element={<SendPasswordResetOtp />} />
+        <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
         <Route path="/reset-password" element={<PasswordReset />} />                       
       </Routes>
     </BrowserRouter>
