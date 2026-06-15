@@ -1,5 +1,5 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { sendPasswordResetOtp } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 

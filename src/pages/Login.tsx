@@ -81,13 +81,6 @@ const Login = () => {
         password: formData.password,
       });
       setSession(auth.token, auth.email, auth.role);
-      // TEMP: remove before merge: confirms login succeeded + token is stored.
-      console.log("Logged in:", {
-        email: auth.email,
-        role: auth.role,
-        token: auth.token,
-        tokenInStorage: localStorage.getItem("aisc_token"),
-      });
       navigate("/"); // or "/founder-portal"
     } catch (err) {
       setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API

@@ -1,7 +1,6 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
-//import { setSession } from "../lib/auth";
 import { getErrorMessage } from "../lib/api";
 
 interface FAQItem {
@@ -77,7 +76,7 @@ const SignUp = () => {
     const checked =
       type === "checkbox" && "checked" in target ? target.checked : false;
 
-    const newValue = type === "checkbox" ? checked : value;
+    // const newValue = type === "checkbox" ? checked : value;
 
     setFormData((current) => ({
       ...current,
@@ -90,7 +89,7 @@ const SignUp = () => {
     })); 
   };
 
-  const isEmpty = (value: string) => value.trim() === "";
+  // const isEmpty = (value: string) => value.trim() === "";
 
   const handleBlur = (name: string) => {
     setTouched((prev) => ({
@@ -118,30 +117,6 @@ const SignUp = () => {
       return "Password must include at least one symbol.";
     return null;
   };
-
-  // const [formErrors, setFormErrors] = useState<{
-  // firstName?: string;
-  // lastName?: string;
-  // businessEmail?: string;
-  // phoneNumber?: number;
-  // }>({});
-
-  // const validateField = (name: string, value: string) => {
-  //   switch (name) {
-  //     case "firstName":
-  //       return value.trim() ? "" : "First name is required";
-  //     case "lastName":
-  //       return value.trim() ? "" : "Last name is required";
-  //     case "businessEmail":
-  //       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-  //         ? ""
-  //         : "Valid email required";
-  //     case "phoneNumber":
-  //       return value.trim() ? "" : "Phone number is required";          
-  //     default:
-  //       return "";
-  //   }
-  // };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

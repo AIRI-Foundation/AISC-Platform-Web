@@ -1,5 +1,5 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PasswordReset } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 import { useLocation } from "react-router-dom";
@@ -75,8 +75,6 @@ const ForgotPassword = () => {
     const checked =
       type === "checkbox" && "checked" in target ? target.checked : false;
 
-    const newValue = type === "checkbox" ? checked : value;
-
     setFormData((current) => ({
       ...current,
       [name]:
@@ -87,8 +85,6 @@ const ForgotPassword = () => {
             : value,
     }));  
   };
-
-  const isEmpty = (value: string) => value.trim() === "";
 
   const handleBlur = (name: string) => {
     setTouched((prev) => ({

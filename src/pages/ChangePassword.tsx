@@ -72,8 +72,6 @@ const ChangePassword = () => {
     const checked =
       type === "checkbox" && "checked" in target ? target.checked : false;
 
-    const newValue = type === "checkbox" ? checked : value;
-
     setFormData((current) => ({
       ...current,
       [name]:
@@ -84,8 +82,6 @@ const ChangePassword = () => {
             : value,
     }));  
   };
-
-  const isEmpty = (value: string) => value.trim() === "";
 
   const handleBlur = (name: string) => {
     setTouched((prev) => ({
