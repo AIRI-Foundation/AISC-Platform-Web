@@ -1,9 +1,10 @@
 import { type FormEvent, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { verifyOtp } from "../services/authService";
+import { verifyEmail } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 
-const VerifyEmail = () => {
+const VerifyOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -60,7 +61,7 @@ const VerifyEmail = () => {
     setError(null);
     if (mode === "email-verification") {
       try {
-        await verifyOtp({
+        await verifyEmail({
           email,
           otp: otpCode,
         });
@@ -80,8 +81,7 @@ const VerifyEmail = () => {
         });   
         navigate("/password-reset", {
           state: {
-          email,
-          otp: otpCode,
+          email
           },
         });
       } catch (err) {
@@ -359,4 +359,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default VerifyOtp;

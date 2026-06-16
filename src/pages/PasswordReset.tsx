@@ -27,7 +27,6 @@ const ForgotPassword = () => {
 
   const location = useLocation();
   const stateEmail = location.state?.email;
-  const stateOtp = location.state?.otp;
   const faqItems: FAQItem[] = [
     {
       id: 0,
@@ -132,7 +131,6 @@ const getError = (name: string, value: string) => {
     try {
       await PasswordReset({
         email: stateEmail,
-        Otp: stateOtp,
         NewPassword: formData.newPassword,
         ConfirmPassword: formData.confirmPassword
       });

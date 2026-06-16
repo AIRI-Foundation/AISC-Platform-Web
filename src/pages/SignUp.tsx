@@ -154,7 +154,7 @@ const SignUp = () => {
     setSuccess(
       "Account created. Check your email for a verification code."
     );    
-    navigate("/verify-email", {
+    navigate("/verify-otp", {
       state: {
       email: formData.businessEmail,
       mode: "email-verification",

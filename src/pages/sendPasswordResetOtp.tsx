@@ -78,7 +78,7 @@ const ForgotPassword = () => {
     try {
       await sendPasswordResetOtp(formData);
 
-    navigate("/verify-email", {
+    navigate("/verify-otp", {
       state: {
       email: formData.email,
       mode: "password-reset",

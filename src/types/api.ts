@@ -25,6 +25,11 @@ export interface VerifyOtpRequest {
   otp: string;
 }
 
+export interface VerifyEmailRequest {
+  email: string;
+  otp: string;
+}
+
 // What /login and /verify-otp give back inside data
 export interface AuthData {
   token: string;
@@ -44,7 +49,6 @@ export interface sendPasswordResetOtpRequest {
 
 export interface PasswordResetRequest {
   email: string;
-  Otp: string;
   NewPassword: string;
   ConfirmPassword: string;
 }

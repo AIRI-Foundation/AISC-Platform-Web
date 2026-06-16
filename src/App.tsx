@@ -30,7 +30,7 @@ function App() {
         <Route path="/investor-hub" element={<InvestorHub />} />
         <Route path="/founder-portal" element={<FounderPortal />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/verify-email" element={<VerifyOtp />} />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route
           path="/build-company-profile"
           element={<BuildCompanyProfile />}
