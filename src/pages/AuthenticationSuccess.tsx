@@ -18,7 +18,7 @@ const Success = () => {
           </p>
 
           <a
-            href="/founder-portal"
+            href="/dashboard/overview"
             className="mt-28 inline-flex items-center justify-center rounded-lg bg-[#dc2626] px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
           >
             Go to dashboard

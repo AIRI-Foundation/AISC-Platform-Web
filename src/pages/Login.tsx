@@ -39,7 +39,7 @@ const Login = () => {
         password: formData.password,
       });
       setSession(auth.token, auth.email, auth.role);
-      navigate("/founder-portal");
+      navigate("/dashboard/overview");
     } catch (err) {
       setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API
     } finally {
