@@ -15,7 +15,7 @@ function priorityLabel(priority: string): string {
 
 function priorityStyle(priority: string): string {
   const value = priority.toLowerCase();
-  if (value === "high") return "bg-red-50 text-[#dc2626] border border-red-200";
+  if (value === "high") return "bg-red-50 text-red border border-red-200";
   if (value === "low")
     return "bg-green-50 text-[#16a34a] border border-green-200";
   return "bg-amber-50 text-amber-600 border border-amber-200";
@@ -75,7 +75,7 @@ const NextActions = ({ actions, progressMessage }: NextActionsProps) => {
               </div>
               <button
                 type="button"
-                className="shrink-0 rounded-lg bg-[#dc2626] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#b91c1c]"
+                className="shrink-0 rounded-lg bg-red px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-dark"
               >
                 Upload Document
               </button>

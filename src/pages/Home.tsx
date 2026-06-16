@@ -37,9 +37,9 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0f2b5c] text-white">
+    <div className="min-h-screen bg-navy text-white">
         <div className="min-h-screen bg-white text-slate-900">
-          <div className="bg-[#0f2b5c] text-white">
+          <div className="bg-navy text-white">
             <Header />
             <div className="mx-auto max-w-7xl px-6 py-6">              
 
@@ -50,7 +50,7 @@ const Home = () => {
 
                 <h1 className="mx-auto mt-8 max-w-4xl text-5xl font-bold leading-tight text-white sm:text-6xl">
                   The{" "}
-                  <span className="text-[#f8d547]">
+                  <span className="text-gold">
                     Verified Intelligence Layer
                   </span>{" "}
                   for Canadian AI Innovation
@@ -66,7 +66,7 @@ const Home = () => {
                 <div className="mt-12 flex flex-col gap-4 justify-center sm:flex-row">
                   <a
                     href="/directory"
-                    className="inline-flex items-center justify-center rounded-lg bg-[#dc2626] px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
+                    className="inline-flex items-center justify-center rounded-lg bg-red px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
                   >
                     Browse the Directory
                   </a>
@@ -105,7 +105,7 @@ const Home = () => {
               </div>
             </div>
           </section>
-          <div className="bg-[#0f2b5c] text-white">
+          <div className="bg-navy text-white">
             <div className="mx-auto max-w-7xl px-6 py-6">
               <BottomSection />
             </div>

@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     //Full
-    <header className="w-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] bg-[#0a1f3c]/15">
+    <header className="w-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] bg-dark-blue/15">
       <div className="mx-auto max-w-7xl px-6 py-4">
           {/* Small */}
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -23,7 +23,7 @@ export default function Header() {
                       </div>
 
                       <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        <span className="text-[#f8d547]">AISC PLATFORM</span>
+                        <span className="text-gold">AISC PLATFORM</span>
                       </p>
                     </div>
                   </div>
@@ -52,7 +52,7 @@ export default function Header() {
 
             <a
               href="/signup"
-              className="rounded-md bg-[#dc2626] px-3 py-2.25 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
+              className="rounded-md bg-red px-3 py-2.25 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
             >
               SIGN UP/LOGIN
             </a>

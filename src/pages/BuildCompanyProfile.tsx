@@ -40,7 +40,7 @@ const BuildCompanyProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f2b5c] text-white">
+    <div className="min-h-screen bg-navy text-white">
       <Header />    
       <div className="mx-auto max-w-7xl px-6 py-6">
 
@@ -211,7 +211,7 @@ const BuildCompanyProfile = () => {
 
             <button
               type="submit"
-              className="mx-auto block rounded-2xl bg-[#dc2626] px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
+              className="mx-auto block rounded-2xl bg-red px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
             >
               Submit
             </button>

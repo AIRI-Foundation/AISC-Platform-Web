@@ -104,7 +104,7 @@ const getError = (name: string, value: string) => {
   };
 
 return (
-    <div className="min-h-screen bg-[#0f2b5c] text-white">
+    <div className="min-h-screen bg-navy text-white">
       <Header />      
       <div className="mx-auto max-w-7xl px-6 py-6">        
 
@@ -216,7 +216,7 @@ return (
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 rounded-2xl bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? "Updating Password..." : "Update Password"}
             </button>

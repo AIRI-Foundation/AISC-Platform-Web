@@ -94,7 +94,7 @@ const VerifyOtp = () => {
 
 
   return (
-    <div className="min-h-screen bg-[#0f2b5c] text-white">  
+    <div className="min-h-screen bg-navy text-white">  
       <div className="mx-auto max-w-7xl px-6 py-6">
 
         <section className="mt-3 text-center">
@@ -124,7 +124,7 @@ const VerifyOtp = () => {
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="h-20 w-16 rounded-3xl border-2 border-white/30 bg-white/10 text-center text-2xl font-semibold text-white outline-none transition focus:border-[#f8d547] focus:ring-2 focus:ring-[#f8d547]/25 sm:h-24 sm:w-20"
+                    className="h-20 w-16 rounded-3xl border-2 border-white/30 bg-white/10 text-center text-2xl font-semibold text-white outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/25 sm:h-24 sm:w-20"
                     placeholder="0"
                     inputMode="numeric"
                   />
@@ -134,7 +134,7 @@ const VerifyOtp = () => {
               <button
                 type="submit"
                 disabled={submitting || otp.some((digit) => !digit)}
-                className="rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition enabled:hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="rounded-2xl bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition enabled:hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Verify email
               </button>
@@ -148,7 +148,7 @@ const VerifyOtp = () => {
               Didn't receive the code?{" "}
               <a
                 href="#"
-                className="font-semibold text-[#f8d547] transition hover:text-white"
+                className="font-semibold text-gold transition hover:text-white"
               >
                 Resend
               </a>

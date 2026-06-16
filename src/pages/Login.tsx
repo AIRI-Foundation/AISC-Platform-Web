@@ -49,12 +49,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f2b5c] text-white">
+    <div className="min-h-screen bg-navy text-white">
       <Header />
       <div className="mx-auto max-w-7xl px-6 py-6">       
 
+        <div className="mx-auto mt-12 max-w-md rounded-[32px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
+        {/* Title */}
         <section className="mt-16 text-center">
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
             Welcome back
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
@@ -62,9 +64,8 @@ const Login = () => {
             <br />
             Sed nibh consequat eget in.
           </p>
-        </section>
-
-        <div className="mx-auto mt-12 max-w-md rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
+        </section>          
+          
           <form onSubmit={handleSubmit} className="space-y-6">
             <label className="space-y-2 text-sm font-medium text-slate-800">
               Email
@@ -137,7 +138,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-2xl bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? "Logging in..." : "Login"}
             </button>

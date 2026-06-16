@@ -128,7 +128,7 @@ const SignUp = () => {
 console.log("Registration successful");
 
   return (
-    <div className="min-h-screen bg-[#0f2b5c] text-white">
+    <div className="min-h-screen bg-navy text-white">
       <Header />      
       <div className="mx-auto max-w-7xl px-6 py-6">
 
@@ -137,7 +137,7 @@ console.log("Registration successful");
             Sign up
           </p>
           <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
-            Start using <span className="text-[#f8d547]">AISC</span> today!
+            Start using <span className="text-gold">AISC</span> today!
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
             Lorem ipsum dolor sit amet consectetur. Sed nibh consequat eget in.
@@ -337,7 +337,7 @@ console.log("Registration successful");
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-2xl bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? "Creating account..." : "Create Account"}
             </button>

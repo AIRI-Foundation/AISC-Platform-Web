@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-      <footer className="mt-16 border-t border-white/10 bg-[#0a1f3c] text-white">
+      <footer className="mt-16 border-t border-white/10 bg-dark-blue text-white">
         <div className="mx-auto max-w-7xl px-6 pt-6 pb-3">
           <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-x-20">
             <div className="sm:col-span-1">
@@ -22,7 +22,7 @@ export default function Footer() {
                       </div>
 
                       <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        <span className="text-[#f8d547]">AISC PLATFORM</span>
+                        <span className="text-gold">AISC PLATFORM</span>
                       </p>
                     </div>
                   </div>

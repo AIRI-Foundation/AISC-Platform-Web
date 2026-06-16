@@ -42,7 +42,7 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <div className="bg-[#0f2b5c] text-white">
+      <div className="bg-navy text-white">
         <Header />        
         <div className="mx-auto max-w-7xl px-6 py-6">
 
@@ -84,7 +84,7 @@ const Pricing = () => {
                   <span className="text-sm">List item</span>
                 </li>
               </ul>
-              <button className="mt-8 w-full rounded-lg bg-[#dc2626] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]">
+              <button className="mt-8 w-full rounded-lg bg-red px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark">
                 Try for free
               </button>
             </div>
@@ -118,7 +118,7 @@ const Pricing = () => {
                   <span className="text-sm">List item</span>
                 </li>
               </ul>
-              <button className="mt-8 w-full rounded-lg bg-[#dc2626] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]">
+              <button className="mt-8 w-full rounded-lg bg-red px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark">
                 Book a demo
               </button>
             </div>
@@ -152,7 +152,7 @@ const Pricing = () => {
                   <span className="text-sm">List item</span>
                 </li>
               </ul>
-              <button className="mt-8 w-full rounded-lg bg-[#dc2626] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]">
+              <button className="mt-8 w-full rounded-lg bg-red px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark">
                 Book a demo
               </button>
             </div>
@@ -185,7 +185,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      <section className="bg-[#0f2b5c] px-6 py-16 text-white">
+      <section className="bg-navy px-6 py-16 text-white">
         <div className="mx-auto max-w-7xl">
           <h2 className="text-center text-3xl font-bold sm:text-4xl">
             Lorem ipsum
@@ -395,7 +395,7 @@ const Pricing = () => {
         </div>
       </section>
       <section>
-          <div className="bg-[#0f2b5c] text-white">
+          <div className="bg-navy text-white">
             <div className="mx-auto max-w-7xl px-6 py-6">
               <BottomSection />
             </div>
