@@ -88,7 +88,7 @@ const Login = () => {
         token: auth.token,
         tokenInStorage: localStorage.getItem("aisc_token"),
       });
-      navigate("/founder-portal");
+      navigate("/dashboard/overview");
     } catch (err) {
       setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API
     } finally {
