@@ -1,3 +1,5 @@
+import Footer from "../components/general/IndividualComponents/Footer"
+
 const Success = () => {
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
@@ -22,6 +24,11 @@ const Success = () => {
           </a>
         </div>
       </div>
+      <div className="bg-[#0f2b5c] text-white">
+
+      <Footer />
+      </div>
+
     </div>
   );
 };

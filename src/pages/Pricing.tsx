@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
+import Header from "../components/general/IndividualComponents/Header"
 
 const Pricing = () => {
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
@@ -42,44 +43,8 @@ const Pricing = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <div className="bg-[#0f2b5c] text-white">
+        <Header />        
         <div className="mx-auto max-w-7xl px-6 py-6">
-          <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-              <div className="rounded-2xl border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-slate-100">
-                AI Startups Canada
-              </div>
-              <div className="text-sm uppercase tracking-[0.25em] text-slate-300">
-                AISC PLATFORM
-              </div>
-            </div>
-
-            <nav className="hidden gap-8 text-sm text-slate-200 md:flex">
-              <a href="/" className="transition hover:text-white">
-                Home
-              </a>
-              <a href="/directory" className="transition hover:text-white">
-                Directory
-              </a>
-              <a href="/spectrum" className="transition hover:text-white">
-                AISC Spectrum
-              </a>
-              <a href="/pricing" className="transition hover:text-white">
-                Pricing
-              </a>
-              <a href="#" className="transition hover:text-white">
-                FR
-              </a>
-            </nav>
-
-            <div className="flex items-center gap-2">
-              <a
-                href="/signup"
-                className="inline-flex items-center justify-center rounded-full bg-[#dc2626] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
-              >
-                Sign up/ Login
-              </a>
-            </div>
-          </header>
 
           <section className="mt-16 text-center">
             <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">

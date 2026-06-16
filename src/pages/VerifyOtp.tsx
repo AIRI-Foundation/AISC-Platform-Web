@@ -4,10 +4,6 @@ import { verifyOtp } from "../services/authService";
 import { verifyEmail } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 
-import Footer from "../components/general/IndividualComponents/Footer";
-import Header from "../components/general/IndividualComponents/Header";
-import BottomSection from "../components/general/BottomSection";
-
 const VerifyOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
