@@ -77,7 +77,7 @@ const BuildCompanyProfile = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/success");
+    navigate("/authentication-success");
   };
 
   return (

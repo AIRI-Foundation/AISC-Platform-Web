@@ -4,7 +4,11 @@ import type {
   LoginRequest,
   SendOtpRequest,
   VerifyOtpRequest,
+  VerifyEmailRequest,
   AuthData,
+  ChangePasswordRequest,
+  sendPasswordResetOtpRequest,
+  PasswordResetRequest,
 } from "../types/api";
 
 // Create a new account The backend doesn't send a token back here
@@ -25,6 +29,27 @@ export async function sendOtp(body: SendOtpRequest): Promise<void> {
 
   // Send the code back to confirm the email returns the token, email and role
   export async function verifyOtp(body: VerifyOtpRequest): Promise<AuthData> {
+    const res = await api.post("/api/Notifications/verify-otp", body);
+    return res.data.data;
+  }
+
+  // Send the code back to confirm the email returns the token, email and role
+  export async function verifyEmail(body: VerifyEmailRequest): Promise<AuthData> {
     const res = await api.post("/api/Notifications/verify-email", body);
     return res.data.data;
   }
+
+  export async function changePassword(body: ChangePasswordRequest){
+  const res = await api.post("/api/Auth/change-password", body);
+  return res.data;
+}
+
+export async function sendPasswordResetOtp(body: sendPasswordResetOtpRequest): Promise<void> {
+  const res = await api.post("/api/Auth/password-reset-otp", body);
+  return res.data;
+}
+
+export async function PasswordReset(body: PasswordResetRequest): Promise<void> {
+  const res = await api.post("/api/Auth/password-reset", body);
+  return res.data;
+}

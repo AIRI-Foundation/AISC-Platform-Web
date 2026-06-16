@@ -5,6 +5,7 @@ const BASE_URL = import.meta.env.DEV
   ? ""
   : import.meta.env.VITE_API_BASE_URL || "https://aisc-platform-api.fly.dev";
 
+
 // One axios object we use for all our requests.
 export const api = axios.create({
   baseURL: BASE_URL,
