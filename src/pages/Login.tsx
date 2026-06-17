@@ -53,16 +53,16 @@ const Login = () => {
       <Header />
       <div className="mx-auto max-w-7xl px-6 py-6">       
 
-        <div className="mx-auto mt-12 max-w-md rounded-[32px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
+        <div className="mx-auto mt-8 max-w-lg rounded-[20px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
         {/* Title */}
-        <section className="mt-16 text-center">
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
+        <section className="mt-2 text-center">
+          <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
             Welcome back
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
-            Lorem ipsum dolor sit amet consectetur.
+          <p className="mx-auto mt-5 mb-5 max-w-2xl text-base text-slate-800 font-semibold text-lg">
+            Lorem ipsum dolor sit amet consectetur. Sed 
             <br />
-            Sed nibh consequat eget in.
+            nibh consequat eget in.
           </p>
         </section>          
           
@@ -73,20 +73,20 @@ const Login = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                className="w-full mb-2 rounded-[10px] border border-slate-300 bg-slate-50 px-4 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                 type="email"
                 placeholder="you@business.com"
               />
             </label>
 
-            <label className="space-y-2 text-sm font-medium text-slate-800">
+            <label className="space-y-2 text-sm font-medium text-slate-800 ">
               Password
               <div className="relative">
                 <input
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className="w-full rounded-[10px] border border-slate-300 bg-slate-50 px-4 py-2 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter password"
                 />
@@ -121,7 +121,7 @@ const Login = () => {
                 </button>
               </div>
             </label>
-            <p className="mt-2 text-right text-xs text-slate-600">
+            <p className="mt-4 text-right text-xs text-slate-600">
               <a
                 href="/password-reset-otp"
                 className="font-semibold text-black hover:underline"
@@ -138,7 +138,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-2xl bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-[14px] bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? "Logging in..." : "Login"}
             </button>
