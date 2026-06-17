@@ -1,7 +1,9 @@
+import Footer from "../components/general/IndividualComponents/Footer"
+
 const Success = () => {
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
-      <div className="flex flex-1 flex-col bg-[#0f2b5c] text-white">
+      <div className="flex flex-1 flex-col bg-navy text-white">
         <div className="mx-auto max-w-7xl px-6 py-6 w-full"></div>
 
         <div className="flex flex-1 flex-col items-center justify-center">
@@ -16,12 +18,17 @@ const Success = () => {
 
           <a
             href="/login"
-            className="mt-12 inline-flex items-center justify-center rounded-lg bg-[#dc2626] px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
+            className="mt-12 inline-flex items-center justify-center rounded-lg bg-red px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
           >
             Continue
           </a>
         </div>
       </div>
+      <div className="bg-navy text-white">
+
+      <Footer />
+      </div>
+
     </div>
   );
 };

@@ -42,13 +42,13 @@ const Sidebar = ({ fullName, email, initials }: SidebarProps) => {
     <aside className="hidden w-64 shrink-0 flex-col bg-[#102a54] text-white lg:flex">
       <div className="flex items-center gap-3 px-6 py-5">
         <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white">
-          <span className="text-[10px] font-bold leading-tight text-[#dc2626]">
+          <span className="text-[10px] font-bold leading-tight text-red">
             AISC
           </span>
         </div>
         <div className="leading-tight">
           <div className="text-base font-bold">AI Startups Canada</div>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#f8d547]">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
             AISC Platform
           </div>
         </div>

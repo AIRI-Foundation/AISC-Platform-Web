@@ -6,6 +6,7 @@ import { getErrorMessage } from "../lib/api";
 
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
+import Header from "../components/general/IndividualComponents/Header"
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -48,48 +49,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f2b5c] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-6">
-        <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <div className="rounded-2xl border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-slate-100">
-              AI Startups Canada
-            </div>
-            <div className="text-sm uppercase tracking-[0.25em] text-slate-300">
-              AISC PLATFORM
-            </div>
-          </div>
+    <div className="min-h-screen bg-navy text-white">
+      <Header />
+      <div className="mx-auto max-w-7xl px-6 py-6">       
 
-          <nav className="hidden gap-8 text-sm text-slate-200 md:flex">
-            <a href="/" className="transition hover:text-white">
-              Home
-            </a>
-            <a href="/directory" className="transition hover:text-white">
-              Directory
-            </a>
-            <a href="/spectrum" className="transition hover:text-white">
-              AISC Spectrum
-            </a>
-            <a href="/pricing" className="transition hover:text-white">
-              Pricing
-            </a>
-            <a href="#" className="transition hover:text-white">
-              FR
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <a
-              href="/signup"
-              className="inline-flex items-center justify-center rounded-full bg-[#dc2626] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
-            >
-              Sign up/ Login
-            </a>
-          </div>
-        </header>
-
+        <div className="mx-auto mt-12 max-w-md rounded-[32px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
+        {/* Title */}
         <section className="mt-16 text-center">
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
             Welcome back
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
@@ -97,9 +64,8 @@ const Login = () => {
             <br />
             Sed nibh consequat eget in.
           </p>
-        </section>
-
-        <div className="mx-auto mt-12 max-w-md rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
+        </section>          
+          
           <form onSubmit={handleSubmit} className="space-y-6">
             <label className="space-y-2 text-sm font-medium text-slate-800">
               Email
@@ -172,7 +138,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-2xl bg-[#dc2626] px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-2xl bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? "Logging in..." : "Login"}
             </button>
