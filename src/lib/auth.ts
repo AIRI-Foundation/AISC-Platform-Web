@@ -13,6 +13,11 @@ export function getToken(): string | null {
 }
 
 
+export function getRefreshToken(): string | null {
+  return localStorage.getItem("aisc_refresh");
+}
+
+
 export function getRole(): string | null {
   return localStorage.getItem("aisc_role");
 }
@@ -27,4 +32,5 @@ export function clearSession() {
   localStorage.removeItem("aisc_token");
   localStorage.removeItem("aisc_email");
   localStorage.removeItem("aisc_role");
+  localStorage.removeItem("aisc_refresh");
 }

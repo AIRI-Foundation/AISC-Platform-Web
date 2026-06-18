@@ -1,4 +1,5 @@
 import { api } from "../lib/api";
+import { getRefreshToken } from "../lib/auth";
 import type {
   RegisterRequest,
   LoginRequest,
@@ -28,3 +29,7 @@ export async function sendOtp(body: SendOtpRequest): Promise<void> {
     const res = await api.post("/api/Notifications/verify-email", body);
     return res.data.data;
   }
+
+export async function logout(): Promise<void> {
+  await api.post("/api/Auth/logout", { refreshToken: getRefreshToken() ?? "" });
+}

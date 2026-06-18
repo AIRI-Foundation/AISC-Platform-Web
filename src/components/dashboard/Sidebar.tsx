@@ -1,4 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   OverviewIcon,
   MilestoneIcon,
@@ -7,6 +9,9 @@ import {
   SettingsIcon,
   LogoutIcon,
 } from "./icons";
+import SignOutModal from "./SignOutModal";
+import { logout } from "../../services/authService";
+import { clearSession } from "../../lib/auth";
 
 interface SidebarProps {
   fullName: string;
@@ -34,6 +39,23 @@ const navItems: NavItem[] = [
 ];
 
 const Sidebar = ({ fullName, email, initials }: SidebarProps) => {
+  const navigate = useNavigate();
+  const [showSignOut, setShowSignOut] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+
+  const handleSignOut = async () => {
+    setSigningOut(true);
+    try {
+      await logout();
+    } catch {
+    } finally {
+      clearSession();
+      setSigningOut(false);
+      setShowSignOut(false);
+      navigate("/login");
+    }
+  };
+
   return (
     <aside className="hidden w-64 shrink-0 flex-col bg-[#102a54] text-white lg:flex">
       <div className="flex items-center gap-3 px-6 py-5">
@@ -90,12 +112,20 @@ const Sidebar = ({ fullName, email, initials }: SidebarProps) => {
           <button
             type="button"
             aria-label="Log out"
+            onClick={() => setShowSignOut(true)}
             className="text-slate-400 transition hover:text-white"
           >
             <LogoutIcon className="h-5 w-5" />
           </button>
         </div>
       </div>
+
+      <SignOutModal
+        open={showSignOut}
+        loading={signingOut}
+        onCancel={() => setShowSignOut(false)}
+        onConfirm={handleSignOut}
+      />
     </aside>
   );
 };
