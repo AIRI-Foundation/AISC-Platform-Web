@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     //Full
-    <header className="w-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] bg-dark-blue/15">
+    <header className="w-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] bg-dark-blue/15">
       <div className="mx-auto max-w-7xl px-6 py-4">
           {/* Small */}
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

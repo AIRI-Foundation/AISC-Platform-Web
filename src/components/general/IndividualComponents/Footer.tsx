@@ -2,7 +2,7 @@ export default function Footer() {
   return (
       <footer className="mt-16 border-t border-white/10 bg-dark-blue text-white">
         <div className="mx-auto max-w-7xl px-6 pt-6 pb-3">
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-x-20">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] lg:gap-x-20">
             <div className="sm:col-span-1">
               <div className="mb-4 flex flex-col gap-2">
                   {/* //ICON                            */}

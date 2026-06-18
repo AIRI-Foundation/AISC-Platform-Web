@@ -15,7 +15,7 @@ export default function FAQ({ items }: FAQProps) {
 
   return (
  
-        <section className="mt-14 border-t border-dashed border-white/20 pt-14">
+        <section className="mt-14  pt-14">
           <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">
             Frequently asked questions
           </h2>

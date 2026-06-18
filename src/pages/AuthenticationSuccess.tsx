@@ -4,10 +4,8 @@ import BottomSection from "../components/general/BottomSection";
 const Success = () => {
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
-      <div className="flex flex-1 flex-col bg-navy text-white">
-        <div className="mx-auto max-w-7xl px-6 py-6 w-full"></div>
+      <div className="flex flex-1 flex-col bg-navy text-white items-center justify-center">
 
-        <div className="flex flex-1 flex-col items-center justify-center">
           <h1 className="text-center text-5xl font-bold">
             Welcome to <span className="text-gold">AISC</span>
           </h1>
@@ -24,7 +22,6 @@ const Success = () => {
             Go to dashboard
           </a>
         </div>
-      </div>
       <div className="bg-navy text-white">
 
       <Footer />
