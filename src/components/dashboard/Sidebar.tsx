@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import type { ComponentType, SVGProps } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,19 +24,22 @@ interface NavItem {
   label: string;
   href: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
-  active?: boolean;
 }
 
 const navItems: NavItem[] = [
-  { label: "Overview", href: "/founder-portal", icon: OverviewIcon, active: true },
+  { label: "Overview", href: "/dashboard/overview", icon: OverviewIcon },
   {
     label: "Milestone Tracker",
-    href: "/milestone-tracker",
+    href: "/dashboard/milestone-tracker",
     icon: MilestoneIcon,
   },
-  { label: "Profile", href: "/founder-portal", icon: ProfileIcon },
-  { label: "Advisory Program", href: "/advisory", icon: AdvisoryIcon },
-  { label: "Settings", href: "/settings", icon: SettingsIcon },
+  { label: "Profile", href: "/dashboard/profile", icon: ProfileIcon },
+  {
+    label: "Advisory Program",
+    href: "/dashboard/advisory-program",
+    icon: AdvisoryIcon,
+  },
+  { label: "Settings", href: "/dashboard/settings", icon: SettingsIcon },
 ];
 
 const Sidebar = ({ fullName, email, initials }: SidebarProps) => {
@@ -60,13 +64,13 @@ const Sidebar = ({ fullName, email, initials }: SidebarProps) => {
     <aside className="hidden w-64 shrink-0 flex-col bg-[#102a54] text-white lg:flex">
       <div className="flex items-center gap-3 px-6 py-5">
         <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white">
-          <span className="text-[10px] font-bold leading-tight text-[#dc2626]">
+          <span className="text-[10px] font-bold leading-tight text-red">
             AISC
           </span>
         </div>
         <div className="leading-tight">
           <div className="text-base font-bold">AI Startups Canada</div>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#f8d547]">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
             AISC Platform
           </div>
         </div>
@@ -81,17 +85,19 @@ const Sidebar = ({ fullName, email, initials }: SidebarProps) => {
             const Icon = item.icon;
             return (
               <li key={item.label}>
-                <a
-                  href={item.href}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold uppercase tracking-wide transition ${
-                    item.active
-                      ? "bg-white/10 text-white"
-                      : "text-slate-300 hover:bg-white/5 hover:text-white"
-                  }`}
+                <NavLink
+                  to={item.href}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold uppercase tracking-wide transition ${
+                      isActive
+                        ? "bg-white/10 text-white"
+                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`
+                  }
                 >
                   <Icon className="h-5 w-5 shrink-0" />
                   {item.label}
-                </a>
+                </NavLink>
               </li>
             );
           })}

@@ -59,7 +59,7 @@ const Topbar = ({
           onFocus={() => results.length > 0 && setOpen(true)}
           onBlur={() => setTimeout(() => setOpen(false), 150)}
           placeholder="Company, technology, keyword..."
-          className="w-full rounded-full bg-white py-2.5 pl-12 pr-4 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#f8d547]"
+          className="w-full rounded-full bg-white py-2.5 pl-12 pr-4 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-gold"
         />
         {open && results.length > 0 && (
           <ul className="absolute left-0 right-0 top-full z-10 mt-2 overflow-hidden rounded-2xl bg-white text-slate-700 shadow-lg">
@@ -100,7 +100,7 @@ const Topbar = ({
         >
           <BellIcon className="h-6 w-6" />
           {notificationCount > 0 && (
-            <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#dc2626] text-[10px] font-bold">
+            <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red text-[10px] font-bold">
               {notificationCount}
             </span>
           )}

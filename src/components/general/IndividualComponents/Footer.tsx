@@ -1,45 +1,39 @@
-const Success = () => {
+export default function Footer() {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
-      <div className="flex flex-1 flex-col bg-[#0f2b5c] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-6 w-full"></div>
-
-        <div className="flex flex-1 flex-col items-center justify-center">
-          <h1 className="text-center text-5xl font-bold">
-            Welcome to <span className="text-[#f8d547]">AISC</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-center text-lg text-slate-300">
-            Your company has been successfully
-            <br />
-            authenticated
-          </p>
-
-          <a
-            href="/founder-portal"
-            className="mt-12 inline-flex items-center justify-center rounded-lg bg-[#dc2626] px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
-          >
-            Go to dashboard
-          </a>
-        </div>
-      </div>
-
-      <footer className="border-t border-white/10 bg-[#0a1f3c] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-12">
-          <div className="grid gap-8 sm:grid-cols-5">
+      <footer className="mt-16 border-t border-white/10 bg-dark-blue text-white">
+        <div className="mx-auto max-w-7xl px-6 pt-6 pb-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] lg:gap-x-20">
             <div className="sm:col-span-1">
               <div className="mb-4 flex flex-col gap-2">
-                <div className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-100">
-                  AI Startups Canada
-                </div>
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                  AISC PLATFORM
-                </p>
+                  {/* //ICON                            */}
+                <div className="rounded-lg border border-white/10 bg-white/3 px-3 py-2">
+                  <div className="flex items-center gap-3">
+                    <svg
+                      className="h-10 w-10"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7z" />
+                    </svg>
+
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-100">
+                        AI Startups Canada
+                      </div>
+
+                      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                        <span className="text-gold">AISC PLATFORM</span>
+                      </p>
+                    </div>
+                  </div>
+                  </div>
+
               </div>
-              <p className="text-xs text-slate-400">
-                Canada's AI Startups Intelligence Platform
+              <p className="text-xs text-slate-400 indent-1">
+                Canada's #1 AI Startups Intelligence Platform
               </p>
 
-              <div className="mt-6 flex gap-3">
+              <div className="mt-3 flex gap-3">
                 <a
                   href="#"
                   className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-slate-300 transition hover:bg-white/20"
@@ -82,7 +76,7 @@ const Success = () => {
               </div>
             </div>
 
-            <div>
+            <div className="flex flex-col w-fit">
               <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
               <ul className="space-y-2 text-sm text-slate-300">
                 <li>
@@ -103,7 +97,7 @@ const Success = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="flex flex-col w-fit">
               <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
               <ul className="space-y-2 text-sm text-slate-300">
                 <li>
@@ -124,7 +118,7 @@ const Success = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="flex flex-col w-fit">
               <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
               <ul className="space-y-2 text-sm text-slate-300">
                 <li>
@@ -145,7 +139,7 @@ const Success = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="flex flex-col w-fit">
               <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
               <ul className="space-y-2 text-sm text-slate-300">
                 <li>
@@ -168,8 +162,5 @@ const Success = () => {
           </div>
         </div>
       </footer>
-    </div>
   );
-};
-
-export default Success;
+}

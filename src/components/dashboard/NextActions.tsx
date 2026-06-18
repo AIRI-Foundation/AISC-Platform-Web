@@ -18,7 +18,7 @@ function priorityLabel(priority: string): string {
 
 function priorityStyle(priority: string): string {
   const value = priority.toLowerCase();
-  if (value === "high") return "bg-red-50 text-[#dc2626] border border-red-200";
+  if (value === "high") return "bg-red-50 text-red border border-red-200";
   if (value === "low")
     return "bg-green-50 text-[#16a34a] border border-green-200";
   return "bg-amber-50 text-amber-600 border border-amber-200";

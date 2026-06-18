@@ -26,7 +26,7 @@ function activityStyle(type: string): ActivityStyle {
     return {
       icon: AlertIcon,
       iconBg: "bg-red-50",
-      iconColor: "text-[#dc2626]",
+      iconColor: "text-red",
     };
   }
   return {
