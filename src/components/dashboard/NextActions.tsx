@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { ArrowRightIcon } from "./icons";
+import { uploadDocument, submitMilestone } from "../../services/documentService";
+import { getErrorMessage } from "../../lib/api";
 import type { DashboardAction } from "../../types/dashboard";
 
 interface NextActionsProps {
@@ -22,6 +25,26 @@ function priorityStyle(priority: string): string {
 }
 
 const NextActions = ({ actions, progressMessage }: NextActionsProps) => {
+  const [status, setStatus] = useState<Record<number, string>>({});
+  const [errors, setErrors] = useState<Record<number, string>>({});
+
+  const handleFile = async (
+    action: DashboardAction,
+    index: number,
+    file: File,
+  ) => {
+    setStatus((current) => ({ ...current, [index]: "Uploading..." }));
+    setErrors((current) => ({ ...current, [index]: "" }));
+    try {
+      const url = await uploadDocument(file);
+      await submitMilestone(action.stageNumber, action.milestoneNumber, url);
+      setStatus((current) => ({ ...current, [index]: "Submitted ✓" }));
+    } catch (err) {
+      setStatus((current) => ({ ...current, [index]: "" }));
+      setErrors((current) => ({ ...current, [index]: getErrorMessage(err) }));
+    }
+  };
+
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow-sm">
       <div className="flex items-start justify-between px-6 pt-6">
@@ -72,13 +95,24 @@ const NextActions = ({ actions, progressMessage }: NextActionsProps) => {
                 <p className="mt-2 text-sm text-slate-700">
                   {action.description || action.milestoneTitle}
                 </p>
+                {errors[index] && (
+                  <p className="mt-2 text-sm font-medium text-[#dc2626]">
+                    {errors[index]}
+                  </p>
+                )}
               </div>
-              <button
-                type="button"
-                className="shrink-0 rounded-lg bg-red px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-dark"
-              >
-                Upload Document
-              </button>
+              <label className="shrink-0 cursor-pointer rounded-lg bg-[#dc2626] px-5 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-[#b91c1c]">
+                {status[index] || "Upload Document"}
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+                    if (file) handleFile(action, index, file);
+                    event.target.value = "";
+                  }}
+                />
+              </label>
             </li>
           ))}
         </ul>

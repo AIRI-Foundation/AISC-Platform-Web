@@ -1,4 +1,5 @@
 import { api } from "../lib/api";
+import { getRefreshToken } from "../lib/auth";
 import type {
   RegisterRequest,
   LoginRequest,
@@ -39,7 +40,11 @@ export async function sendOtp(body: SendOtpRequest): Promise<void> {
     return res.data.data;
   }
 
-  export async function changePassword(body: ChangePasswordRequest){
+export async function logout(): Promise<void> {
+  await api.post("/api/Auth/logout", { refreshToken: getRefreshToken() ?? "" });
+}
+
+export async function changePassword(body: ChangePasswordRequest){
   const res = await api.post("/api/Auth/change-password", body);
   return res.data;
 }
