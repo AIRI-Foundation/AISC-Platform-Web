@@ -7,6 +7,7 @@ import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
 import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements"
+import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle"
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 import { textField } from "../components/general/IndividualComponents/Buttons";
 
@@ -28,6 +29,9 @@ const SignUp = () => {
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -35,8 +39,6 @@ const SignUp = () => {
     const { name, value, type } = target;
     const checked =
       type === "checkbox" && "checked" in target ? target.checked : false;
-
-    // const newValue = type === "checkbox" ? checked : value;
 
     setFormData((current) => ({
       ...current,
@@ -49,19 +51,12 @@ const SignUp = () => {
     })); 
   };
 
-  // const isEmpty = (value: string) => value.trim() === "";
-
   const handleBlur = (name: string) => {
     setTouched((prev) => ({
       ...prev,
       [name]: true,
     }));
   };
-
-  const getError = (name: string, value: string) => {
-    if (!touched[name]) return "";
-    return value.trim() === "" ? "This field is required" : "";
-  };  
 
   // Returns an error message if the password fails a rule, otherwise null.
   const validatePassword = (password: string): string | null => {
@@ -77,6 +72,23 @@ const SignUp = () => {
       return "Password must include at least one symbol.";
     return null;
   };
+
+  const hasFieldError = (name: string, value: string) => {
+    return touched[name] && value.trim() === "";
+  };
+
+  const getInputClass = (name: string, value: string, touched: boolean) =>
+  `${textField} ${
+     touched && hasFieldError(name, value)
+      ? "!border-red focus:border-red focus:ring-red/25"
+      : ""
+  }`;
+
+  const passwordsMatch =
+    formData.password === formData.confirmPassword;
+
+  const passwordValid =
+    validatePassword(formData.password) === null;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -141,121 +153,114 @@ const SignUp = () => {
           <form onSubmit={handleSubmit} className="space-y-1">
             <div className="grid gap-1 sm:grid-cols-2">
               <label className="text-sm font-medium">
-                <span className="text-red">*</span>First name
+                <span className="text-red">*</span> First name
                 <input
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
                   onBlur={() => handleBlur("firstName")}
-                  className={textField}
+                  className={getInputClass("firstName", formData.firstName, touched.firstName)}
                   placeholder="First name"
-                />
-                {getError("firstName", formData.firstName) && (
-                  <p className="text-red text-sm">
-                    {getError("firstName", formData.firstName)}
-                  </p>
-                )}               
+                />              
               </label>
               <label className="text-sm font-medium">
-                <span className="text-red">*</span>Last name
+                <span className="text-red">*</span> Last name
                 <input
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
                   onBlur={() => handleBlur("lastName")}
-                  className={textField}
+                  className={getInputClass("lastName", formData.lastName, touched.lastName)}
                   type="text"
                   placeholder="Last name"
-                />
-                {getError("lastName", formData.lastName) && (
-                  <p className="text-red text-sm">
-                    {getError("lastName", formData.lastName)}
-                  </p>
-                )}                
+                />              
               </label>
             </div>
 
             <label className="text-sm font-medium">
-              <span className="text-red">*</span>Business email
+              <span className="text-red">*</span> Business email
               <input
                 name="businessEmail"
                 value={formData.businessEmail}
                 onChange={handleChange}
                 onBlur={() => handleBlur("businessEmail")}
-                className={textField}
+                className={getInputClass("businessEmail", formData.businessEmail, touched.businessEmail)}
                 type="email"
                 placeholder="you@business.com"
-              />
-                {getError("businessEmail", formData.businessEmail) && (
-                  <p className="text-red text-sm">
-                    {getError("businessEmail", formData.businessEmail)}
-                  </p>
-                )}   
+              />  
                 <p className="mb-2">
                   </p>                              
             </label>
 
             <label className="text-sm font-medium">
-              <span className="text-red">*</span>Phone number
+              <span className="text-red">*</span> Phone number
               <input
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
                 onBlur={() => handleBlur("phoneNumber")}
-                className={textField}
+                className={getInputClass("phoneNumber", formData.phoneNumber, touched.phoneNumber)}
                 type="tel"
                 placeholder="(123) 456-7890"
-              />
-                {getError("phoneNumber", formData.phoneNumber) && (
-                  <p className="text-red text-sm">
-                    {getError("phoneNumber", formData.phoneNumber)}
-                  </p>
-                )}    
+              /> 
                 <p className="mb-2">
                   </p>               
             </label>
-
-
               <label className="text-sm font-medium">
-                <span className="text-red">*</span>Create password
-                <input
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={textField}
-                  type="password"
-                  placeholder="Create password"
-                  onBlur={() => handleBlur("password")}
-                />
-                {getError("password", formData.password) && (
-                  <p className="text-red text-sm">
-                    {getError("password", formData.password)}
-                  </p>
-                )}                   
+                <span className="text-red">*</span> Create password
+                <div className="relative">
+                  <input
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={`${textField} pr-10 ${
+                      touched.password && !passwordValid
+                        ? "!border-red focus:border-red focus:ring-red/25"
+                        : ""
+                    }`}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Create password"
+                    onBlur={() => handleBlur("confirmPassword")}
+                  />
+
+                  <PasswordToggle
+                    show={showPassword}
+                    onToggle={() =>
+                      setShowPassword(!showPassword)
+                    }
+                  />
+                </div>
               </label>
 
               <PasswordRequirements password={formData.password} />  
-
               <label className="text-sm font-medium">
-                <span className="text-red">*</span>Confirm password
-                <input
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className={textField}
-                  type="password"
-                  placeholder="Confirm password"
-                  onBlur={() => handleBlur("confirmPassword")}
-                />
-                {getError("confirmPassword", formData.confirmPassword) && (
-                  <p className="text-red text-sm">
-                    {getError("confirmPassword", formData.confirmPassword)}
-                  </p>
-                )}                   
+                <span className="text-red">*</span> Confirm password
+                <div className="relative">
+                  <input
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className={`${textField} pr-10 ${
+                      touched.confirmPassword && !passwordsMatch
+                        ? "!border-red focus:border-red focus:ring-red/25"
+                        : ""
+                    }`}
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirm password"
+                    onBlur={() => handleBlur("confirmPassword")}
+                  />
+
+                  <PasswordToggle
+                    show={showConfirmPassword}
+                    onToggle={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
+                  />
+                </div>
               </label>
 
               <label className="space-y-2 text-sm font-medium">
-                <span className="text-red">*</span>What describes you best?
+                <span className="text-red">*</span> What describes you best?
                 <select
                   name="role"
                   value={formData.role}
@@ -269,7 +274,7 @@ const SignUp = () => {
                   <option value={5}>Partner</option>
                 </select>
               </label>
-            <div className="flex items-start gap-3 mt-6 mb-6">
+            <div className="flex items-start gap-3 mt-2">
               <input
                 id="agreeTerms"
                 name="agreeTerms"
@@ -282,7 +287,16 @@ const SignUp = () => {
                 htmlFor="agreeTerms"
                 className="text-sm leading-6 text-slate-700 "
               >
-                I agree to terms & conditions
+                I agree to terms & conditions <span className="text-red">*</span>
+              </label>
+            </div>
+
+            <div className="flex items-start gap-3 mt-2 mb-6">
+              <label
+                htmlFor="agreeTerms"
+                className="text-sm leading-6 text-slate-700 "
+              >
+                <span className="text-red">*</span> Required Field
               </label>
             </div>
 
@@ -295,17 +309,14 @@ const SignUp = () => {
                 formData.phoneNumber == "" ||
                 formData.password == "" ||
                 formData.confirmPassword == "" ||
+                !passwordValid  ||  
+                !passwordsMatch ||                
                 formData.agreeTerms == false                                                                              
               }          
               className={buttonSubmit}
             >
               {submitting ? "Creating account..." : "Create Account"}
             </button>
-            {error && (
-              <div className="text-center mx-auto rounded-[6px] border-red/20 border-2 border py-1 w-full max-w-sm mt-1 mb-3 bg-red/10 text-md text-red-dark font-semibold">
-                {error}
-              </div>
-            )}  
 
             <p className="text-center mt-3 text-sm text-slate-600 mb-6">
               Already have an AISC account?{" "}

@@ -35,13 +35,6 @@ const ProgressBar = ({ progressPercentage } : {progressPercentage: number}) => {
           progressPercentage
         )}`}
       />
-
-      <div
-        style={{
-          left: `calc(${progressPercentage}% - 8px)`,
-        }}
-        className={`absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 ${getProgressColor(progressPercentage)} border-white shadow`}
-      />
     </div>
   );
 };
@@ -61,7 +54,7 @@ export default function PasswordRequirements({
     </p>
     <ProgressBar progressPercentage = {calculatedProgressPercentage}/>
     <ul className="space-y-1 text-sm">
-      <li className="flex items-start gap-3">
+      <li className="flex items-start gap-3 font-semibold">
         <Dot passed={requirements.minLength} />
       <span
         className={
@@ -74,7 +67,7 @@ export default function PasswordRequirements({
       </span>
       </li>
 
-      <li className="flex items-start gap-3">
+      <li className="flex items-start gap-3 font-semibold">
         <Dot passed={requirements.lowercase} />
         <span
           className={
@@ -87,7 +80,7 @@ export default function PasswordRequirements({
         </span>        
       </li>
 
-      <li className="flex items-start gap-3">
+      <li className="flex items-start gap-3 font-semibold">
         <Dot passed={requirements.uppercase} />
         <span
           className={
@@ -100,7 +93,7 @@ export default function PasswordRequirements({
         </span>           
       </li>
 
-      <li className="flex items-start gap-3">
+      <li className="flex items-start gap-3 font-semibold">
         <Dot passed={requirements.number} />
         <span
           className={
@@ -113,7 +106,7 @@ export default function PasswordRequirements({
         </span>           
       </li>
 
-      <li className="flex items-start gap-3">
+      <li className="flex items-start gap-3 font-semibold">
         <Dot passed={requirements.symbol} />
         <span
           className={

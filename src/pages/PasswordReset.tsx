@@ -8,6 +8,7 @@ import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
 import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements"
+import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle"
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 import { textField } from "../components/general/IndividualComponents/Buttons";
 
@@ -22,6 +23,9 @@ const ForgotPassword = () => {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const [showNewPassword, setShowNewPassword] = useState(false);  
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const location = useLocation();
   const stateEmail = location.state?.email;
@@ -42,10 +46,16 @@ const ForgotPassword = () => {
     }));
   };
 
-const getError = (name: string, value: string) => {
-  if (!touched[name]) return "";
-  return value.trim() === "" ? "This field is required" : "";
-};
+  const hasFieldError = (name: string, value: string) => {
+    return touched[name] && value.trim() === "";
+  };
+
+  const getInputClass = (name: string, value: string, touched: boolean) =>
+  `${textField} ${
+     touched && hasFieldError(name, value)
+      ? "!border-red focus:border-red focus:ring-red/25"
+      : ""
+  }`;
 
   // Returns an error message if the password fails a rule, otherwise null.
   const validatePassword = (password: string): string | null => {
@@ -61,6 +71,12 @@ const getError = (name: string, value: string) => {
       return "Password must include at least one symbol.";
     return null;
   };
+
+  const passwordsMatch =
+    formData.newPassword === formData.confirmPassword;
+
+  const passwordValid =
+    validatePassword(formData.newPassword) === null;  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -122,11 +138,11 @@ return (
                   placeholder="New password"
                   onBlur={() => handleBlur("newPassword")}
                 />
-                {getError("password", formData.newPassword) && (
+                {/* {getError("password", formData.newPassword) && (
                   <p className="text-red text-sm">
                     {getError("password", formData.newPassword)}
                   </p>
-                )}                   
+                )}                    */}
               </label>
 
               <PasswordRequirements password={formData.newPassword} />  
@@ -142,11 +158,11 @@ return (
                   placeholder="Confirm password"
                   onBlur={() => handleBlur("confirmPassword")}
                 />
-                {getError("confirmPassword", formData.confirmPassword) && (
+                {/* {getError("confirmPassword", formData.confirmPassword) && (
                   <p className="text-red text-sm">
                     {getError("confirmPassword", formData.confirmPassword)}
                   </p>
-                )}                   
+                )}                    */}
               </label>
           {/* BUTTONS */}
           <div className="flex gap-3 mt-6">
