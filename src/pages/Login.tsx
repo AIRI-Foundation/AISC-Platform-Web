@@ -7,6 +7,8 @@ import { getErrorMessage } from "../lib/api";
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
+import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
+import { textField } from "../components/general/IndividualComponents/Buttons";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,11 +17,11 @@ const Login = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
 
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -28,6 +30,18 @@ const Login = () => {
       ...current,
       [name]: value,
     }));
+  };
+
+  const handleBlur = (name: string) => {
+    setTouched((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+  };
+
+  const getError = (name: string, value: string) => {
+    if (!touched[name]) return "";
+    return value.trim() === "" ? "This field is required" : "";
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -49,9 +63,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <div className="flex min-h-screen flex-col min-h-screen bg-navy text-white">
       <Header />
-      <div className="mx-auto max-w-7xl px-6 py-6">       
+      <div className="flex-1 mx-auto max-w-7xl px-6 py-6">       
 
         <div className="mx-auto mt-8 max-w-lg rounded-[20px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
         {/* Title */}
@@ -59,26 +73,31 @@ const Login = () => {
           <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
             Welcome back
           </h1>
-          <p className="mx-auto mt-5 mb-5 max-w-2xl text-base text-slate-800 font-semibold text-lg">
+          <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
             Lorem ipsum dolor sit amet consectetur. Sed 
             <br />
             nibh consequat eget in.
           </p>
         </section>          
           
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <label className="space-y-2 text-sm font-medium text-slate-800">
+          <form onSubmit={handleSubmit} className="space-y-1">
+            <label className="space-y-1 text-sm font-medium text-slate-800">
               Email
               <input
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full mb-2 rounded-[10px] border border-slate-300 bg-slate-50 px-4 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                className={textField}
                 type="email"
                 placeholder="you@business.com"
+                onBlur={() => handleBlur("email")}                     
               />
             </label>
-
+            {getError("email", formData.email) && (
+                  <p className="text-red text-sm">
+                {getError("email", formData.email)}
+              </p>
+            )}
             <label className="space-y-2 text-sm font-medium text-slate-800 ">
               Password
               <div className="relative">
@@ -86,9 +105,10 @@ const Login = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full rounded-[10px] border border-slate-300 bg-slate-50 px-4 py-2 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter password"
+                  onBlur={() => handleBlur("password")}                       
                 />
                 <button
                   type="button"
@@ -121,6 +141,11 @@ const Login = () => {
                 </button>
               </div>
             </label>
+            {getError("password", formData.password) && (
+                  <p className="text-red text-sm">
+                {getError("password", formData.password)}
+              </p>
+            )}            
             <p className="mt-4 text-right text-xs text-slate-600">
               <a
                 href="/password-reset-otp"
@@ -129,21 +154,19 @@ const Login = () => {
                 Forgot Password?
               </a>
             </p>       
-            {error && (
-              <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
-                {error}
-              </p>
-            )}
-
             <button
               type="submit"
-              disabled={submitting}
-              className="w-full rounded-[14px] bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={submitting || formData.password == "" || formData.email == ""}
+              className={buttonSubmit}
             >
               {submitting ? "Logging in..." : "Login"}
             </button>
-
-            <p className="text-center text-sm text-slate-600">
+            {error && (
+              <div className="text-center mx-auto rounded-[6px] border-red/20 border-2 border py-1 w-full max-w-sm mt-1 mb-3 bg-red/10 text-md text-red-dark font-semibold">
+                {error}
+              </div>
+            )} 
+            <p className="text-center text-sm text-slate-600 mt-2">
               Don't have an account?{" "}
               <a
                 href="/signup"

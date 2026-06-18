@@ -1,4 +1,5 @@
 import Footer from "../components/general/IndividualComponents/Footer";
+import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 
 const Error = () => {
   return (
@@ -13,17 +14,20 @@ const Error = () => {
             <br />
             Please try again
           </p>
-
-          <a
+          <div className="mt-12 inline-flex items-center justify-center px-8 py-3" >
+                 <a
             href="/build-company-profile"
-            className="mt-12 inline-flex items-center justify-center rounded-lg bg-red px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
+            className={buttonSubmit}
           >
             Edit company profile
-          </a>
+          </a>                 
+          </div>
+          
         </div>
       </div>
-
-      <Footer />
+      <div className="bg-navy text-white">
+        <Footer />
+      </div>
     </div>
   );
 };

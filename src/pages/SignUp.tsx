@@ -6,6 +6,9 @@ import { getErrorMessage } from "../lib/api";
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
+import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements"
+import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
+import { textField } from "../components/general/IndividualComponents/Buttons";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -18,8 +21,6 @@ const SignUp = () => {
     role: 1,
     agreeTerms: false,
   });
-
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
   
   const navigate = useNavigate();
 
@@ -128,74 +129,70 @@ const SignUp = () => {
 console.log("Registration successful");
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <div className="flex flex-col min-h-screen bg-navy text-white">
       <Header />      
-      <div className="mx-auto max-w-7xl px-6 py-6">
+      <div className="flex-1 mx-auto max-w-7xl px-6 py-6">
 
-        <section className="mt-16 text-center">
-          <p className="text-sm uppercase tracking-[0.32em] text-slate-300">
-            Sign up
-          </p>
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        <div className="mx-auto mt-12 max-w-4xl rounded-[24px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
+        <section className="mt-2 text-center">
+          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
             Start using <span className="text-gold">AISC</span> today!
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
+          <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
             Lorem ipsum dolor sit amet consectetur. Sed nibh consequat eget in.
           </p>
         </section>
-
-        <div className="mx-auto mt-12 max-w-4xl rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="text-sm font-medium text-slate-800">
-                First name
+        <div className="px-40">
+          <form onSubmit={handleSubmit} className="space-y-1">
+            <div className="grid gap-1 sm:grid-cols-2">
+              <label className="text-sm font-medium">
+                <span className="text-red">*</span>First name
                 <input
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
                   onBlur={() => handleBlur("firstName")}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                  type="text"
+                  className={textField}
                   placeholder="First name"
                 />
                 {getError("firstName", formData.firstName) && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red text-sm">
                     {getError("firstName", formData.firstName)}
                   </p>
                 )}               
               </label>
-              <label className="text-sm font-medium text-slate-800">
-                Last name
+              <label className="text-sm font-medium">
+                <span className="text-red">*</span>Last name
                 <input
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
                   onBlur={() => handleBlur("lastName")}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                   type="text"
                   placeholder="Last name"
                 />
                 {getError("lastName", formData.lastName) && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red text-sm">
                     {getError("lastName", formData.lastName)}
                   </p>
                 )}                
               </label>
             </div>
 
-            <label className="text-sm font-medium text-slate-800">
-              Business email
+            <label className="text-sm font-medium">
+              <span className="text-red">*</span>Business email
               <input
                 name="businessEmail"
                 value={formData.businessEmail}
                 onChange={handleChange}
                 onBlur={() => handleBlur("businessEmail")}
-                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                className={textField}
                 type="email"
                 placeholder="you@business.com"
               />
                 {getError("businessEmail", formData.businessEmail) && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red text-sm">
                     {getError("businessEmail", formData.businessEmail)}
                   </p>
                 )}   
@@ -203,19 +200,19 @@ console.log("Registration successful");
                   </p>                              
             </label>
 
-            <label className="text-sm font-medium text-slate-800">
-              Phone number
+            <label className="text-sm font-medium">
+              <span className="text-red">*</span>Phone number
               <input
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
                 onBlur={() => handleBlur("phoneNumber")}
-                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                className={textField}
                 type="tel"
                 placeholder="(123) 456-7890"
               />
                 {getError("phoneNumber", formData.phoneNumber) && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red text-sm">
                     {getError("phoneNumber", formData.phoneNumber)}
                   </p>
                 )}    
@@ -223,79 +220,52 @@ console.log("Registration successful");
                   </p>               
             </label>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="text-sm font-medium text-slate-800">
-                Create password
+
+              <label className="text-sm font-medium">
+                <span className="text-red">*</span>Create password
                 <input
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                   type="password"
                   placeholder="Create password"
                   onBlur={() => handleBlur("password")}
                 />
                 {getError("password", formData.password) && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red text-sm">
                     {getError("password", formData.password)}
                   </p>
                 )}                   
               </label>
-              <label className="text-sm font-medium text-slate-800">
-                Confirm password
+
+              <PasswordRequirements password={formData.password} />  
+
+              <label className="text-sm font-medium">
+                <span className="text-red">*</span>Confirm password
                 <input
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                   type="password"
                   placeholder="Confirm password"
                   onBlur={() => handleBlur("confirmPassword")}
                 />
                 {getError("confirmPassword", formData.confirmPassword) && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red text-sm">
                     {getError("confirmPassword", formData.confirmPassword)}
                   </p>
                 )}                   
               </label>
-            </div>
 
-            <div className="grid gap-4 sm:grid-cols-[0.8fr_1fr]">
-              <div className="space-y-3 rounded-3xl border border-slate-200 bg-slate-50/75 p-4 text-slate-700 shadow-sm">
-                <p className="text-sm font-semibold text-slate-900">
-                  Password requirements
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
-                    8 characters minimum
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
-                    a number
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
-                    a symbol
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
-                    At least one lowercase character
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-[#2563eb]" />
-                    At least one uppercase character
-                  </li>
-                </ul>
-              </div>
-
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                What describes you best?
+              <label className="space-y-2 text-sm font-medium">
+                <span className="text-red">*</span>What describes you best?
                 <select
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                 >
                   <option value={1}>Founder</option>
                   <option value={2}>Investor</option>
@@ -304,9 +274,7 @@ console.log("Registration successful");
                   <option value={5}>Partner</option>
                 </select>
               </label>
-            </div>
-
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 mt-6 mb-6">
               <input
                 id="agreeTerms"
                 name="agreeTerms"
@@ -317,32 +285,34 @@ console.log("Registration successful");
               />
               <label
                 htmlFor="agreeTerms"
-                className="text-sm leading-6 text-slate-700"
+                className="text-sm leading-6 text-slate-700 "
               >
                 I agree to terms & conditions
               </label>
             </div>
 
-            {error && (
-              <div className="rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
-                {error}
-              </div>
-            )}
-            {success && (
-              <div className="rounded-2xl border border-green-300 bg-green-50 px-4 py-3 text-sm text-green-700">
-                {success}
-              </div>
-            )}
-
             <button
               type="submit"
-              disabled={submitting}
-              className="w-full rounded-2xl bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={submitting || 
+                formData.firstName == "" || 
+                formData.lastName == "" ||
+                formData.businessEmail == "" ||
+                formData.phoneNumber == "" ||
+                formData.password == "" ||
+                formData.confirmPassword == "" ||
+                formData.agreeTerms == false                                                                              
+              }          
+              className={buttonSubmit}
             >
               {submitting ? "Creating account..." : "Create Account"}
             </button>
+            {error && (
+              <div className="text-center mx-auto rounded-[6px] border-red/20 border-2 border py-1 w-full max-w-sm mt-1 mb-3 bg-red/10 text-md text-red-dark font-semibold">
+                {error}
+              </div>
+            )}  
 
-            <p className="text-center text-sm text-slate-600">
+            <p className="text-center mt-3 text-sm text-slate-600 mb-6">
               Already have an AISC account?{" "}
               <a
                 href="/login"
@@ -352,6 +322,7 @@ console.log("Registration successful");
               </a>
             </p>
           </form>
+          </div>
       </div>
       <BottomSection />
       </div>

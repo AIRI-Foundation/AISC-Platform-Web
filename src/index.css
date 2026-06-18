@@ -3,7 +3,10 @@
 @theme {
   --color-navy: #183463;
   --color-dark-blue: #0a1f3c;
-  --color-gold: #f8d547;
+  --color-gold: #C9A84C;
   --color-red: #dc2626;
   --color-red-dark: #b91c1c;
+  --color-light-blue: #2563eb;
+  --color-green: #059669;  
+  --color-orange: #D97706;
 }

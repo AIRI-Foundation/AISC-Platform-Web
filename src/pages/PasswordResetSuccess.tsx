@@ -1,34 +1,47 @@
+import { useNavigate } from 'react-router-dom';
+
 import Footer from "../components/general/IndividualComponents/Footer"
+import BottomSection from "../components/general/BottomSection";
+import Header from "../components/general/IndividualComponents/Header"
+import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 
 const Success = () => {
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate('/login');
+  };
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
-      <div className="flex flex-1 flex-col bg-navy text-white">
-        <div className="mx-auto max-w-7xl px-6 py-6 w-full"></div>
+    <div className="flex min-h-screen flex-col min-h-screen bg-navy text-white">
+      <Header />
+      <div className="flex-1 mx-auto max-w-7xl px-6 py-6">       
 
-        <div className="flex flex-1 flex-col items-center justify-center">
-          <h1 className="text-center text-5xl font-bold">
+        <div className="mx-auto w-full mt-8 max-w-3xl rounded-[20px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
+         {/* Title */}
+        <section className="mt-2 text-center">
+          <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
             Password updated!
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-center text-lg text-slate-300">
-            Your password has been successfully updated.
-            <br />
-            Click continue to log in.
+          <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
+             Your password has been successfully updated.
+             <br />
+             Click continue to log in.
           </p>
-
-          <a
-            href="/login"
-            className="mt-12 inline-flex items-center justify-center rounded-lg bg-red px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
+        </section>          
+        <div className="mx-auto w-sm">
+        <button           
+          type="submit"
+          className={buttonSubmit} 
+          onClick={handleNavigation}
           >
             Continue
-          </a>
-        </div>
+        </button>      
+          
       </div>
-      <div className="bg-navy text-white">
+      </div>
+      <BottomSection />
+      </div>
 
       <Footer />
-      </div>
-
     </div>
   );
 };
