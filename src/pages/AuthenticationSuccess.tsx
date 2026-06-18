@@ -1,5 +1,4 @@
 import Footer from "../components/general/IndividualComponents/Footer";
-import BottomSection from "../components/general/BottomSection";
 
 const Success = () => {
   return (

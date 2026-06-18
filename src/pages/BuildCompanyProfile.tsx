@@ -20,8 +20,6 @@ const BuildCompanyProfile = () => {
     revenueBand: "",
   });
 
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
-
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
