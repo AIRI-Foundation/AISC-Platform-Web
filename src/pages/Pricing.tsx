@@ -1,12 +1,8 @@
-import { useState } from "react";
-
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
 
 const Pricing = () => {
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
-
   const ecosystemFeatures = [
     {
       title: "Founders",

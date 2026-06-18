@@ -26,7 +26,6 @@ const SignUp = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const handleChange = (
@@ -112,9 +111,6 @@ const SignUp = () => {
       agreeToTerms: formData.agreeTerms
     }); 
 
-    setSuccess(
-      "Account created. Check your email for a verification code."
-    );    
     navigate("/verify-otp", {
       state: {
       email: formData.businessEmail,
@@ -126,8 +122,6 @@ const SignUp = () => {
       setSubmitting(false);
     } 
   };
-console.log("Registration successful");
-
   return (
     <div className="flex flex-col min-h-screen bg-navy text-white">
       <Header />      

@@ -1,7 +1,7 @@
 import { changePassword } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
-import { type ChangeEvent, type FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { type ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
@@ -20,8 +20,6 @@ const ChangePassword = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -74,7 +72,7 @@ const ChangePassword = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
+    setSubmitting(true);
 
     const passwordError = validatePassword(formData.newPassword);
     if (passwordError) {
@@ -96,7 +94,7 @@ const ChangePassword = () => {
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 

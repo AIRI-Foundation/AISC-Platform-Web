@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FormEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { sendPasswordResetOtp } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
@@ -17,7 +17,6 @@ const ForgotPassword = () => {
     email: "",
   });  
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
@@ -48,7 +47,7 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     setError(null);
-    setLoading(true);
+    setSubmitting(true);
 
     try {
       await sendPasswordResetOtp(formData);
@@ -61,7 +60,7 @@ const ForgotPassword = () => {
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 

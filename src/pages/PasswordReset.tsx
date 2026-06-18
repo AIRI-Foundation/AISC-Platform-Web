@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FormEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PasswordReset } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
@@ -20,9 +20,7 @@ const ForgotPassword = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const location = useLocation();
@@ -68,7 +66,7 @@ const getError = (name: string, value: string) => {
     event.preventDefault();
 
     setError(null);
-    setLoading(true);
+    setSubmitting(true);
 
     const passwordError = validatePassword(formData.newPassword);
     if (passwordError) {
@@ -91,7 +89,7 @@ const getError = (name: string, value: string) => {
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
