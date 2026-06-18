@@ -15,88 +15,7 @@ import { getErrorMessage } from "../lib/api";
 import { getInitials } from "../lib/format";
 import { isLoggedIn } from "../lib/auth";
 import type { DashboardUser } from "../types/dashboard";
-
-type MilestoneStatus =
-  | "verified"
-  | "in-review"
-  | "action-required"
-  | "not-started"
-  | "locked";
-
-const statusConfig: Record<
-  MilestoneStatus,
-  {
-    label: string;
-    badgeClass: string;
-    eyebrowClass: string;
-    borderClass: string;
-    cardBg: string;
-    doneLabel: string;
-  }
-> = {
-  verified: {
-    label: "VERIFIED",
-    badgeClass: "border-2 border-[#10b981] text-[#10b981] bg-white",
-    eyebrowClass: "text-[#10b981]",
-    borderClass: "border-l-[#10b981]",
-    cardBg: "bg-[#f0fdf4]",
-    doneLabel: "Done",
-  },
-  "in-review": {
-    label: "IN REVIEW",
-    badgeClass: "border-2 border-orange-400 text-orange-500 bg-white",
-    eyebrowClass: "text-orange-500",
-    borderClass: "border-l-orange-400",
-    cardBg: "bg-orange-50",
-    doneLabel: "In Review",
-  },
-  "action-required": {
-    label: "ACTION REQUIRED",
-    badgeClass: "border-2 border-red-500 text-red-500 bg-white",
-    eyebrowClass: "text-red-500",
-    borderClass: "border-l-red-500",
-    cardBg: "bg-red-50",
-    doneLabel: "Action Required",
-  },
-  "not-started": {
-    label: "NOT STARTED",
-    badgeClass: "border-2 border-slate-300 text-slate-400 bg-white",
-    eyebrowClass: "text-slate-400",
-    borderClass: "border-l-slate-300",
-    cardBg: "bg-white",
-    doneLabel: "Not Started",
-  },
-  locked: {
-    label: "LOCKED",
-    badgeClass: "border-2 border-slate-200 text-slate-300 bg-white",
-    eyebrowClass: "text-slate-300",
-    borderClass: "border-l-slate-200",
-    cardBg: "bg-white",
-    doneLabel: "Locked",
-  },
-};
-
-// Maps the API's status strings to our internal type
-function normalizeStatus(status: string): MilestoneStatus {
-  switch (status.toLowerCase()) {
-    case "verified":
-    case "complete":
-    case "completed":
-      return "verified";
-    case "inreview":
-    case "in_review":
-    case "in-review":
-      return "in-review";
-    case "actionrequired":
-    case "action_required":
-    case "action-required":
-      return "action-required";
-    case "locked":
-      return "locked";
-    default:
-      return "not-started";
-  }
-}
+import MilestoneCard from "../components/dashboard/MilestoneCard";
 
 function normalizeStageStatus(status: string): string {
   switch (status.toLowerCase()) {
@@ -114,7 +33,23 @@ function normalizeStageStatus(status: string): string {
   }
 }
 
-// Level boundaries — which stage number ends each level
+function normalizeStatus(status: string) {
+  switch (status.toLowerCase()) {
+    case "verified":
+    case "complete":
+    case "completed":
+      return "verified";
+    case "inreview":
+    case "in_review":
+    case "in-review":
+      return "in-review";
+    case "locked":
+      return "locked";
+    default:
+      return "not-started";
+  }
+}
+
 const levelBoundaries: Record<number, number> = {
   2: 1,
   4: 2,
@@ -200,9 +135,6 @@ const DashboardMilestones = () => {
   const inReviewCount = milestones.filter(
     (m) => normalizeStatus(m.status) === "in-review",
   ).length;
-  const actionCount = milestones.filter(
-    (m) => normalizeStatus(m.status) === "action-required",
-  ).length;
   const isComplete = stageDetail
     ? normalizeStageStatus(stageDetail.status) === "COMPLETE"
     : false;
@@ -211,25 +143,18 @@ const DashboardMilestones = () => {
     const inReviewEnd = verifiedCount + inReviewCount;
     if (index < verifiedCount) return "bg-[#10b981]";
     if (index < inReviewEnd) return "bg-orange-400";
-    if (index < inReviewEnd + actionCount) return "bg-red-500";
     return "bg-slate-200";
   };
 
-  const formatTimestamp = (value: string | null) => {
-    if (!value) return "";
-    const date = new Date(value);
-    return (
-      date.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }) +
-      " · " +
-      date.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-      })
-    );
+  const handleSubmitSuccess = async () => {
+    try {
+      const detail = await getStageDetail(activeStage);
+      setStageDetail(detail);
+      const trackerSummary = await getMilestoneTracker();
+      setSummary(trackerSummary);
+    } catch (err) {
+      console.error("Failed to reload stage after submit:", err);
+    }
   };
 
   return (
@@ -316,52 +241,14 @@ const DashboardMilestones = () => {
 
                 {/* Milestone cards */}
                 <div className="space-y-6">
-                  {milestones.map((milestone) => {
-                    const status = normalizeStatus(milestone.status);
-                    const config = statusConfig[status];
-                    return (
-                      <div key={milestone.milestoneNumber}>
-                        <div
-                          className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${config.eyebrowClass}`}
-                        >
-                          Milestone {milestone.milestoneNumber} ·{" "}
-                          {config.doneLabel}
-                        </div>
-                        <div
-                          className={`rounded-xl border-l-4 shadow-sm overflow-hidden ${config.cardBg} ${config.borderClass}`}
-                        >
-                          <div className="flex items-center gap-4 px-5 py-4">
-                            <div className="flex-1 min-w-0">
-                              <h3 className="text-base font-semibold text-slate-900 mb-1">
-                                {milestone.title}
-                              </h3>
-                              <p className="text-sm text-slate-500 leading-relaxed mb-2">
-                                {milestone.description}
-                              </p>
-                              {milestone.verifiedAt && (
-                                <p className="text-xs text-slate-400">
-                                  Verified{" "}
-                                  {formatTimestamp(milestone.verifiedAt)}
-                                </p>
-                              )}
-                              {milestone.reviewNotes && (
-                                <p className="text-xs text-orange-500 mt-1">
-                                  Note: {milestone.reviewNotes}
-                                </p>
-                              )}
-                            </div>
-                            <div className="flex-shrink-0">
-                              <span
-                                className={`inline-block px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide ${config.badgeClass}`}
-                              >
-                                {config.label}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                  {milestones.map((milestone) => (
+                    <MilestoneCard
+                      key={milestone.milestoneNumber}
+                      milestone={milestone}
+                      stageNumber={activeStage}
+                      onSubmitSuccess={handleSubmitSuccess}
+                    />
+                  ))}
                 </div>
               </>
             )}

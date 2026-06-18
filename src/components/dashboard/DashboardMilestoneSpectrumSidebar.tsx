@@ -55,7 +55,8 @@ const DashboardMilestoneSpectrumSidebar = ({
         </div>
       </div>
 
-      <div className="px-3 pb-4 space-y-0.5">
+      {/* Stage list */}
+      <div className="px-3 pb-8 space-y-0.5">
         {stages.map((stage) => (
           <div key={stage.number}>
             <button
@@ -69,12 +70,14 @@ const DashboardMilestoneSpectrumSidebar = ({
               <div className="text-xs font-bold text-white mb-0.5 tracking-wide">
                 {stage.number}. {stage.title.toUpperCase()}
               </div>
-              <div className="text-xs mb-2">
+              <div className="text-xs">
                 <span
                   className={
                     stage.status === "IN PROGRESS"
                       ? "text-amber-400 font-semibold"
-                      : "text-[#10b981] font-semibold"
+                      : stage.status === "COMPLETE"
+                        ? "text-[#10b981] font-semibold"
+                        : "text-white/40 font-semibold"
                   }
                 >
                   {stage.status}
@@ -82,21 +85,6 @@ const DashboardMilestoneSpectrumSidebar = ({
                 <span className="text-white/40">
                   {stage.completed}/{stage.total}
                 </span>
-              </div>
-              <div className="flex gap-1">
-                {Array.from({ length: stage.total }).map((_, i) => (
-                  <div
-                    key={i}
-                    className={`flex-1 h-1.5 rounded-full ${
-                      i < stage.completed
-                        ? stage.status === "IN PROGRESS" &&
-                          i === stage.completed - 1
-                          ? "bg-amber-400"
-                          : "bg-[#10b981]"
-                        : "bg-white/15"
-                    }`}
-                  />
-                ))}
               </div>
             </button>
 
