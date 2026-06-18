@@ -53,7 +53,7 @@ const Login = () => {
         email: formData.email,
         password: formData.password,
       });
-      setSession(auth.token, auth.email, auth.role);
+      setSession(auth.token, auth.email, auth.role, auth.refreshToken);
       navigate("/dashboard/overview");
     } catch (err) {
       setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API

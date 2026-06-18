@@ -114,6 +114,7 @@ const SignUp = () => {
     navigate("/verify-otp", {
       state: {
       email: formData.businessEmail,
+      password: formData.password,
       mode: "email-verification",
       },});
     } catch (err) {

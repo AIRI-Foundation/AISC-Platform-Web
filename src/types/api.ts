@@ -30,11 +30,27 @@ export interface VerifyEmailRequest {
   otp: string;
 }
 
-// What /login and /verify-otp give back inside data
+// What /login gives back inside data
 export interface AuthData {
   token: string;
+  refreshToken: string;
   email: string;
   role: string;
+}
+
+// Body for POST /api/Company. Only `name` is required by the backend.
+export interface AddCompanyRequest {
+  name: string;
+  description?: string;
+  province?: string;
+  city?: string;
+  industry?: string;
+  aiCategory?: string;
+  productStage?: string;
+  teamSize?: number | null;
+  fundingYear?: number | null;
+  revenueBand?: string;
+  website?: string;
 }
 
 export interface ChangePasswordRequest {

@@ -1,7 +1,8 @@
 import { type FormEvent, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { verifyOtp } from "../services/authService";
-import { verifyEmail } from "../services/authService";
+import { verifyEmail, login } from "../services/authService";
+import { setSession, isFounder } from "../lib/auth";
 import { getErrorMessage } from "../lib/api";
 
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
@@ -17,6 +18,7 @@ const VerifyOtp = () => {
 
   const location = useLocation();
   const email = location.state?.email;
+  const password = location.state?.password;
   const mode = location.state?.mode;
   
   const handleChange = (index: number, value: string) => {
@@ -68,7 +70,19 @@ const VerifyOtp = () => {
           otp: otpCode,
         });
 
-        navigate("/authentication-success");
+        if (!password) {
+          navigate("/login");
+          return;
+        }
+
+        const auth = await login({ email, password });
+        setSession(auth.token, auth.email, auth.role, auth.refreshToken);
+
+        if (isFounder(auth.role)) {
+          navigate("/build-company-profile");
+        } else {
+          navigate("/dashboard/overview");
+        }
       } catch (err) {
         setError(getErrorMessage(err));
       } finally {

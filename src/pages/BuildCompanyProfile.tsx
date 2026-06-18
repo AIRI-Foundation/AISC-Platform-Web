@@ -1,12 +1,18 @@
-import { type ChangeEvent, type FormEvent, useState } from "react";
+import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { addCompany } from "../services/companyService";
+import { isLoggedIn } from "../lib/auth";
+import { getErrorMessage } from "../lib/api";
 
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
+import { textField } from "../components/general/IndividualComponents/Buttons";
 
 const BuildCompanyProfile = () => {
   const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     companyName: "",
     websiteUrl: "",
@@ -16,9 +22,15 @@ const BuildCompanyProfile = () => {
     aiCategory: "",
     productStage: "",
     teamSize: "",
-    foundingYear: "",
+    fundingYear: "",
     revenueBand: "",
   });
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -32,9 +44,31 @@ const BuildCompanyProfile = () => {
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/authentication-success");
+    setError(null);
+    setSubmitting(true);
+
+    try {
+      await addCompany({
+        name: formData.companyName,
+        website: formData.websiteUrl,
+        city: formData.city,
+        province: formData.province,
+        industry: formData.industry,
+        aiCategory: formData.aiCategory,
+        productStage: formData.productStage,
+        teamSize: formData.teamSize ? Number(formData.teamSize) : null,
+        fundingYear: formData.fundingYear ? Number(formData.fundingYear) : null,
+        revenueBand: formData.revenueBand,
+      });
+
+      navigate("/dashboard/overview");
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -54,135 +88,121 @@ const BuildCompanyProfile = () => {
         </section>
 
         <div className="mx-auto mt-12 max-w-2xl rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <label className="space-y-2 text-sm font-medium text-slate-800">
-              *Company name
+          <form onSubmit={handleSubmit} className="space-y-1">
+            <label className="text-sm font-medium text-slate-800">
+              <span className="text-red">*</span>Company name
               <input
                 name="companyName"
                 value={formData.companyName}
                 onChange={handleChange}
-                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                className={textField}
                 type="text"
                 placeholder="Enter company name"
               />
             </label>
 
-            <label className="space-y-2 text-sm font-medium text-slate-800">
-              *Website URL
+            <label className="text-sm font-medium text-slate-800">
+              <span className="text-red">*</span>Website URL
               <input
                 name="websiteUrl"
                 value={formData.websiteUrl}
                 onChange={handleChange}
-                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                className={textField}
                 type="url"
                 placeholder="https://example.com"
               />
             </label>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *City
+            <div className="grid gap-x-4 sm:grid-cols-2">
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>City
                 <input
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                   type="text"
                   placeholder="Enter city"
                 />
               </label>
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *Province
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>Province
                 <input
                   name="province"
                   value={formData.province}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                   type="text"
                   placeholder="Enter province"
                 />
               </label>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *Industry
-                <select
+            <div className="grid gap-x-4 sm:grid-cols-2">
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>Industry
+                <input
                   name="industry"
                   value={formData.industry}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                >
-                  <option value="">Select industry</option>
-                  <option>Technology</option>
-                  <option>Healthcare</option>
-                  <option>Finance</option>
-                  <option>Manufacturing</option>
-                </select>
+                  className={textField}
+                  type="text"
+                  placeholder="e.g. Healthcare"
+                />
               </label>
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *AI Category
-                <select
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>AI Category
+                <input
                   name="aiCategory"
                   value={formData.aiCategory}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                >
-                  <option value="">Select category</option>
-                  <option>Generative AI</option>
-                  <option>Machine Learning</option>
-                  <option>Computer Vision</option>
-                  <option>NLP</option>
-                </select>
+                  className={textField}
+                  type="text"
+                  placeholder="e.g. Generative AI"
+                />
               </label>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *Product stage
-                <select
+            <div className="grid gap-x-4 sm:grid-cols-2">
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>Product stage
+                <input
                   name="productStage"
                   value={formData.productStage}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                >
-                  <option value="">Select stage</option>
-                  <option>Idea</option>
-                  <option>MVP</option>
-                  <option>Beta</option>
-                  <option>Production</option>
-                </select>
+                  className={textField}
+                  type="text"
+                  placeholder="e.g. MVP"
+                />
               </label>
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *Team Size
-                <select
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>Team Size
+                <input
                   name="teamSize"
                   value={formData.teamSize}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                >
-                  <option value="">Select team size</option>
-                  <option>1-5</option>
-                  <option>6-15</option>
-                  <option>16-50</option>
-                  <option>50+</option>
-                </select>
+                  className={textField}
+                  type="number"
+                  min={1}
+                  max={100000}
+                  placeholder="Number of people"
+                />
               </label>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *Founding year
+            <div className="grid gap-x-4 sm:grid-cols-2">
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>Funding year
                 <select
-                  name="foundingYear"
-                  value={formData.foundingYear}
+                  name="fundingYear"
+                  value={formData.fundingYear}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
+                  className={textField}
                 >
                   <option value="">Select year</option>
                   {Array.from(
-                    { length: 30 },
-                    (_, i) => new Date().getFullYear() - i,
+                    { length: 2026 - 2000 + 1 },
+                    (_, i) => 2026 - i,
                   ).map((year) => (
                     <option key={year} value={year}>
                       {year}
@@ -190,29 +210,34 @@ const BuildCompanyProfile = () => {
                   ))}
                 </select>
               </label>
-              <label className="space-y-2 text-sm font-medium text-slate-800">
-                *Revenue band
-                <select
+              <label className="text-sm font-medium text-slate-800">
+                <span className="text-red">*</span>Revenue band
+                <input
                   name="revenueBand"
                   value={formData.revenueBand}
                   onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/25"
-                >
-                  <option value="">Select revenue band</option>
-                  <option>$0 - $100K</option>
-                  <option>$100K - $1M</option>
-                  <option>$1M - $10M</option>
-                  <option>$10M+</option>
-                </select>
+                  className={textField}
+                  type="text"
+                  placeholder="e.g. $100K - $1M"
+                />
               </label>
             </div>
 
-            <button
-              type="submit"
-              className="mx-auto block rounded-2xl bg-red px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
-            >
-              Submit
-            </button>
+            <div className="pt-6 text-center">
+              <button
+                type="submit"
+                disabled={submitting || formData.companyName.trim() === ""}
+                className="inline-block rounded-[8px] bg-red px-12 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {submitting ? "Submitting..." : "Submit"}
+              </button>
+            </div>
+
+            {error && (
+              <div className="mx-auto mt-3 w-full max-w-sm rounded-[6px] border-2 border border-red/20 bg-red/10 py-1 text-center text-sm font-semibold text-red-dark">
+                {error}
+              </div>
+            )}
           </form>
         
       </div>
