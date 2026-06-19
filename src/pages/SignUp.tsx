@@ -143,7 +143,7 @@ const SignUp = () => {
         <div className="mx-auto mt-12 max-w-4xl rounded-[24px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
         <section className="mt-2 text-center">
           <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-            Start using <span className="text-gold">AISC</span> today!
+            Start Using <span className="text-gold">AISC</span> Today!
           </h1>
           <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
             Lorem ipsum dolor sit amet consectetur. Sed nibh consequat eget in.
@@ -206,31 +206,31 @@ const SignUp = () => {
                 <p className="mb-2">
                   </p>               
             </label>
-              <label className="text-sm font-medium">
-                <span className="text-red">*</span> Create password
-                <div className="relative">
-                  <input
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className={`${textField} pr-10 ${
-                      touched.password && !passwordValid
-                        ? "!border-red focus:border-red focus:ring-red/25"
-                        : ""
-                    }`}
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Create password"
-                    onBlur={() => handleBlur("confirmPassword")}
-                  />
+            <label className= "text-sm font-medium block">
+              <span className="text-red">*</span> Create password
+              <div className="relative">
+                <input
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={`${textField} pr-10 ${
+                    touched.password && !passwordValid
+                      ? "!border-red focus:border-red focus:ring-red/25"
+                      : ""
+                  }`}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password"
+                  onBlur={() => handleBlur("password")}
+                />
 
-                  <PasswordToggle
-                    show={showPassword}
-                    onToggle={() =>
-                      setShowPassword(!showPassword)
-                    }
-                  />
-                </div>
-              </label>
+                <PasswordToggle
+                  show={showPassword}
+                  onToggle={() =>
+                    setShowPassword(!showPassword)
+                  }
+                />
+              </div>
+            </label>
 
               <PasswordRequirements password={formData.password} />  
               <label className="text-sm font-medium">
@@ -241,7 +241,7 @@ const SignUp = () => {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     className={`${textField} pr-10 ${
-                      touched.confirmPassword && !passwordsMatch
+                      (touched.confirmPassword && !passwordsMatch) || (touched.confirmPassword && formData.confirmPassword =="")
                         ? "!border-red focus:border-red focus:ring-red/25"
                         : ""
                     }`}
@@ -317,7 +317,11 @@ const SignUp = () => {
             >
               {submitting ? "Creating account..." : "Create Account"}
             </button>
-
+            {error && (
+              <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
+                {error}
+              </div>
+            )} 
             <p className="text-center mt-3 text-sm text-slate-600 mb-6">
               Already have an AISC account?{" "}
               <a

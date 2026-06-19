@@ -104,7 +104,7 @@ return (
           {/* Title */}
           <section className="mt-2 text-center">
             <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-              Change Password
+              Change <span className="text-gold">Your</span> Password
             </h1>
             <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
               Enter your current password and new password.
@@ -112,8 +112,8 @@ return (
           </section>          
 
               <form onSubmit={handleSubmit} className="space-y-1 px-25 mb-6">
-              <label className="text-sm font-medium">
-                Current password
+              <label className= "text-sm font-medium block">
+              <div className= "px-2.5"> Current password </div>
                 <div className="relative">
                   <input
                     name="currentPassword"
@@ -138,8 +138,8 @@ return (
                 </div>
               </label>                
 
-              <label className="text-sm font-medium">
-                New password
+          <label className= "text-sm font-medium block">
+              <div className= "px-2.5"> New password </div>
                 <div className="relative">
                   <input
                     name="newPassword"
@@ -166,15 +166,15 @@ return (
 
               <PasswordRequirements password={formData.newPassword} />  
 
-              <label className="text-sm font-medium">
-                Confirm password
+              <label className= "text-sm font-medium block">
+              <div className= "px-2.5 mt-3"> Confirm password </div>
                 <div className="relative">
                   <input
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     className={`${textField} pr-10 ${
-                      touched.confirmPassword && !passwordsMatch
+                      (touched.confirmPassword && !passwordsMatch) || (touched.confirmPassword && formData.confirmPassword =="")
                         ? "!border-red focus:border-red focus:ring-red/25"
                         : ""
                     }`}
@@ -203,7 +203,7 @@ return (
             </button>
           </div>
             {error && (
-              <div className="text-center mx-auto rounded-[6px] border-red/20 border-2 border py-1 w-full max-w-sm mt-1 mb-3 bg-red/10 text-md text-red-dark font-semibold">
+              <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
                 {error}
               </div>
             )}  

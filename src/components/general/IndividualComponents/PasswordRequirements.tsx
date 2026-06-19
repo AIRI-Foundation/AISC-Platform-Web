@@ -1,3 +1,5 @@
+import {CheckCircleIcon } from "../../dashboard/icons";
+{/* <ClosedEyeIcon className="h-6 w-6" />   */}
 export const getPasswordRequirements = (password: string) => ({
   minLength: password.length >= 8,
   lowercase: /[a-z]/.test(password),
@@ -7,13 +9,13 @@ export const getPasswordRequirements = (password: string) => ({
 });
 
 const Dot = ({ passed }: { passed: boolean }) => (
-  <span
-    className={`mt-1 inline-flex h-3 w-3 rounded-full border ${
-      passed
-        ? "border-light-blue bg-light-blue"
-        : "border-slate-400 bg-white"
-    }`}
-  />
+  <div className="mt-1 flex h-4 w-4 items-center justify-center">
+    {passed ? (
+      <CheckCircleIcon className="h-3.75 w-3.75 text-green" />
+    ) : (
+      <span className="h-3 w-3 rounded-full border border-slate-400 bg-white" />
+    )}
+  </div>
 );
 
 type PasswordRequirementsProps = {
@@ -50,7 +52,7 @@ export default function PasswordRequirements({
   return (
   <div>
     <p className="text-sm font-semibold text-slate-900 mb-1">
-      Password requirements
+      <div className="px-2">Password requirements</div>
     </p>
     <ProgressBar progressPercentage = {calculatedProgressPercentage}/>
     <ul className="space-y-1 text-sm">

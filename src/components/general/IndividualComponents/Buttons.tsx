@@ -1,5 +1,5 @@
 export const buttonSubmit =
-"w-full rounded-[10px] bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:opacity-50 disabled:cursor-not-allowed"
+"w-full rounded-[10px] bg-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:bg-grey disabled:shadow-black/10 disabled:cursor-not-allowed"
 
 export const buttonBack =
 "w-full rounded-[10px] bg-navy px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-navy/20 transition hover:bg-dark-blue"
