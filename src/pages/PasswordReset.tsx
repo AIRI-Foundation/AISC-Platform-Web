@@ -23,7 +23,6 @@ const ForgotPassword = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const [showNewPassword, setShowNewPassword] = useState(false);  
@@ -47,17 +46,6 @@ const ForgotPassword = () => {
       [name]: true,
     }));
   };
-
-  const hasFieldError = (name: string, value: string) => {
-    return touched[name] && value.trim() === "";
-  };
-
-  const getInputClass = (name: string, value: string, touched: boolean) =>
-  `${textField} ${
-     touched && hasFieldError(name, value)
-      ? "!border-red focus:border-red focus:ring-red/25"
-      : ""
-  }`;
 
   // Returns an error message if the password fails a rule, otherwise null.
   const validatePassword = (password: string): string | null => {
@@ -120,7 +108,7 @@ return (
           {/* Title */}
           <section className="mt-2 text-center">
             <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-              Set a new password
+              Choose A <span className="text-gold">New</span> Password
             </h1>
             <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
               Create a new password. 
@@ -129,43 +117,59 @@ return (
 
               <form onSubmit={handleSubmit} className="space-y-1 px-25 mb-6">
 
-              <label className="text-sm font-medium">
-                New password
-                <input
-                  name="newPassword"
-                  value={formData.newPassword}
-                  onChange={handleChange}
-                  className={textField}
-                  type="password"
-                  placeholder="New password"
-                  onBlur={() => handleBlur("newPassword")}
-                />
-                {/* {getError("password", formData.newPassword) && (
-                  <p className="text-red text-sm">
-                    {getError("password", formData.newPassword)}
-                  </p>
-                )}                    */}
-              </label>
+          <label className= "text-sm font-medium block">
+              <div className= "px-2.5"> New password </div>
+                <div className="relative">
+                  <input
+                    name="newPassword"
+                    value={formData.newPassword}
+                    onChange={handleChange}
+                    className={`${textField} pr-10 ${
+                      touched.newPassword && !passwordValid
+                        ? "!border-red focus:border-red focus:ring-red/25"
+                        : ""
+                    }`}
+                    type={showNewPassword ? "text" : "password"}
+                    placeholder="New password"
+                    onBlur={() => handleBlur("newPassword")}
+                  />
+
+                  <PasswordToggle
+                    show={showNewPassword}
+                    onToggle={() =>
+                      setShowNewPassword(!showNewPassword)
+                    }
+                  />
+                </div>
+               </label>   
 
               <PasswordRequirements password={formData.newPassword} />  
 
-              <label className="text-sm font-medium">
-                Confirm password
-                <input
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className={textField}
-                  type="password"
-                  placeholder="Confirm password"
-                  onBlur={() => handleBlur("confirmPassword")}
-                />
-                {/* {getError("confirmPassword", formData.confirmPassword) && (
-                  <p className="text-red text-sm">
-                    {getError("confirmPassword", formData.confirmPassword)}
-                  </p>
-                )}                    */}
-              </label>
+          <label className= "text-sm font-medium block">
+              <div className= "px-2.5 mt-3"> Confirm password </div>
+                <div className="relative">
+                  <input
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className={`${textField} pr-10 ${
+                      (touched.confirmPassword && !passwordsMatch) || (touched.confirmPassword && formData.confirmPassword =="")
+                        ? "!border-red focus:border-red focus:ring-red/25"
+                        : ""
+                    }`}
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirm password"
+                    onBlur={() => handleBlur("confirmPassword")}
+                  />
+
+                  <PasswordToggle
+                    show={showConfirmPassword}
+                    onToggle={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
+                  />
+                </div>
+               </label>   
           {/* BUTTONS */}
           <div className="flex gap-3 mt-6">
             <button
@@ -178,7 +182,7 @@ return (
 
           </div>
             {error && (
-              <div className="text-center mx-auto rounded-[6px] border-red/20 border-2 border py-1 w-full max-w-sm mt-1 mb-3 bg-red/10 text-md text-red-dark font-semibold">
+               <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
                 {error}
               </div>
             )}  

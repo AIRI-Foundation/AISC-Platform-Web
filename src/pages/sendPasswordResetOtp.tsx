@@ -37,10 +37,16 @@ const ForgotPassword = () => {
     }));
   };
 
-  const getError = (name: string, value: string) => {
-  if (!touched[name]) return "";
-  return value.trim() === "" ? "This field is required" : "";
-};
+const hasFieldError = (name: string, value: string) => {
+    return touched[name] && value.trim() === "";
+  };
+
+  const getInputClass = (name: string, value: string, touched: boolean) =>
+  `${textField} ${
+     touched && hasFieldError(name, value)
+      ? "!border-red focus:border-red focus:ring-red/25"
+      : ""
+  }`;
 
   const handleSubmit = async (
     e: React.FormEvent
@@ -74,7 +80,7 @@ return (
         {/* Title */}
         <section className="mt-2 text-center">
           <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-            Forgot password
+            Forgot <span className="text-gold">Password</span>
           </h1>
           <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
             If an account with that email exists an email will be sent
@@ -84,24 +90,20 @@ return (
         </section>                 
           
           <form onSubmit={handleSubmit} className="space-y-1">
-            <label className="space-y-2 text-sm font-medium text-slate-800">
-              Email
+            <label className= "text-sm font-medium block">
+              <div className= "px-2.5"> Email </div>
               <input
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={textField}
+                className={getInputClass("email", formData.email, touched.email)}
                 type="email"
                 placeholder="you@business.com"
-                onBlur={() => handleBlur("email")}                
+                onBlur={() => handleBlur("email")}                     
               />
-            </label>            
-            {getError("email", formData.email) && (
-                  <p className="text-red text-sm">
-                {getError("email", formData.email)}
-              </p>
-            )}
-            <div className="flex gap-3 mt-2">
+            </label>       
+
+            <div className="flex gap-3 mt-4">
               <button
                 type="submit"
                 disabled={submitting || formData.email == ""}
@@ -119,7 +121,7 @@ return (
               </button>
             </div>
             {error && (
-              <div className="text-center mx-auto rounded-[6px] border-red/20 border-2 border py-1 w-full max-w-sm mt-2 mb-3 bg-red/10 text-md text-red-dark font-semibold">
+              <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
                 {error}
               </div>
             )} 

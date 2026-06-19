@@ -74,11 +74,11 @@ const Login = () => {
       <Header />
       <div className="flex-1 mx-auto max-w-7xl px-6 py-6">       
 
-        <div className="mx-auto mt-8 max-w-lg rounded-[20px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
+        <div className="mx-auto mt-8 max-w-xl rounded-[20px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
         {/* Title */}
         <section className="mt-2 text-center">
           <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-            Welcome back
+            <span className="text-gold">Welcome</span> Back
           </h1>
           <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
             Lorem ipsum dolor sit amet consectetur. Sed 
@@ -88,8 +88,8 @@ const Login = () => {
         </section>          
           
           <form onSubmit={handleSubmit} className="space-y-1">
-            <label className="space-y-1 text-sm font-medium text-slate-800">
-              Email
+            <label className= "text-sm font-medium block">
+              <div className= "px-2.5"> Email </div>
               <input
                 name="email"
                 value={formData.email}
@@ -101,8 +101,8 @@ const Login = () => {
               />
             </label>
 
-            <label className="text-sm font-medium">
-              Password
+            <label className= "text-sm font-medium block">
+              <div className= "px-2.5"> Password </div>
               <div className="relative">
                 <input
                   name="password"
@@ -123,7 +123,7 @@ const Login = () => {
               </div>
             </label>
       
-            <p className="mt-4 text-right text-xs text-slate-600 mb-5">
+            <p className="mt-4 text-right text-xs text-slate-600 mb-6">
               <a
                 href="/password-reset-otp"
                 className="font-semibold text-black hover:underline"
@@ -139,7 +139,7 @@ const Login = () => {
               {submitting ? "Logging in..." : "Login"}
             </button>
             {error && (
-              <div className="text-center mx-auto rounded-[6px] border-red/20 border-2 border py-1 w-full max-w-sm mt-1 mb-3 bg-red/10 text-md text-red-dark font-semibold">
+              <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
                 {error}
               </div>
             )} 
