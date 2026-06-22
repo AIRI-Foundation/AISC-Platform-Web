@@ -1,15 +1,33 @@
 // Helpers for saving the login token in the browser.
 
 
-export function setSession(token: string, email: string, role: string) {
+export function setSession(
+  token: string,
+  email: string,
+  role: string,
+  refreshToken?: string,
+) {
   localStorage.setItem("aisc_token", token);
   localStorage.setItem("aisc_email", email);
   localStorage.setItem("aisc_role", role);
+  if (refreshToken) {
+    localStorage.setItem("aisc_refresh", refreshToken);
+  }
+}
+
+export function isFounder(role: string | null): boolean {
+  if (!role) return false;
+  return role.toLowerCase() === "founder" || role === "1";
 }
 
 
 export function getToken(): string | null {
   return localStorage.getItem("aisc_token");
+}
+
+
+export function getRefreshToken(): string | null {
+  return localStorage.getItem("aisc_refresh");
 }
 
 
@@ -27,4 +45,5 @@ export function clearSession() {
   localStorage.removeItem("aisc_token");
   localStorage.removeItem("aisc_email");
   localStorage.removeItem("aisc_role");
+  localStorage.removeItem("aisc_refresh");
 }

@@ -1,27 +1,23 @@
-import { type ChangeEvent, type FormEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/authService";
-import { setSession } from "../lib/auth";
+import { sendPasswordResetOtp } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
-import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle"
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 import { textField } from "../components/general/IndividualComponents/Buttons";
+import { buttonBack } from "../components/general/IndividualComponents/Buttons";
 
-const Login = () => {
+const ForgotPassword = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
-  });
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
-  const [submitting, setSubmitting] = useState(false);
+  });  
   const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +36,7 @@ const Login = () => {
     }));
   };
 
-  const hasFieldError = (name: string, value: string) => {
+const hasFieldError = (name: string, value: string) => {
     return touched[name] && value.trim() === "";
   };
 
@@ -51,41 +47,46 @@ const Login = () => {
       : ""
   }`;
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (
+    e: React.FormEvent
+  ) => {
+    e.preventDefault();
+
     setError(null);
     setSubmitting(true);
+
     try {
-      const auth = await login({
-        email: formData.email,
-        password: formData.password,
-      });
-      setSession(auth.token, auth.email, auth.role, auth.refreshToken);
-      navigate("/dashboard/overview");
+      await sendPasswordResetOtp(formData);
+
+    navigate("/verify-otp", {
+      state: {
+      email: formData.email,
+      mode: "password-reset",
+      },});
     } catch (err) {
-      setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API
+      setError(getErrorMessage(err));
     } finally {
       setSubmitting(false);
     }
   };
 
-  return (
+return (
     <div className="flex min-h-screen flex-col min-h-screen bg-navy text-white">
       <Header />
-      <div className="flex-1 mx-auto max-w-7xl px-6 py-6">       
+      <div className="flex-1 mx-auto max-w-7xl px-6 py-6">
 
-        <div className="mx-auto mt-8 max-w-xl rounded-[20px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
+        <div className="mx-auto mt-12 max-w-xl rounded-[20px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
         {/* Title */}
         <section className="mt-2 text-center">
           <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-            <span className="text-gold">Welcome</span> Back
+            Forgot <span className="text-gold">Password</span>
           </h1>
           <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
-            Lorem ipsum dolor sit amet consectetur. Sed 
+            If an account with that email exists an email will be sent
             <br />
-            nibh consequat eget in.
+            with instructions on how to reset your password.
           </p>
-        </section>          
+        </section>                 
           
           <form onSubmit={handleSubmit} className="space-y-1">
             <label className= "text-sm font-medium block">
@@ -99,51 +100,31 @@ const Login = () => {
                 placeholder="you@business.com"
                 onBlur={() => handleBlur("email")}                     
               />
-            </label>
+            </label>       
 
-            <label className= "text-sm font-medium block">
-              <div className= "px-2.5"> Password </div>
-              <div className="relative">
-                <input
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={getInputClass("password", formData.password, touched.password)}
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
-                  onBlur={() => handleBlur("password")}
-                />
-
-                <PasswordToggle
-                  show={showPassword}
-                  onToggle={() =>
-                    setShowPassword(!showPassword)
-                  }
-                />
-              </div>
-            </label>
-      
-            <p className="mt-4 text-right text-xs text-slate-600 mb-6">
-              <a
-                href="/password-reset-otp"
-                className="font-semibold text-black hover:underline"
+            <div className="flex gap-3 mt-4">
+              <button
+                type="submit"
+                disabled={submitting || formData.email == ""}
+                className={buttonSubmit}
               >
-                Forgot Password?
-              </a>
-            </p>       
-            <button
-              type="submit"
-              disabled={submitting || formData.password == "" || formData.email == ""}
-              className={buttonSubmit}
-            >
-              {submitting ? "Logging in..." : "Login"}
-            </button>
+                {submitting ? "Sending Verification Code..." : "Reset Password"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => window.history.back()}
+                className={buttonBack}
+              >
+                Back
+              </button>
+            </div>
             {error && (
               <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
                 {error}
               </div>
             )} 
-            <p className="text-center text-sm text-slate-600 mt-2">
+            <p className="text-center text-sm text-slate-600">
               Don't have an account?{" "}
               <a
                 href="/signup"
@@ -162,4 +143,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
