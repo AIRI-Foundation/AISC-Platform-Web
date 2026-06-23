@@ -1,5 +1,5 @@
 import {CheckCircleIcon } from "../../dashboard/icons";
-{/* <ClosedEyeIcon className="h-6 w-6" />   */}
+
 export const getPasswordRequirements = (password: string) => ({
   minLength: password.length >= 8,
   lowercase: /[a-z]/.test(password),
