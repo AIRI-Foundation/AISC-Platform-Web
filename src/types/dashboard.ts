@@ -1,8 +1,23 @@
+export interface ProfileStage {
+  stageNumber: number;
+  title: string;
+  status: string;
+  levelBoundaryAfter: number | null;
+}
+
 export interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
   role: string;
+  emailVerified: boolean;
+  spectrumLevel: number;
+  milestoneLevel: number;
+  stagesCompleted: number;
+  totalStages: number;
+  profileVisible: boolean;
+  daysOnPlatform: number;
+  stageOverview: ProfileStage[];
 }
 
 export interface DashboardStats {

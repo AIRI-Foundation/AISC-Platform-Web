@@ -7,6 +7,7 @@ import type { DashboardAction } from "../../types/dashboard";
 interface NextActionsProps {
   actions: DashboardAction[];
   progressMessage: string;
+  onUploaded?: () => void;
 }
 
 function priorityLabel(priority: string): string {
@@ -24,7 +25,11 @@ function priorityStyle(priority: string): string {
   return "bg-amber-50 text-amber-600 border border-amber-200";
 }
 
-const NextActions = ({ actions, progressMessage }: NextActionsProps) => {
+const NextActions = ({
+  actions,
+  progressMessage,
+  onUploaded,
+}: NextActionsProps) => {
   const [status, setStatus] = useState<Record<number, string>>({});
   const [errors, setErrors] = useState<Record<number, string>>({});
 
@@ -39,6 +44,7 @@ const NextActions = ({ actions, progressMessage }: NextActionsProps) => {
       const url = await uploadDocument(file);
       await submitMilestone(action.stageNumber, action.milestoneNumber, url);
       setStatus((current) => ({ ...current, [index]: "Submitted ✓" }));
+      onUploaded?.();
     } catch (err) {
       setStatus((current) => ({ ...current, [index]: "" }));
       setErrors((current) => ({ ...current, [index]: getErrorMessage(err) }));
