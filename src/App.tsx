@@ -21,6 +21,10 @@ import DashboardSettings from "./pages/DashboardSettings";
 import ChangePassword from "./pages/ChangePassword";
 import SendPasswordResetOtp from "./pages/sendPasswordResetOtp";
 import PasswordReset from "./pages/PasswordReset";
+import LearnMoreCorporations from "./pages/LearnMoreCorporations";
+import LearnMoreFounders from "./pages/LearnMoreFounders";
+import LearnMoreGovernment from "./pages/LearnMoreGovernment";
+import LearnMoreInvestors from "./pages/LearnMoreInvestors";
 
 function App() {
   return (
@@ -60,7 +64,12 @@ function App() {
         <Route path="/dashboard/settings" element={<DashboardSettings />} />
         <Route path="/change-password" element={<ChangePassword />} />   
         <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
-        <Route path="/password-reset" element={<PasswordReset />} />                       
+        <Route path="/password-reset" element={<PasswordReset />} />
+
+        <Route path="/learn-corporations" element={<LearnMoreCorporations />} />   
+        <Route path="/learn-founders" element={<LearnMoreFounders />} />   
+        <Route path="/learn-government" element={<LearnMoreGovernment />} />   
+        <Route path="/learn-investors" element={<LearnMoreInvestors />} />                                                   
       </Routes>
     </BrowserRouter>
   );
