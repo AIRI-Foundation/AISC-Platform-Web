@@ -1,6 +1,8 @@
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
+import FeatureCards from "../components/general/IndividualComponents/Cards";
+import { PriceCard } from "../components/general/IndividualComponents/Cards";
 
 const Pricing = () => {
   const ecosystemFeatures = [
@@ -39,8 +41,191 @@ const Pricing = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <div className="bg-navy text-white">
-        <Header />        
-        <div className="mx-auto max-w-7xl px-6 py-6">
+        <Header />     
+        
+  <div className="flex-col mt-auto item-center justify-center items-centergap-24">
+    <div className="size- flex flex-col justify-start items-center mt-20 ">
+        <div className="self-stretch text-center justify-start text-white text-6xl font-bold  capitalize">
+          Pricing
+        </div>
+        <div className="self-stretch text-center justify-start text-white text-2xl font-medium mb-16 mt-6">
+          Choose the plan that works best for you
+        </div>
+    </div>
+    <div className="size- flex flex-col justify-center items-center gap-16">
+
+      {/* Swap pages */}
+        <div data-property-1="Left" className="size- p-1.5 bg-zinc-300 rounded-2xl inline-flex justify-start items-center gap-1">
+            <div data-page="Advisory Program" data-show-notification="false" data-show-page-icon="false" data-state="Active" className="size- p-3.5 bg-white rounded-[10px] shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.25)] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.25)] flex justify-center items-center gap-2.5 overflow-hidden">
+                <div className="justify-start text-black text-base font-bold  uppercase">founder</div>
+            </div>
+            <div data-page="Advisory Program" data-show-notification="false" data-show-page-icon="false" data-state="Default" className="size- p-3.5 rounded-[10px] shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.25)] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.25)] flex justify-center items-center gap-2.5 overflow-hidden">
+                <div className="justify-start text-black text-base font-bold  uppercase">investor</div>
+            </div>
+        </div>
+
+        
+              
+        <div className="size- inline-flex justify-start items-center gap-6">
+
+          <PriceCard
+            Title="Free"
+            Cost="$0"
+            Body1 = "AISC Spectrum Classification"
+            Body2 = "Standard Directory Listing."
+            Body3 = "Investor Accessibility"
+            Body4 = "Advisory Program Access"
+            ButtonText = "Create Account"
+            Link = "/signup"
+          />  
+            {/* <div data-highlighted="False" data-size="Large" className="size- p-8 bg-white rounded-2xl shadow-[0px_8px_32px_0px_rgba(0,0,0,0.25)] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.25)] outline outline-[0.67px] outline-offset-[-0.67px] outline-zinc-300 inline-flex flex-col justify-start items-start gap-5">
+                <div className="size- flex flex-col justify-start items-start gap-5">
+                    <div className="justify-start text-black text-base font-bold  uppercase">Free</div>
+                    <div className="size- flex flex-col justify-start items-start">
+                        <div className="size- inline-flex justify-start items-center gap-1.5">
+                            <div className="justify-start text-black text-5xl font-bold ">$0</div>
+                            <div className="justify-start text-zinc-300 text-2xl font-medium ">/mo</div>
+                        </div>
+                        <div className="justify-start text-zinc-300 text-base font-medium ">Who the plan is for</div>
+                    </div>
+                </div>
+                <div className="w-64 h-56 flex flex-col justify-between items-center">
+                    <div className="self-stretch h-px bg-zinc-300" />
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">AISC Spectrum Classification</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Standard Directory Listing</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Investor Accessibility</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Advisory Program Access</div>
+                    </div>
+                    <div data-show-left-icon="false" data-show-right-icon="false" data-size="Large" data-state="Default" className="self-stretch h-14 p-5 bg-red-700 rounded-[10px] inline-flex justify-center items-center gap-1.5">
+                        <div className="text-center justify-start text-white text-base font-bold  uppercase">create account</div>
+                    </div>
+                </div>
+            </div> */}
+
+
+            <div data-highlighted="True" data-size="Large" className="size- p-8 relative bg-white rounded-2xl shadow-[0px_8px_32px_0px_rgba(0,0,0,0.25)] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.25)] outline outline-2 outline-offset-[-2px] outline-emerald-600 inline-flex flex-col justify-start items-start gap-5">
+                <div className="size- flex flex-col justify-start items-start gap-5">
+                    <div className="justify-start text-emerald-600 text-base font-bold  uppercase">Premium</div>
+                    <div className="size- flex flex-col justify-start items-start">
+                        <div className="size- inline-flex justify-start items-center gap-1.5">
+                            <div className="justify-start text-black text-5xl font-bold ">$100</div>
+                            <div className="justify-start text-zinc-300 text-2xl font-medium ">/mo</div>
+                        </div>
+                        <div className="justify-start text-zinc-300 text-base font-medium ">Who the plan is for</div>
+                    </div>
+                </div>
+                <div className="w-64 h-56 flex flex-col justify-between items-center">
+                    <div className="self-stretch h-px bg-zinc-300" />
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Everything in Free</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">AISC Readiness Score</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Profile Analytics &amp; Views</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-emerald-600" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Automated Investor Match Suggestions</div>
+                    </div>
+                    <div data-show-left-icon="false" data-show-right-icon="false" data-size="Large" data-state="Default" className="self-stretch h-14 p-5 bg-red-700 rounded-[10px] inline-flex justify-center items-center gap-1.5">
+                        <div className="text-center justify-start text-white text-base font-bold  uppercase">book a demo</div>
+                    </div>
+                </div>
+                <div data-left-icon="false" data-right-icon="false" data-size="Small" data-state="Green" className="size- px-2.5 py-[5px] left-[109px] top-[-11px] absolute bg-green-50 rounded-[52px] outline outline-[0.67px] outline-offset-[-0.67px] outline-emerald-600 inline-flex justify-center items-center gap-2.5">
+                    <div className="justify-start text-emerald-600 text-[10px] font-bold  uppercase">most popular</div>
+                </div>
+            </div>
+            <div data-highlighted="False" data-size="Large" className="size- p-8 bg-white rounded-2xl shadow-[0px_8px_32px_0px_rgba(0,0,0,0.25)] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.25)] outline outline-[0.67px] outline-offset-[-0.67px] outline-zinc-300 inline-flex flex-col justify-start items-start gap-5">
+                <div className="size- flex flex-col justify-start items-start gap-5">
+                    <div className="justify-start text-black text-base font-bold  uppercase">Pro</div>
+                    <div className="size- flex flex-col justify-start items-start">
+                        <div className="size- inline-flex justify-start items-center gap-1.5">
+                            <div className="justify-start text-black text-5xl font-bold ">$300</div>
+                            <div className="justify-start text-zinc-300 text-2xl font-medium ">/mo</div>
+                        </div>
+                        <div className="justify-start text-zinc-300 text-base font-medium ">Who the plan is for</div>
+                    </div>
+                </div>
+                <div className="w-64 h-56 flex flex-col justify-between items-center">
+                    <div className="self-stretch h-px bg-zinc-300" />
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Everything in Premium</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Dedicated Account Manager</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">Quarterly Investor Interest Report</div>
+                    </div>
+                    <div className="self-stretch inline-flex justify-start items-center gap-3">
+                        <div data-property-1="Green" className="size-4 relative overflow-hidden">
+                            <div className="size-3.5 left-[1.33px] top-[1.33px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                            <div className="w-1 h-[2.67px] left-[6px] top-[6.67px] absolute outline outline-[1.33px] outline-offset-[-0.67px] outline-zinc-300" />
+                        </div>
+                        <div className="justify-start text-black text-xs font-medium ">+ much more</div>
+                    </div>
+                    <div data-show-left-icon="false" data-show-right-icon="false" data-size="Large" data-state="Default" className="self-stretch h-14 p-5 bg-red-700 rounded-[10px] inline-flex justify-center items-center gap-1.5">
+                        <div className="text-center justify-start text-white text-base font-bold  uppercase">book a demo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="self-stretch text-center justify-start text-white text-[10px] font-bold  uppercase">all prices in cad. cancel or change plans anytime. contact us for enterprise or government licensing.</div>
+    </div>
+</div>
+        {/* <div className="mx-auto max-w-7xl px-6 py-6">
 
           <section className="mt-16 text-center">
             <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
@@ -152,10 +337,10 @@ const Pricing = () => {
                 Book a demo
               </button>
             </div>
-          </div>
-        </div>
+          </div>          
+        </div> */}
       </div>
-
+      <FeatureCards />
       <section className="bg-slate-50 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <h2 className="text-center text-3xl font-bold text-slate-900 sm:text-4xl">
