@@ -16,9 +16,9 @@ export default function FAQ({ items }: FAQProps) {
   return (
  
         <section className="mt-14  pt-14">
-          <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">
+          <div className="self-stretch text-center justify-start text-white text-6xl font-bold  capitalize">
             Frequently asked questions
-          </h2>
+          </div>          
 
           <div className="mx-auto mt-10 max-w-2xl space-y-3">
             {items.map((item) => (
