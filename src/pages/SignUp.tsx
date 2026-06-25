@@ -23,7 +23,7 @@ const SignUp = () => {
   });
 
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
-  
+
   const navigate = useNavigate();
 
   const [submitting, setSubmitting] = useState(false);
@@ -82,11 +82,7 @@ const SignUp = () => {
     setFormData((current) => ({
       ...current,
       [name]:
-        type === "checkbox"
-          ? checked
-          : name === "role"
-            ? Number(value)
-            : value,
+        type === "checkbox" ? checked : name === "role" ? Number(value) : value,
     }));
 
     if (typeof newValue === "string") {
@@ -94,7 +90,7 @@ const SignUp = () => {
         ...prev,
         [name]: validateField(name, newValue),
       }));
-    }    
+    }
   };
 
   const handleBlur = (name: string, value: string) => {
@@ -122,10 +118,10 @@ const SignUp = () => {
   };
 
   const [formErrors, setFormErrors] = useState<{
-  firstName?: string;
-  lastName?: string;
-  businessEmail?: string;
-  phoneNumber?: number;
+    firstName?: string;
+    lastName?: string;
+    businessEmail?: string;
+    phoneNumber?: number;
   }>({});
 
   const validateField = (name: string, value: string) => {
@@ -139,7 +135,7 @@ const SignUp = () => {
           ? ""
           : "Valid email required";
       case "phoneNumber":
-        return value.trim() ? "" : "Phone number is required";          
+        return value.trim() ? "" : "Phone number is required";
       default:
         return "";
     }
@@ -166,32 +162,31 @@ const SignUp = () => {
     }
     setSubmitting(true);
 
-  try {
-    await register({
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.businessEmail,
-      phoneNumber: formData.phoneNumber,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword,
-      role: formData.role,
-      agreeToTerms: formData.agreeTerms
-    }); 
+    try {
+      await register({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.businessEmail,
+        phoneNumber: formData.phoneNumber,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        role: formData.role,
+        agreeToTerms: formData.agreeTerms,
+      });
 
-    setSuccess(
-      "Account created. Check your email for a verification code."
-    );    
-    navigate("/verify-email", {
-      state: {
-      email: formData.businessEmail,
-      },});
+      setSuccess("Account created. Check your email for a verification code.");
+      navigate("/verify-email", {
+        state: {
+          email: formData.businessEmail,
+        },
+      });
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
       setSubmitting(false);
-    } 
+    }
   };
-console.log("Registration successful");
+  console.log("Registration successful");
 
   return (
     <div className="min-h-screen bg-[#0f2b5c] text-white">
@@ -224,12 +219,18 @@ console.log("Registration successful");
             </a>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <a
+              href="/login"
+              className="inline-flex items-center justify-center rounded-full border-2 border-[#dc2626] px-5 py-2.5 text-sm font-semibold text-[#dc2626] transition hover:bg-[#dc2626] hover:text-white"
+            >
+              Login
+            </a>
             <a
               href="/signup"
               className="inline-flex items-center justify-center rounded-full bg-[#dc2626] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
             >
-              Sign up / Login
+              Sign Up
             </a>
           </div>
         </header>
@@ -260,11 +261,9 @@ console.log("Registration successful");
                   type="text"
                   placeholder="First name"
                 />
-              {formErrors.firstName && formErrors.firstName &&(
-                <p className="text-sm text-red-500">
-                  {formErrors.firstName}
-                </p>
-              )}                
+                {formErrors.firstName && formErrors.firstName && (
+                  <p className="text-sm text-red-500">{formErrors.firstName}</p>
+                )}
               </label>
               <label className="space-y-2 text-sm font-medium text-slate-800">
                 Last name
@@ -277,11 +276,9 @@ console.log("Registration successful");
                   type="text"
                   placeholder="Last name"
                 />
-              {formErrors.lastName && formErrors.lastName &&(
-                  <p className="text-sm text-red-500">
-                    {formErrors.lastName}
-                  </p>
-                )}                
+                {formErrors.lastName && formErrors.lastName && (
+                  <p className="text-sm text-red-500">{formErrors.lastName}</p>
+                )}
               </label>
             </div>
 
@@ -296,11 +293,11 @@ console.log("Registration successful");
                 type="email"
                 placeholder="you@business.com"
               />
-                {formErrors.businessEmail && formErrors.businessEmail &&(
-                  <p className="text-sm text-red-500">
-                    {formErrors.businessEmail}
-                  </p>
-                )}              
+              {formErrors.businessEmail && formErrors.businessEmail && (
+                <p className="text-sm text-red-500">
+                  {formErrors.businessEmail}
+                </p>
+              )}
             </label>
 
             <label className="space-y-2 text-sm font-medium text-slate-800">
@@ -315,10 +312,8 @@ console.log("Registration successful");
                 placeholder="(123) 456-7890"
               />
               {formErrors.phoneNumber && formErrors.phoneNumber && (
-                <p className="text-sm text-red-500">
-                  {formErrors.phoneNumber}
-                </p>
-              )}                 
+                <p className="text-sm text-red-500">{formErrors.phoneNumber}</p>
+              )}
             </label>
 
             <div className="grid gap-4 sm:grid-cols-2">

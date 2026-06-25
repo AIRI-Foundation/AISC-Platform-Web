@@ -17,6 +17,7 @@ import DashboardMilestones from "./pages/DashboardMilestones";
 import DashboardProfile from "./pages/DashboardProfile";
 import DashboardAdvisoryProgram from "./pages/DashboardAdvisoryProgram";
 import DashboardSettings from "./pages/DashboardSettings";
+import SignUpDemo from "./pages/SignUpDemo";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           element={<DashboardAdvisoryProgram />}
         />
         <Route path="/dashboard/settings" element={<DashboardSettings />} />
+        <Route path="/signup-demo" element={<SignUpDemo />} />
       </Routes>
     </BrowserRouter>
   );

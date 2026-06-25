@@ -64,12 +64,18 @@ const Home = () => {
               </a>
             </nav>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <a
+                href="/login"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#dc2626] px-5 py-2.5 text-sm font-semibold text-[#dc2626] transition hover:bg-[#dc2626] hover:text-white"
+              >
+                Login
+              </a>
               <a
                 href="/signup"
                 className="inline-flex items-center justify-center rounded-full bg-[#dc2626] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
               >
-                Sign up/ Login
+                Sign Up
               </a>
             </div>
           </header>
@@ -152,7 +158,6 @@ const Home = () => {
               <p className="text-xs text-slate-400">
                 Canada's AI Startups Intelligence Platform
               </p>
-
               <div className="mt-6 flex gap-3">
                 <a
                   href="#"
@@ -177,7 +182,7 @@ const Home = () => {
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7z" />
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
                 <a
@@ -195,90 +200,30 @@ const Home = () => {
                 </a>
               </div>
             </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {["Contact Us", "Contact Us", "Contact Us", "Contact Us"].map(
+              (title, i) => (
+                <div key={i}>
+                  <h4 className="mb-4 text-sm font-semibold">{title}</h4>
+                  <ul className="space-y-2 text-sm text-slate-300">
+                    <li>
+                      <a href="#" className="transition hover:text-white">
+                        Contact
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="transition hover:text-white">
+                        About
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="transition hover:text-white">
+                        Privacy
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              ),
+            )}
           </div>
         </div>
       </footer>

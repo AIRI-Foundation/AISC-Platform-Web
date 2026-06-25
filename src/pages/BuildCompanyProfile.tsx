@@ -111,12 +111,18 @@ const BuildCompanyProfile = () => {
             </a>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <a
+              href="/login"
+              className="inline-flex items-center justify-center rounded-full border-2 border-[#dc2626] px-5 py-2.5 text-sm font-semibold text-[#dc2626] transition hover:bg-[#dc2626] hover:text-white"
+            >
+              Login
+            </a>
             <a
               href="/signup"
               className="inline-flex items-center justify-center rounded-full bg-[#dc2626] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
             >
-              Sign up / Login
+              Sign Up
             </a>
           </div>
         </header>

@@ -11,14 +11,9 @@ interface FAQItem {
 }
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
-
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,11 +59,7 @@ const Login = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
-    setFormData((current) => ({
-      ...current,
-      [name]: value,
-    }));
+    setFormData((current) => ({ ...current, [name]: value }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -81,16 +72,9 @@ const Login = () => {
         password: formData.password,
       });
       setSession(auth.token, auth.email, auth.role);
-      // TEMP: remove before merge: confirms login succeeded + token is stored.
-      console.log("Logged in:", {
-        email: auth.email,
-        role: auth.role,
-        token: auth.token,
-        tokenInStorage: localStorage.getItem("aisc_token"),
-      });
       navigate("/dashboard/overview");
     } catch (err) {
-      setError(getErrorMessage(err)); // 401 → "wrong credentials" message from the API
+      setError(getErrorMessage(err));
     } finally {
       setSubmitting(false);
     }
@@ -127,12 +111,18 @@ const Login = () => {
             </a>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <a
+              href="/login"
+              className="inline-flex items-center justify-center rounded-full border-2 border-[#dc2626] px-5 py-2.5 text-sm font-semibold text-[#dc2626] transition hover:bg-[#dc2626] hover:text-white"
+            >
+              Login
+            </a>
             <a
               href="/signup"
               className="inline-flex items-center justify-center rounded-full bg-[#dc2626] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-[#b91c1c]"
             >
-              Sign up/ Login
+              Sign Up
             </a>
           </div>
         </header>
@@ -149,9 +139,11 @@ const Login = () => {
         </section>
 
         <div className="mx-auto mt-12 max-w-md rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <label className="space-y-2 text-sm font-medium text-slate-800">
-              Email
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-slate-800 mb-1.5">
+                Email
+              </label>
               <input
                 name="email"
                 value={formData.email}
@@ -160,10 +152,12 @@ const Login = () => {
                 type="email"
                 placeholder="you@business.com"
               />
-            </label>
+            </div>
 
-            <label className="space-y-2 text-sm font-medium text-slate-800">
-              Password
+            <div>
+              <label className="block text-sm font-medium text-slate-800 mb-1.5">
+                Password
+              </label>
               <div className="relative">
                 <input
                   name="password"
@@ -203,7 +197,7 @@ const Login = () => {
                   </svg>
                 </button>
               </div>
-            </label>
+            </div>
 
             {error && (
               <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -251,7 +245,6 @@ const Login = () => {
           <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">
             Frequently asked questions
           </h2>
-
           <div className="mx-auto mt-10 max-w-2xl space-y-3">
             {faqItems.map((item) => (
               <div
@@ -268,9 +261,7 @@ const Login = () => {
                     {item.title}
                   </span>
                   <svg
-                    className={`h-5 w-5 text-slate-600 transition-transform ${
-                      expandedFAQ === item.id ? "rotate-180" : ""
-                    }`}
+                    className={`h-5 w-5 text-slate-600 transition-transform ${expandedFAQ === item.id ? "rotate-180" : ""}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -283,7 +274,6 @@ const Login = () => {
                     />
                   </svg>
                 </button>
-
                 {expandedFAQ === item.id && (
                   <div className="border-t border-slate-200 bg-slate-50/50 px-6 py-4 text-sm text-slate-700">
                     {item.answer}
@@ -310,7 +300,6 @@ const Login = () => {
               <p className="text-xs text-slate-400">
                 Canada's AI Startups Intelligence Platform
               </p>
-
               <div className="mt-6 flex gap-3">
                 <a
                   href="#"
@@ -335,7 +324,7 @@ const Login = () => {
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7z" />
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
                 <a
@@ -353,90 +342,30 @@ const Login = () => {
                 </a>
               </div>
             </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {["Contact Us", "Contact Us", "Contact Us", "Contact Us"].map(
+              (title, i) => (
+                <div key={i}>
+                  <h4 className="mb-4 text-sm font-semibold">{title}</h4>
+                  <ul className="space-y-2 text-sm text-slate-300">
+                    <li>
+                      <a href="#" className="transition hover:text-white">
+                        Contact
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="transition hover:text-white">
+                        About
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="transition hover:text-white">
+                        Privacy
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              ),
+            )}
           </div>
         </div>
       </footer>
