@@ -172,3 +172,15 @@ export const InformationIcon = (props: IconProps) => (
 </svg>
 );
 
+export const SecurityIcon = (props: IconProps) => (
+<svg {...base} {...props}>
+  <path d="M7 16C7 16 13 13 13 8.5V3.25L7 1L1 3.25V8.5C1 13 7 16 7 16Z"/>
+</svg>
+);
+
+export const CreditCardIcon = (props: IconProps) => (
+<svg {...base} {...props}>
+  <path d="M0.75 5.5H17.25M2.25 1H15.75C16.5784 1 17.25 1.67157 17.25 2.5V11.5C17.25 12.3284 16.5784 13 15.75 13H2.25C1.42157 13 0.75 12.3284 0.75 11.5V2.5C0.75 1.67157 1.42157 1 2.25 1Z"/>
+</svg>
+);
+
