@@ -25,6 +25,7 @@ import LearnMoreCorporations from "./pages/LearnMoreCorporations";
 import LearnMoreFounders from "./pages/LearnMoreFounders";
 import LearnMoreGovernment from "./pages/LearnMoreGovernment";
 import LearnMoreInvestors from "./pages/LearnMoreInvestors";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -42,8 +43,11 @@ function App() {
           path="/build-company-profile"
           element={<BuildCompanyProfile />}
         />
-        <Route path="/authentication-success" element={<AuthenticationSuccess />} />
-        <Route path="/password-success" element={<PasswordResetSuccess />} />        
+        <Route
+          path="/authentication-success"
+          element={<AuthenticationSuccess />}
+        />
+        <Route path="/password-success" element={<PasswordResetSuccess />} />
         <Route path="/error" element={<Error />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
@@ -62,14 +66,15 @@ function App() {
           element={<DashboardAdvisoryProgram />}
         />
         <Route path="/dashboard/settings" element={<DashboardSettings />} />
-        <Route path="/change-password" element={<ChangePassword />} />   
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
         <Route path="/password-reset" element={<PasswordReset />} />
 
-        <Route path="/learn-corporations" element={<LearnMoreCorporations />} />   
-        <Route path="/learn-founders" element={<LearnMoreFounders />} />   
-        <Route path="/learn-government" element={<LearnMoreGovernment />} />   
-        <Route path="/learn-investors" element={<LearnMoreInvestors />} />                                                   
+        <Route path="/learn-corporations" element={<LearnMoreCorporations />} />
+        <Route path="/learn-founders" element={<LearnMoreFounders />} />
+        <Route path="/learn-government" element={<LearnMoreGovernment />} />
+        <Route path="/learn-investors" element={<LearnMoreInvestors />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );
