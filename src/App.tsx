@@ -25,6 +25,8 @@ import LearnMoreCorporations from "./pages/LearnMoreCorporations";
 import LearnMoreFounders from "./pages/LearnMoreFounders";
 import LearnMoreGovernment from "./pages/LearnMoreGovernment";
 import LearnMoreInvestors from "./pages/LearnMoreInvestors";
+import BookDemo from "./pages/BookDemo";
+import SubmissionSent from "./pages/SubmissionSent";
 
 function App() {
   return (
@@ -69,7 +71,10 @@ function App() {
         <Route path="/learn-corporations" element={<LearnMoreCorporations />} />   
         <Route path="/learn-founders" element={<LearnMoreFounders />} />   
         <Route path="/learn-government" element={<LearnMoreGovernment />} />   
-        <Route path="/learn-investors" element={<LearnMoreInvestors />} />                                                   
+        <Route path="/learn-investors" element={<LearnMoreInvestors />} />
+
+        <Route path="/book-demo" element={<BookDemo />} />
+        <Route path="/submission-sent" element={<SubmissionSent />} />
       </Routes>
     </BrowserRouter>
   );
