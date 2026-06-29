@@ -33,7 +33,7 @@ const ProgressBar = ({ progressPercentage } : {progressPercentage: number}) => {
     <div className="relative mb-2 h-2 w-full rounded-full bg-slate-300">
       <div
         style={{ width: `${progressPercentage}%` }}
-        className={`h-full rounded-full transition-all duration-300 ${getProgressColor(
+        className={`h-full rounded-full transition-all duration-500 ${getProgressColor(
           progressPercentage
         )}`}
       />

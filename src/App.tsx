@@ -17,7 +17,8 @@ import Pricing from "./pages/Pricing";
 import DashboardMilestones from "./pages/DashboardMilestones";
 import DashboardProfile from "./pages/DashboardProfile";
 import DashboardAdvisoryProgram from "./pages/DashboardAdvisoryProgram";
-import DashboardSettings from "./pages/DashboardSettings";
+import DashboardSettingsProfile from "./pages/DashboardSettingsProfile";
+import DashboardSettingsSecurity from "./pages/DashboardSettingsSecurity";
 import ChangePassword from "./pages/ChangePassword";
 import SendPasswordResetOtp from "./pages/sendPasswordResetOtp";
 import PasswordReset from "./pages/PasswordReset";
@@ -61,7 +62,6 @@ function App() {
           path="/dashboard/advisory-program"
           element={<DashboardAdvisoryProgram />}
         />
-        <Route path="/dashboard/settings" element={<DashboardSettings />} />
         <Route path="/change-password" element={<ChangePassword />} />   
         <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
         <Route path="/password-reset" element={<PasswordReset />} />
@@ -69,7 +69,10 @@ function App() {
         <Route path="/learn-corporations" element={<LearnMoreCorporations />} />   
         <Route path="/learn-founders" element={<LearnMoreFounders />} />   
         <Route path="/learn-government" element={<LearnMoreGovernment />} />   
-        <Route path="/learn-investors" element={<LearnMoreInvestors />} />                                                   
+        <Route path="/learn-investors" element={<LearnMoreInvestors />} />   
+
+        <Route path="/dashboard/settings-profile" element={<DashboardSettingsProfile />} />
+        <Route path="/dashboard/settings-security" element={<DashboardSettingsSecurity />} />
       </Routes>
     </BrowserRouter>
   );
