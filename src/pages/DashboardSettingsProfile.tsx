@@ -5,11 +5,8 @@ import { getProfile, getUserCompany } from "../services/dashboardService";
 import { getErrorMessage } from "../lib/api";
 import { isLoggedIn } from "../lib/auth";
 import { getInitials } from "../lib/format";
-import { ProfileIcon, SecurityIcon, BellIcon, CreditCardIcon } from "../components/dashboard/icons";
 import { changePassword } from "../services/authService";
 import DashboardSettingsTopbar from "../components/dashboard/DashboardSettingsTopbar";
-
-import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements"
 import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle"
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 import { textField } from "../components/general/IndividualComponents/Buttons";
@@ -132,8 +129,8 @@ const [data, setData] = useState<ProfilePageData | null>(null);
 
   return (
     <DashboardLayout user={user}>
-    <div className=" min-h-screen max-w-7xl !px-8 !py-8">  {/* change red */} 
-        <div className="flex-1 text-sm text-slate-400">  {/* change navy */}
+    <div className=" min-h-screen !px-8 !py-8">
+        <div className="flex-1 text-sm text-slate-400">
           Dashboard  <span className="font-semibold text-base">/ </span> Settings 
             <span className="font-semibold text-base">/ </span> 
             <span className="text-black font-semibold">Profile info</span>
@@ -149,7 +146,7 @@ const [data, setData] = useState<ProfilePageData | null>(null);
 <div className="inline-flex justify-center items-center w-full h-full gap-5">  {/* change gold */}
 
 {/* Personal Information */}
-    <div className="max-w-[650px] md:min-w-[450px] rounded-[20px] bg-white/95 shadow-[0px_4px_12px_4px_rgba(0,0,0,0.15)] text-slate-900 backdrop-blur-xl p-4">
+    <div className="max-w-[650px] md:min-w-[450px] rounded-[20px] bg-white/95 shadow-[0px_4px_12px_4px_rgba(0,0,0,0.15)] text-slate-900 backdrop-blur-xl py-6 p-4">
         {/* Title */}
         <section >
         <h1 className="mx-auto max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-2xl">

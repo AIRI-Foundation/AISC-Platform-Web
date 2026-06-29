@@ -5,14 +5,8 @@ import { getProfile, getUserCompany } from "../services/dashboardService";
 import { getErrorMessage } from "../lib/api";
 import { isLoggedIn } from "../lib/auth";
 import { getInitials } from "../lib/format";
-import { ProfileIcon, SecurityIcon, BellIcon, CreditCardIcon } from "../components/dashboard/icons";
-import { changePassword } from "../services/authService";
 import DashboardSettingsTopbar from "../components/dashboard/DashboardSettingsTopbar";
-
-import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements"
-import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle"
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
-import { textField } from "../components/general/IndividualComponents/Buttons";
 
 import type {
   UserProfile,
@@ -65,18 +59,18 @@ DeviceState
             <div
               className={`px-2.5 py-[5px]
                 flex items-center justify-center
-                rounded-[52px] outline outline-[0.67px] outline-offset-[-0.67px]
+                rounded-[52px] outline outline-[0.67px] text-bold outline-offset-[-0.67px]
                 ${
                   DeviceState === "Current"
-                    ? "outline-emerald-600 text-emerald-600"
-                    : "outline-red-600 text-red-600"
+                    ? "outline-emerald-600 text-emerald-600 bg-emerald-50"
+                    : "outline-red-600 text-red-600 bg-red-50"
                 }`}
             >
-              <span className="text-[10px] font-bold uppercase">
+              <span className="text-[12px] font-bold uppercase">
                 {DeviceState}
               </span>
             </div>
-          </div>
+          </div>                  
       </div>   
     </div>
   );
@@ -147,7 +141,7 @@ const DashboardSettings = () => {
 
   return (
     <DashboardLayout user={user}>
-    <div className=" min-h-screen max-w-7xl !px-8 !py-8">
+    <div className=" min-h-screen !px-8 !py-8">
         <div className="flex-1 text-sm text-slate-400">
           Dashboard  <span className="font-semibold text-base">/ </span> Settings 
             <span className="font-semibold text-base">/ </span> 
@@ -162,7 +156,7 @@ const DashboardSettings = () => {
 <div className="inline-flex justify-center items-start w-full h-full gap-5">
 
 {/* Two-Factor Authentication */}
-    <div className="max-w-[650px] md:min-w-[475px] rounded-[20px] bg-white/95 shadow-[0px_4px_12px_4px_rgba(0,0,0,0.15)] text-slate-900 backdrop-blur-xl p-4">
+    <div className="max-w-[650px] md:min-w-[475px] rounded-[20px] bg-white/95 shadow-[0px_4px_12px_4px_rgba(0,0,0,0.15)] text-slate-900 backdrop-blur-xl py-6 p-4">
         {/* Title */}
         <section >
         <h1 className="w-full max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-2xl">
