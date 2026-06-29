@@ -164,3 +164,11 @@ export const CorporationIcon = (props: IconProps) => (
   </svg>
 );
 
+export const InformationIcon = (props: IconProps) => (
+<svg {...base} {...props}>
+ <circle cx="12" cy="12" r="9" />
+<path d="M12 16V12" />
+<path d="M12 8H11.99" />
+</svg>
+);
+
