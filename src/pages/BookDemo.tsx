@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/general/IndividualComponents/Header";
 import Footer from "../components/general/IndividualComponents/Footer";
 import { textField, buttonSubmit } from "../components/general/IndividualComponents/Buttons";
+import { bookDemo } from "../services/demoService";
+import { getErrorMessage } from "../lib/api";
 
 const describesYouOptions = ["Founder", "Investor"];
 
@@ -105,6 +107,8 @@ const required = <span className="text-red"> *</span>;
 const BookDemo = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
@@ -115,10 +119,20 @@ const BookDemo = () => {
 
   const isComplete = Object.values(formData).every((value) => value.trim() !== "");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isComplete) return;
-    navigate("/submission-sent");
+    setError(null);
+    setSubmitting(true);
+
+    try {
+      await bookDemo(formData);
+      navigate("/submission-sent");
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -354,9 +368,11 @@ const BookDemo = () => {
               />
             </label>
 
+            {error && <p className="pt-4 text-sm text-red">{error}</p>}
+
             <div className="pt-6">
-              <button type="submit" disabled={!isComplete} className={buttonSubmit}>
-                Submit
+              <button type="submit" disabled={!isComplete || submitting} className={buttonSubmit}>
+                {submitting ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>

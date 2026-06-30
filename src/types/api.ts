@@ -68,3 +68,22 @@ export interface PasswordResetRequest {
   NewPassword: string;
   ConfirmPassword: string;
 }
+
+export interface BookDemoRequest {
+  firstName: string;
+  lastName: string;
+  businessEmail: string;
+  phoneNumber: string;
+  describesYou: string;
+  companyName: string;
+  location: string;
+  city: string;
+  industry: string;
+  aiCategory: string;
+  productStage: string;
+  teamSize: string;
+  fundingYear: string;
+  revenueBand: string;
+  companyWebsite: string;
+  businessChallenge: string;
+}
