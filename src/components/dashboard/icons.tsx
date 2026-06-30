@@ -195,7 +195,7 @@ export const PencilEditIcon = (props: IconProps) => (
 );
 
 export const XIcon = (props: IconProps) => (
-<svg {...base} {...props} stroke-width="0.2" fill="none" >
+<svg {...base} {...props} stroke-width="1" fill="none" transform="translate(5 5) scale(1.2)" >
   <path d="M11.75 0.75L0.75 11.75M0.75 0.75L11.75 11.75" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 );

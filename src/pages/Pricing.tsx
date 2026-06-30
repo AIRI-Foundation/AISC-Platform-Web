@@ -8,33 +8,47 @@ import Header from "../components/general/IndividualComponents/Header"
 import FeatureCards from "../components/general/IndividualComponents/Cards";
 import { PriceCard, SmallPriceCard } from "../components/general/IndividualComponents/Cards";
 import placeholderImage from "../assets/placeholder.png";
-import { CheckCircleIcon, InformationIcon } from "../components/dashboard/icons";
+import { CheckCircleIcon, InformationIcon, XIcon } from "../components/dashboard/icons";
+import { founderFeatures, investorFeatures  } from "../components/data/PricingFeaturesData"
+import type { IconType  } from "../components/data/PricingFeaturesData"
+const renderIcon = (icon: IconType) => {
+  switch (icon) {
+    case "check":
+      return <CheckCircleIcon className="h-7 w-7 text-zinc-500" />;
+
+    case "x":
+      return <XIcon className="h-7 w-7 text-zinc-500" />;
+
+    default:
+      return null;
+  }
+};
 
 type DataLineProps = {
   FeatureName: string;
   ShowFeatureIcon: boolean;
   Data1: string;
-  ShowData1Icon: boolean;  
+  Data1Icon: IconType;  
   Data2: string;
-  ShowData2Icon: boolean;  
+  Data2Icon: IconType;  
   Data3: string;
-  ShowData3Icon: boolean;  
+  Data3Icon: IconType;  
 };
 
 const DataLine = ({
   FeatureName,
   ShowFeatureIcon,
   Data1,
-  ShowData1Icon,
+  Data1Icon,
   Data2,
-  ShowData2Icon,
+  Data2Icon,
   Data3,
-  ShowData3Icon
+  Data3Icon
 }: DataLineProps) => {
   return(
     <div className="self-stretch inline-flex justify-start items-start gap-7">
-      <div className="w-80 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start items-center gap-2">
-          <div className="justify-start text-black text-2xl font-medium ">
+      <div className="w-80 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start mt-1 items-center gap-2">
+          <div className="justify-start text-black font-medium ">
             {FeatureName}
           </div>
           {ShowFeatureIcon && (
@@ -42,27 +56,31 @@ const DataLine = ({
           )}          
       </div>
       <div className="size- flex justify-start items-start gap-5">
-          <div className="w-56 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start items-center gap-2">
-              <div className="justify-start text-black text-2xl font-medium ">
-                {ShowData1Icon 
-                  ? <CheckCircleIcon className="ml-auto h-7 w-7 mt-1 text-zinc-500" />
-                  : Data1}
+          <div className="w-65 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start items-center gap-2">
+              <div className="justify-start text-black text-1xl font-medium ">
+                <div className="flex items-center gap-2">
+                  {renderIcon(Data1Icon)}
+                  {Data1}                  
+                </div>
               </div>
               <div className="mt-8"></div>         
           </div>
-          <div className="w-56 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start items-center gap-2">
-              <div className="justify-start text-black text-2xl font-medium ">
-                {ShowData2Icon 
-                  ? <CheckCircleIcon className="ml-auto h-7 w-7 mt-1 text-zinc-500" />
-                  : Data2}
+          <div className="w-65 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start items-center gap-2">
+              <div className="justify-start text-black font-medium ">
+                <div className="flex items-center gap-2">
+                  {renderIcon(Data2Icon)}
+                  {Data2}                  
+
+                </div>
               </div>
               <div className="mt-8"></div>                 
           </div>
-          <div className="w-56 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start items-center gap-2">
-              <div className="justify-start text-black text-2xl font-medium ">
-                {ShowData3Icon 
-                  ? <CheckCircleIcon className="ml-auto h-7 w-7 mt-1 text-zinc-500" />
-                  : Data3}
+          <div className="w-65 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start items-center gap-2">
+              <div className="justify-start text-black font-medium ">
+                <div className="flex items-center gap-2">
+                  {renderIcon(Data3Icon)}                  
+                  {Data3}
+                </div>
               </div>  
               <div className="mt-8"></div>                        
           </div>
@@ -143,338 +161,6 @@ const investorPlans = [
   }    
 ];
 
-const founderFeatures1 = [
-  {
-    Id: "founder-feature-1",    
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: false,
-    Data1: "Feature",
-    ShowData1Icon: false,
-    Data2: "Feature",
-    ShowData2Icon: false,
-    Data3:"Feature",
-    ShowData3Icon: false
-  },
-  {
-    Id: "founder-feature-2",    
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: false,
-    Data1: "Feature",
-    ShowData1Icon: false,
-    Data2: "Feature",
-    ShowData2Icon: false,
-    Data3:"Feature",
-    ShowData3Icon: false
-  }  
-];
-
-const founderFeatures2 = [
-  {
-    Id: "founder-feature-1",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "founder-feature-2",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "founder-feature-3",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  },
-  {
-    Id: "founder-feature-4",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  }   
-];
-
-const founderFeatures3 = [
-  {
-    Id: "founder-feature-1",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "founder-feature-2",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "founder-feature-3",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  },
-  {
-    Id: "founder-feature-4",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  }   
-];
-
-const founderFeatures4 = [
-  {
-    Id: "founder-feature-1",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "founder-feature-2",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "founder-feature-3",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  },
-  {
-    Id: "founder-feature-4",        
-    FeatureName: "Founder Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  }   
-];
-
-const investorFeatures1 = [
-  {
-    Id: "investor-feature-1",
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: false,
-    Data1: "Feature",
-    ShowData1Icon: false,
-    Data2: "Feature",
-    ShowData2Icon: false,
-    Data3:"Feature",
-    ShowData3Icon: false
-  },
-  {
-    Id: "investor-feature-2",    
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: false,
-    Data1: "Feature",
-    ShowData1Icon: false,
-    Data2: "Feature",
-    ShowData2Icon: false,
-    Data3:"Feature",
-    ShowData3Icon: false
-  }  
-];
-
-const investorFeatures2 = [
-  {
-    Id: "investor-feature-1",      
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "investor-feature-2",      
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "investor-feature-3",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  },
-  {
-    Id: "investor-feature-4",         
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  }   
-];
-
-const investorFeatures3 = [
-  {
-    Id: "investor-feature-1",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "investor-feature-2",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "investor-feature-3",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  },
-  {
-    Id: "investor-feature-4",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  }   
-];
-
-const investorFeatures4 = [
-  {
-    Id: "investor-feature-1",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "investor-feature-2",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "Lorem ipsum",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: false,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: false
-  },
-  {
-    Id: "investor-feature-3",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  },
-  {
-    Id: "investor-feature-4",            
-    FeatureName: "Investor Feature",
-    ShowFeatureIcon: true,
-    Data1: "",
-    ShowData1Icon: false,
-    Data2: "Lorem ipsum",
-    ShowData2Icon: true,
-    Data3:"Lorem ipsum",
-    ShowData3Icon: true
-  }   
-];
-
 const founderPlansSmall = [
   {
     Featured: false,
@@ -536,25 +222,11 @@ const Pricing = () => {
       ? founderPlansSmall
       : investorPlansSmall;    
 
-  const features1 =
+  const features =
     view === "founder"
-      ? founderFeatures1
-      : investorFeatures1;
-
-  const features2 =
-    view === "founder"
-      ? founderFeatures2
-      : investorFeatures2;
-      
-  const features3 =
-    view === "founder"
-      ? founderFeatures3
-      : investorFeatures3;
-      
-  const features4 =
-    view === "founder"
-      ? founderFeatures4
-      : investorFeatures4;      
+      ? founderFeatures
+      : investorFeatures;
+   
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
@@ -576,10 +248,10 @@ const Pricing = () => {
     <div className="p-1.5 bg-zinc-400 rounded-2xl inline-flex gap-1">
       <button
         onClick={() => setView("founder")}
-        className={`p-3.5 rounded-[10px] uppercase font-bold
+        className={`p-3.5 rounded-[10px] uppercase font-bold text-black
           ${view === "founder"
             ? "bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.25)]"
-            : "bg-white/40 text-black"
+            : "bg-white/40"
           }`}
       >
         Founder
@@ -596,8 +268,6 @@ const Pricing = () => {
       </button>
     </div>
 
-        
-              
         <div className="size- inline-flex justify-start items-center gap-6">
 
         {plans.map((plan) => (
@@ -723,10 +393,10 @@ const Pricing = () => {
     <div className="p-1.5 bg-zinc-400 rounded-2xl inline-flex gap-1">
       <button
         onClick={() => setView("founder")}
-        className={`p-3.5 rounded-[10px] uppercase font-bold
+        className={`p-3.5 rounded-[10px] uppercase font-bold text-black
           ${view === "founder"
             ? "bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.25)]"
-            : "bg-white/40 text-black"
+            : "bg-white/40"
           }`}
       >
         Founder
@@ -765,76 +435,22 @@ const Pricing = () => {
       </div>
       <div className="self-stretch flex flex-col justify-start items-center gap-16">
           <div className="self-stretch flex flex-col justify-start items-center gap-6">
-              <div className="self-stretch justify-start text-black text-5xl font-bold ">
+              <div className="self-stretch justify-start text-black text-4xl font-bold ">
                 Main
               </div>
-              {features1.map((features) => (
+              {features.map((features) => (
                 <DataLine
                   key={features.Id}
                   FeatureName={features.FeatureName}
                   ShowFeatureIcon={features.ShowFeatureIcon}
                   Data1={features.Data1}
-                  ShowData1Icon={features.ShowData1Icon}
+                  Data1Icon={features.Data1Icon}
                   Data2={features.Data2}
-                  ShowData2Icon={features.ShowData2Icon}
+                  Data2Icon={features.Data2Icon}
                   Data3={features.Data3}
-                  ShowData3Icon={features.ShowData3Icon}
+                  Data3Icon={features.Data3Icon}
                 />
               ))}   
-          </div>
-          <div className="self-stretch flex flex-col justify-start items-center gap-6">
-            <div className="self-stretch justify-start text-black text-5xl font-bold ">
-              Main
-            </div>
-            {features2.map((features) => (
-              <DataLine
-                key={features.Id}
-                FeatureName={features.FeatureName}
-                ShowFeatureIcon={features.ShowFeatureIcon}
-                Data1={features.Data1}
-                ShowData1Icon={features.ShowData1Icon}
-                Data2={features.Data2}
-                ShowData2Icon={features.ShowData2Icon}
-                Data3={features.Data3}
-                ShowData3Icon={features.ShowData3Icon}
-              />
-            ))}              
-          </div>
-          <div className="self-stretch flex flex-col justify-start items-center gap-6">
-<div className="self-stretch justify-start text-black text-5xl font-bold ">
-              Main
-            </div>
-            {features3.map((features) => (
-              <DataLine
-                key={features.Id}
-                FeatureName={features.FeatureName}
-                ShowFeatureIcon={features.ShowFeatureIcon}
-                Data1={features.Data1}
-                ShowData1Icon={features.ShowData1Icon}
-                Data2={features.Data2}
-                ShowData2Icon={features.ShowData2Icon}
-                Data3={features.Data3}
-                ShowData3Icon={features.ShowData3Icon}
-              />
-            ))}               
-          </div>
-          <div className="self-stretch flex flex-col justify-start items-center gap-6">
-<div className="self-stretch justify-start text-black text-5xl font-bold ">
-              Main
-            </div>
-            {features4.map((features) => (
-              <DataLine
-                key={features.Id}
-                FeatureName={features.FeatureName}
-                ShowFeatureIcon={features.ShowFeatureIcon}
-                Data1={features.Data1}
-                ShowData1Icon={features.ShowData1Icon}
-                Data2={features.Data2}
-                ShowData2Icon={features.ShowData2Icon}
-                Data3={features.Data3}
-                ShowData3Icon={features.ShowData3Icon}
-              />
-            ))}                     
           </div>
       </div>
   </div>
