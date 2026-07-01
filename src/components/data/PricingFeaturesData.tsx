@@ -129,7 +129,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-1",
     FeatureName: "Directory Access",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "",
     Data1Icon: "check",
     Data2: "",
@@ -140,7 +140,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-2",    
     FeatureName: "Thesis Matching Feed",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "Basic",
     Data1Icon: "check",
     Data2: "Advanced",
@@ -151,7 +151,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-3",
     FeatureName: "Readiness Score",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "",
     Data1Icon: "x",
     Data2: "If 60 and up",
@@ -162,7 +162,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-4",
     FeatureName: "Readiness Score (self-view)",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "",
     Data1Icon: "x",
     Data2: "",
@@ -173,7 +173,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-5",
     FeatureName: "Profile Analytics",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "",
     Data1Icon: "x",
     Data2: "Views & Engagement",
@@ -184,7 +184,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-6",
     FeatureName: "Investor Introductions",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "Pay per engagement",
     Data1Icon: "x",
     Data2: "Priority Enrollment",
@@ -195,7 +195,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-7",
     FeatureName: "Investor Match Suggestions",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "Level 3+",
     Data1Icon: "check",
     Data2: "Level 3+",
@@ -206,7 +206,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-8",
     FeatureName: "Advisory Program",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "Pay per engagement",
     Data1Icon: "x",
     Data2: "Priority Enrollment",
@@ -217,7 +217,7 @@ export const investorFeatures: FeatureRow[] = [
   {
     Id: "investor-feature-9",
     FeatureName: "Quarterly Investor Interest Report",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "",
     Data1Icon: "x",
     Data2: "",
@@ -228,7 +228,7 @@ export const investorFeatures: FeatureRow[] = [
    {
     Id: "investor-feature-10",
     FeatureName: "Account Manager",
-    ShowFeatureIcon: false,
+    ShowFeatureIcon: true,
     Data1: "",
     Data1Icon: "x",
     Data2: "",
