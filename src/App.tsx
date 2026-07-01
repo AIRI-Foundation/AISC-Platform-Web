@@ -29,6 +29,8 @@ import LearnMoreFounders from "./pages/LearnMoreFounders";
 import LearnMoreGovernment from "./pages/LearnMoreGovernment";
 import LearnMoreInvestors from "./pages/LearnMoreInvestors";
 import ManageSubscriptions from "./pages/ManageSubscriptions";
+import BookDemo from "./pages/BookDemo";
+import SubmissionSent from "./pages/SubmissionSent";
 
 function App() {
   return (
@@ -79,6 +81,10 @@ function App() {
         <Route path="/dashboard/settings-notifications" element={<DashboardSettingsNotifications />} />
         <Route path="/dashboard/settings-billing" element={<DashboardSettingsBilling />} />   
         <Route path="/manage-subscriptions" element={<ManageSubscriptions />} />     
+        <Route path="/learn-investors" element={<LearnMoreInvestors />} />
+
+        <Route path="/book-demo" element={<BookDemo />} />
+        <Route path="/submission-sent" element={<SubmissionSent />} />
       </Routes>
     </BrowserRouter>
   );
