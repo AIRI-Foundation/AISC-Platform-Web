@@ -87,3 +87,7 @@ export interface BookDemoRequest {
   companyWebsite: string;
   businessChallenge: string;
 }
+
+export interface ValidatePasswordRequest {
+  password: string;
+}

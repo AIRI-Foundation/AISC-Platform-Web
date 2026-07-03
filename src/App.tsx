@@ -21,7 +21,6 @@ import DashboardSettingsProfile from "./pages/DashboardSettingsProfile";
 import DashboardSettingsSecurity from "./pages/DashboardSettingsSecurity";
 import DashboardSettingsNotifications from "./pages/DashboardSettingsNotifications";
 import DashboardSettingsBilling from "./pages/DashboardSettingsBilling";
-import ChangePassword from "./pages/ChangePassword";
 import SendPasswordResetOtp from "./pages/sendPasswordResetOtp";
 import PasswordReset from "./pages/PasswordReset";
 import LearnMoreCorporations from "./pages/LearnMoreCorporations";
@@ -67,7 +66,6 @@ function App() {
           path="/dashboard/advisory-program"
           element={<DashboardAdvisoryProgram />}
         />
-        <Route path="/change-password" element={<ChangePassword />} />   
         <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
         <Route path="/password-reset" element={<PasswordReset />} />
 

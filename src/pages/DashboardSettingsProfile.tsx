@@ -1,3 +1,4 @@
+import { validatePassword } from "../services/authService";
 import { useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
@@ -5,7 +6,6 @@ import { getProfile, getUserCompany } from "../services/dashboardService";
 import { getErrorMessage } from "../lib/api";
 import { isLoggedIn } from "../lib/auth";
 import { getInitials } from "../lib/format";
-import { changePassword } from "../services/authService";
 import DashboardSettingsTopbar from "../components/dashboard/DashboardSettingsTopbar";
 import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle"
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
@@ -15,7 +15,6 @@ import type {
   UserProfile,
   UserCompany,
   DashboardUser,
-  // UserInfo
 } from "../types/dashboard";
 
 
@@ -25,6 +24,7 @@ const emptyUser: DashboardUser = {
   firstName: "",
   fullName: "",
   email: "",
+  phoneNumber: "",  
   initials: "",
   companyName: FALLBACK_COMPANY_NAME,
   spectrumLevel: 0,
@@ -36,24 +36,26 @@ interface ProfilePageData {
   company: UserCompany | null;
 }
 
+function formatPhoneNumber(phone: string) {
+  if (phone.length !== 10) return phone;
+
+  return `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`;
+}
+
 const DashboardSettings = () => {
-const [data, setData] = useState<ProfilePageData | null>(null);
+  const [data, setData] = useState<ProfilePageData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
   });
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitting, setSubmitting] = useState(false);
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);  
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -77,13 +79,15 @@ const [data, setData] = useState<ProfilePageData | null>(null);
     setError(null);
     setSubmitting(true);
 
-    // if( formData.currentPassword != ) VALIDATE PASSWORD
     try {
-      await changePassword({
-        currentPassword: formData.currentPassword,
-        newPassword: formData.newPassword,
-        confirmPassword: formData.confirmPassword,
+      await validatePassword({
+        password: formData.currentPassword,
       });
+    navigate("/password-reset", {
+      state: {
+        email: user.email,
+      },
+    });
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
@@ -119,6 +123,7 @@ const [data, setData] = useState<ProfilePageData | null>(null);
         firstName: data.profile.firstName,
         fullName: data.profile.firstName + " " + data.profile.lastName,
         email: data.profile.email,
+        phoneNumber: data.profile.phoneNumber,        
         initials: getInitials(data.profile.firstName, data.profile.lastName),
         companyName: data.company?.name || FALLBACK_COMPANY_NAME,
         spectrumLevel: data.profile.spectrumLevel,
@@ -173,8 +178,19 @@ const [data, setData] = useState<ProfilePageData | null>(null);
 
         <label className="text-sm font-medium">
           Phone number         
-            {/* <div className={`${textField}`}> {data?.}</div>                      */}
+            <div className={`${textField}`}> {formatPhoneNumber(data?.profile.phoneNumber ?? "")}</div>                    
         </label>
+    
+<p className="text-sm text-slate-600 mt-6">
+              <a
+              // CHANGE THE LINK!!
+                href="/signup" 
+                className="font-semibold text-[#2563eb] hover:underline"
+              >
+                Contact us {" "}  
+              </a>
+              to update your personal information.             
+            </p>      
     </div>
 
 {/* ChangePassword */}
@@ -188,22 +204,48 @@ const [data, setData] = useState<ProfilePageData | null>(null);
             Change your password here
         </p>
         </section>                          
-        
-        {/* BUTTONS */}
-        <div className="flex gap-3 py-2 mt-3">
-        <a          
-            className={`${buttonSubmit} mb-3 py-4 text-center`}
-            href="\change-password"
-        >
-            Change Password            
-        </a>
-        </div>
-        {error && (
-            <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
-            {error}
-            </div>
-        )}  
+          <form onSubmit={handleSubmit}>
+            <label className= "text-sm font-medium block">
+              <div className= "px-2.5 mt-3"> Current Password </div>
+                <div className="relative">
+                  <input
+                    name="currentPassword"
+                    value={formData.currentPassword}
+                    onChange={handleChange}
+                    className={`${textField} pr-10 ${
+                      (touched.currentPassword && formData.currentPassword =="")
+                        ? "!border-red focus:border-red focus:ring-red/25"
+                        : ""
+                    }`}
+                    type={showCurrentPassword ? "text" : "password"}
+                    placeholder="Current password"
+                    onBlur={() => handleBlur("currentPassword")}
+                  />
 
+                  <PasswordToggle
+                    show={showCurrentPassword}
+                    onToggle={() =>
+                      setShowCurrentPassword(!showCurrentPassword)
+                    }
+                  />
+                </div>
+               </label>           
+        {/* BUTTONS */}
+          <div className="flex gap-3 mt-6">
+            <button
+              type="submit"
+              disabled={submitting || formData.currentPassword == ""}
+              className={`${buttonSubmit} py-4`}
+            >
+              {submitting ? "Validating Password..." : "Update Password"}
+            </button>
+          </div>
+            {error && (
+              <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
+                {error}
+              </div>
+            )}  
+      </form>
     </div>
 {/* Container Ends*/}    
 </div> 
