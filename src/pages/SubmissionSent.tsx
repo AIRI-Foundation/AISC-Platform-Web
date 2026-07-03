@@ -1,8 +1,10 @@
+import Header from "../components/general/IndividualComponents/Header";
 import Footer from "../components/general/IndividualComponents/Footer";
 
 const SubmissionSent = () => {
   return (
     <div className="flex min-h-screen flex-col bg-navy text-white">
+      <Header />
       <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl">
           Submission <span className="text-gold">Sent</span>
