@@ -39,7 +39,7 @@ const navItems: NavItem[] = [
     href: "/dashboard/advisory-program",
     icon: AdvisoryIcon,
   },
-  { label: "Settings", href: "/dashboard/settings", icon: SettingsIcon },
+  { label: "Settings", href: "/dashboard/settings-profile", icon: SettingsIcon },
 ];
 
 const Sidebar = ({ fullName, email, initials }: SidebarProps) => {
