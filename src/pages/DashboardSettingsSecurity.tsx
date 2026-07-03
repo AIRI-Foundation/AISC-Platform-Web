@@ -221,21 +221,7 @@ const DashboardSettings = () => {
             Location = "Toronto, ON"
             LastUse = "Now"
             DeviceState = "Current"
-          />
-
-          <ActiveDevices 
-            DeviceType="iPhone 15"
-            Location = "Toronto, ON"
-            LastUse = "2h ago"
-            DeviceState = "Signed Out"
-          /> 
-
-          <ActiveDevices 
-            DeviceType="iPhone 15"
-            Location = "Toronto, ON"
-            LastUse = "2h ago"
-            DeviceState = "Signed Out"
-          />                    
+          />                   
                     
         </section> 
   </div>   

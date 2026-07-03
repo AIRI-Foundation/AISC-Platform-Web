@@ -15,6 +15,7 @@ import type {
   UserProfile,
   UserCompany,
   DashboardUser,
+  // UserInfo
 } from "../types/dashboard";
 
 
@@ -125,8 +126,6 @@ const [data, setData] = useState<ProfilePageData | null>(null);
       }
     : emptyUser;
 
-
-
   return (
     <DashboardLayout user={user}>
     <div className=" min-h-screen !px-8 !py-8">
@@ -143,64 +142,39 @@ const [data, setData] = useState<ProfilePageData | null>(null);
           <DashboardSettingsTopbar />     
 
 {/* WIP */}
-<div className="inline-flex justify-center items-center w-full h-full gap-5">  {/* change gold */}
+<div className="inline-flex justify-center items-start w-full h-full gap-5"> 
 
 {/* Personal Information */}
     <div className="max-w-[650px] md:min-w-[450px] rounded-[20px] bg-white/95 shadow-[0px_4px_12px_4px_rgba(0,0,0,0.15)] text-slate-900 backdrop-blur-xl py-6 p-4">
         {/* Title */}
         <section >
         <h1 className="mx-auto max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-2xl">
-            Change Password
+            Personal Information
         </h1>
         <p className="mx-auto mt-1 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
-            Choose a strong password
+            Update your personal information
         </p>
         </section>          
+        <div className="grid gap-1 sm:grid-cols-2">
+          <label className="text-sm font-medium">
+            First name
+            <div className={`${textField}`}> {data?.profile.firstName}</div>
+           
+          </label>
+          <label className="text-sm font-medium">
+            Last name
+            <div className={`${textField}`}> {data?.profile.lastName}</div>                      
+          </label>
+        </div> 
+        <label className="text-sm font-medium">
+          Business email    
+          <div className={`${textField}`}> {data?.profile.email}</div>                                            
+        </label>
 
-            <form onSubmit={handleSubmit} className="space-y-1">
-            <label className= "text-sm font-medium block">
-            <div className= "px-2.5"> Current password </div>
-            <div className="relative">
-                <input
-                name="currentPassword"
-                value={formData.currentPassword}
-                onChange={handleChange}
-                className={`${textField} pr-10 ${
-                    touched.currentPassword && formData.currentPassword == ""
-                    ? "!border-red focus:border-red focus:ring-red/25"
-                    : ""
-                }`}
-                type={showCurrentPassword ? "text" : "password"}
-                placeholder="Current password"
-                onBlur={() => handleBlur("currentPassword")}
-                />
-
-                <PasswordToggle
-                show={showCurrentPassword}
-                onToggle={() =>
-                    setShowCurrentPassword(!showCurrentPassword)
-                }
-                />
-            </div>
-            </label>                  
-        
-        {/* BUTTONS */}
-        <div className="flex gap-3 py-2 mt-3">
-        <button
-            type="submit"
-            disabled={submitting || formData.confirmPassword == "" || formData.newPassword == ""}
-            className={`${buttonSubmit} py-3`}
-        >
-            {submitting ? "Updating Password..." : "Update Password"}
-        </button>
-        </div>
-        {error && (
-            <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
-            {error}
-            </div>
-        )}  
-
-    </form>
+        <label className="text-sm font-medium">
+          Phone number         
+            {/* <div className={`${textField}`}> {data?.}</div>                      */}
+        </label>
     </div>
 
 {/* ChangePassword */}
@@ -211,46 +185,18 @@ const [data, setData] = useState<ProfilePageData | null>(null);
             Change Password
         </h1>
         <p className="mx-auto mt-1 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
-            Choose a strong password
+            Change your password here
         </p>
-        </section>          
-
-            <form onSubmit={handleSubmit} className="space-y-1">
-            <label className= "text-sm font-medium block">
-            <div className= "px-2.5"> Current password </div>
-            <div className="relative">
-                <input
-                name="currentPassword"
-                value={formData.currentPassword}
-                onChange={handleChange}
-                className={`${textField} pr-10 ${
-                    touched.currentPassword && formData.currentPassword == ""
-                    ? "!border-red focus:border-red focus:ring-red/25"
-                    : ""
-                }`}
-                type={showCurrentPassword ? "text" : "password"}
-                placeholder="Current password"
-                onBlur={() => handleBlur("currentPassword")}
-                />
-
-                <PasswordToggle
-                show={showCurrentPassword}
-                onToggle={() =>
-                    setShowCurrentPassword(!showCurrentPassword)
-                }
-                />
-            </div>
-            </label>                  
+        </section>                          
         
         {/* BUTTONS */}
         <div className="flex gap-3 py-2 mt-3">
-        <button
-            type="submit"
-            disabled={submitting || formData.confirmPassword == "" || formData.newPassword == ""}
-            className={`${buttonSubmit} py-3`}
+        <a          
+            className={`${buttonSubmit} mb-3 py-4 text-center`}
+            href="\change-password"
         >
-            {submitting ? "Updating Password..." : "Update Password"}
-        </button>
+            Change Password            
+        </a>
         </div>
         {error && (
             <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
@@ -258,7 +204,6 @@ const [data, setData] = useState<ProfilePageData | null>(null);
             </div>
         )}  
 
-    </form>
     </div>
 {/* Container Ends*/}    
 </div> 

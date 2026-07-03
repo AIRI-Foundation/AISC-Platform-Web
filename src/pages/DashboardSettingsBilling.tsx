@@ -49,7 +49,7 @@ expYear,
 onEdit
 }: PaymentMethodProps) {
   return (
-    <div className="w-[467px] p-5 bg-gray-100 rounded-2xl inline-flex justify-between items-center">
+    <div className=" w-full p-5 bg-gray-100 rounded-2xl inline-flex justify-between items-center">
     <div className="size- flex justify-start items-center gap-3">
       {/* Alter this depending on the card brand. */}
         <div 
@@ -243,7 +243,7 @@ const DashboardSettings = () => {
   </div>   
  {/* End the Current Plan */}
 
-{/* Two-Factor Authentication */}
+{/* Payment Method */}
     <div className="max-w-[650px] md:min-w-[475px] rounded-[20px] bg-white/95 shadow-[0px_4px_12px_4px_rgba(0,0,0,0.15)] text-slate-900 backdrop-blur-xl py-6 p-4">
         {/* Title */}
         <section >
