@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import StatCards from "../components/dashboard/StatCards";
@@ -53,40 +53,40 @@ const FounderPortal = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const loadDashboard = useCallback(async () => {
+    try {
+      const [profile, stats, stageOverview, nextActions, activities, company] =
+        await Promise.all([
+          getProfile(),
+          getStats(),
+          getStageOverview(),
+          getNextActions(),
+          getRecentActivity(),
+          getUserCompany().catch(() => null),
+        ]);
+      setData({
+        profile,
+        stats,
+        stageOverview,
+        nextActions,
+        activities,
+        company,
+      });
+      setError("");
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (!isLoggedIn()) {
       navigate("/login");
       return;
     }
-
-    const loadDashboard = async () => {
-      try {
-        const [profile, stats, stageOverview, nextActions, activities, company] =
-          await Promise.all([
-            getProfile(),
-            getStats(),
-            getStageOverview(),
-            getNextActions(),
-            getRecentActivity(),
-            getUserCompany().catch(() => null),
-          ]);
-        setData({
-          profile,
-          stats,
-          stageOverview,
-          nextActions,
-          activities,
-          company,
-        });
-      } catch (err) {
-        setError(getErrorMessage(err));
-      } finally {
-        setLoading(false);
-      }
-    };
-
     loadDashboard();
-  }, [navigate]);
+  }, [navigate, loadDashboard]);
 
   const user: DashboardUser = data
     ? {
@@ -139,6 +139,7 @@ const FounderPortal = () => {
                 <NextActions
                   actions={data.nextActions.actions}
                   progressMessage={data.nextActions.progressMessage}
+                  onUploaded={loadDashboard}
                 />
               </section>
 

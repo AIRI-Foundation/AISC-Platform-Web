@@ -40,7 +40,7 @@ const StatCards = ({ stats }: StatCardsProps) => {
       label: "profile visibility",
       value: stats.profileVisibility,
       caption: stats.profileVisibilitySublabel,
-      accent: "border-l-[#f8d547]",
+      accent: "border-l-gold",
       iconBg: "bg-amber-50",
       iconColor: "text-amber-500",
       captionColor: "text-amber-600",
@@ -50,10 +50,10 @@ const StatCards = ({ stats }: StatCardsProps) => {
       label: "days on platform",
       value: stats.daysOnPlatform + " days",
       caption: "Member since " + formatMemberSince(stats.memberSince),
-      accent: "border-l-[#dc2626]",
+      accent: "border-l-red",
       iconBg: "bg-red-50",
-      iconColor: "text-[#dc2626]",
-      captionColor: "text-[#dc2626]",
+      iconColor: "text-red",
+      captionColor: "text-red",
     },
   ];
 

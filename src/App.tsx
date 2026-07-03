@@ -7,16 +7,30 @@ import Advisory from "./pages/Advisory";
 import InvestorHub from "./pages/InvestorHub";
 import FounderPortal from "./pages/FounderPortal";
 import SignUp from "./pages/SignUp";
-import VerifyEmail from "./pages/VerifyEmail";
+import VerifyOtp from "./pages/VerifyOtp";
 import BuildCompanyProfile from "./pages/BuildCompanyProfile";
-import Success from "./pages/Success";
+import AuthenticationSuccess from "./pages/AuthenticationSuccess";
+import PasswordResetSuccess from "./pages/PasswordResetSuccess";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Pricing from "./pages/Pricing";
 import DashboardMilestones from "./pages/DashboardMilestones";
 import DashboardProfile from "./pages/DashboardProfile";
 import DashboardAdvisoryProgram from "./pages/DashboardAdvisoryProgram";
-import DashboardSettings from "./pages/DashboardSettings";
+import DashboardSettingsProfile from "./pages/DashboardSettingsProfile";
+import DashboardSettingsSecurity from "./pages/DashboardSettingsSecurity";
+import DashboardSettingsNotifications from "./pages/DashboardSettingsNotifications";
+import DashboardSettingsBilling from "./pages/DashboardSettingsBilling";
+import ChangePassword from "./pages/ChangePassword";
+import SendPasswordResetOtp from "./pages/sendPasswordResetOtp";
+import PasswordReset from "./pages/PasswordReset";
+import LearnMoreCorporations from "./pages/LearnMoreCorporations";
+import LearnMoreFounders from "./pages/LearnMoreFounders";
+import LearnMoreGovernment from "./pages/LearnMoreGovernment";
+import LearnMoreInvestors from "./pages/LearnMoreInvestors";
+import ManageSubscriptions from "./pages/ManageSubscriptions";
+import BookDemo from "./pages/BookDemo";
+import SubmissionSent from "./pages/SubmissionSent";
 import SignUpDemo from "./pages/SignUpDemo";
 
 function App() {
@@ -30,12 +44,16 @@ function App() {
         <Route path="/advisory" element={<Advisory />} />
         <Route path="/investor-hub" element={<InvestorHub />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route
           path="/build-company-profile"
           element={<BuildCompanyProfile />}
         />
-        <Route path="/success" element={<Success />} />
+        <Route
+          path="/authentication-success"
+          element={<AuthenticationSuccess />}
+        />
+        <Route path="/password-success" element={<PasswordResetSuccess />} />
         <Route path="/error" element={<Error />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
@@ -53,8 +71,36 @@ function App() {
           path="/dashboard/advisory-program"
           element={<DashboardAdvisoryProgram />}
         />
-        <Route path="/dashboard/settings" element={<DashboardSettings />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
+        <Route path="/password-reset" element={<PasswordReset />} />
+
+        <Route path="/learn-corporations" element={<LearnMoreCorporations />} />
+        <Route path="/learn-founders" element={<LearnMoreFounders />} />
+        <Route path="/learn-government" element={<LearnMoreGovernment />} />
+        <Route path="/learn-investors" element={<LearnMoreInvestors />} />
+
+        <Route
+          path="/dashboard/settings-profile"
+          element={<DashboardSettingsProfile />}
+        />
+        <Route
+          path="/dashboard/settings-security"
+          element={<DashboardSettingsSecurity />}
+        />
+        <Route
+          path="/dashboard/settings-notifications"
+          element={<DashboardSettingsNotifications />}
+        />
+        <Route
+          path="/dashboard/settings-billing"
+          element={<DashboardSettingsBilling />}
+        />
+        <Route path="/manage-subscriptions" element={<ManageSubscriptions />} />
+
         <Route path="/signup-demo" element={<SignUpDemo />} />
+        <Route path="/book-demo" element={<BookDemo />} />
+        <Route path="/submission-sent" element={<SubmissionSent />} />
       </Routes>
     </BrowserRouter>
   );
