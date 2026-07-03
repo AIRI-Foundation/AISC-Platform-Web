@@ -21,18 +21,22 @@ const VerifyOtp = () => {
   const password = location.state?.password;
   const mode = location.state?.mode;
   
-  const handleChange = (index: number, value: string) => {
-    const newOtp = [...otp];
+const handleChange = (index: number, value: string) => {
+  if (error) {
+    setError(null);
+  }
 
-    if (value.length <= 1 && /^[0-9]*$/.test(value)) {
-      newOtp[index] = value;
-      setOtp(newOtp);
+  const newOtp = [...otp];
 
-      if (value && index < 4) {
-        inputRefs.current[index + 1]?.focus();
-      }
+  if (value.length <= 1 && /^[0-9]*$/.test(value)) {
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < 4) {
+      inputRefs.current[index + 1]?.focus();
     }
-  };
+  }
+};
 
   const handleKeyDown = (
     index: number,
@@ -141,7 +145,13 @@ const VerifyOtp = () => {
                                 value={digit}
                                 onChange={(e) => handleChange(index, e.target.value)}
                                 onKeyDown={(e) => handleKeyDown(index, e)}
-                                className="h-20 w-16 rounded-[10px] border-2 border-white/30 bg-white text-center text-5xl font-bold text-black/85 outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/25 sm:h-34 sm:w-27"
+                               className={`h-20 w-16 rounded-[10px] border-2 bg-white text-center text-5xl font-bold text-black/85 outline-none transition
+                                        ${
+                                          error
+                                            ? "border-red"
+                                            : "border-white/30 focus:border-gold focus:ring-gold/25"
+                                        }
+                                        sm:h-34 sm:w-27`}
                                 placeholder="0"
                                 inputMode="numeric"
                               />
