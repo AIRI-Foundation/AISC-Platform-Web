@@ -6,6 +6,8 @@ import { setSession, isFounder } from "../lib/auth";
 import { getErrorMessage } from "../lib/api";
 
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
+import Header from "../components/general/IndividualComponents/Header";
+import Footer from "../components/general/IndividualComponents/Footer";
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
@@ -114,7 +116,8 @@ const handleChange = (index: number, value: string) => {
 
 
   return (
-    <div className="min-h-screen bg-navy text-white">  
+    <div className="min-h-screen bg-navy text-white">
+      <Header />
       <div className="mx-auto max-w-7xl px-6 py-6">
 
         <section className="flex min-h-[80vh] items-center justify-center text-center">
@@ -184,7 +187,8 @@ const handleChange = (index: number, value: string) => {
           </div>
         </section>
           </div>
-    </div>  
+      <Footer />
+    </div>
   );
 };
 

@@ -1,8 +1,12 @@
+import Header from "../components/general/IndividualComponents/Header";
 import Footer from "../components/general/IndividualComponents/Footer";
 
 const Success = () => {
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
+      <div className="bg-navy text-white">
+        <Header />
+      </div>
       <div className="flex flex-1 flex-col bg-navy text-white items-center justify-center">
 
           <h1 className="text-center text-5xl font-bold">
