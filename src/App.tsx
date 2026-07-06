@@ -31,6 +31,7 @@ import LearnMoreInvestors from "./pages/LearnMoreInvestors";
 import ManageSubscriptions from "./pages/ManageSubscriptions";
 import BookDemo from "./pages/BookDemo";
 import SubmissionSent from "./pages/SubmissionSent";
+import SignUpDemo from "./pages/SignUpDemo";
 
 function App() {
   return (
@@ -48,8 +49,11 @@ function App() {
           path="/build-company-profile"
           element={<BuildCompanyProfile />}
         />
-        <Route path="/authentication-success" element={<AuthenticationSuccess />} />
-        <Route path="/password-success" element={<PasswordResetSuccess />} />        
+        <Route
+          path="/authentication-success"
+          element={<AuthenticationSuccess />}
+        />
+        <Route path="/password-success" element={<PasswordResetSuccess />} />
         <Route path="/error" element={<Error />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
@@ -67,22 +71,34 @@ function App() {
           path="/dashboard/advisory-program"
           element={<DashboardAdvisoryProgram />}
         />
-        <Route path="/change-password" element={<ChangePassword />} />   
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
         <Route path="/password-reset" element={<PasswordReset />} />
 
-        <Route path="/learn-corporations" element={<LearnMoreCorporations />} />   
-        <Route path="/learn-founders" element={<LearnMoreFounders />} />   
-        <Route path="/learn-government" element={<LearnMoreGovernment />} />   
-        <Route path="/learn-investors" element={<LearnMoreInvestors />} />   
-
-        <Route path="/dashboard/settings-profile" element={<DashboardSettingsProfile />} />
-        <Route path="/dashboard/settings-security" element={<DashboardSettingsSecurity />} />
-        <Route path="/dashboard/settings-notifications" element={<DashboardSettingsNotifications />} />
-        <Route path="/dashboard/settings-billing" element={<DashboardSettingsBilling />} />   
-        <Route path="/manage-subscriptions" element={<ManageSubscriptions />} />     
+        <Route path="/learn-corporations" element={<LearnMoreCorporations />} />
+        <Route path="/learn-founders" element={<LearnMoreFounders />} />
+        <Route path="/learn-government" element={<LearnMoreGovernment />} />
         <Route path="/learn-investors" element={<LearnMoreInvestors />} />
 
+        <Route
+          path="/dashboard/settings-profile"
+          element={<DashboardSettingsProfile />}
+        />
+        <Route
+          path="/dashboard/settings-security"
+          element={<DashboardSettingsSecurity />}
+        />
+        <Route
+          path="/dashboard/settings-notifications"
+          element={<DashboardSettingsNotifications />}
+        />
+        <Route
+          path="/dashboard/settings-billing"
+          element={<DashboardSettingsBilling />}
+        />
+        <Route path="/manage-subscriptions" element={<ManageSubscriptions />} />
+
+        <Route path="/signup-demo" element={<SignUpDemo />} />
         <Route path="/book-demo" element={<BookDemo />} />
         <Route path="/submission-sent" element={<SubmissionSent />} />
       </Routes>
