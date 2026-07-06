@@ -50,6 +50,8 @@ function normalizeStatus(status: string) {
   }
 }
 
+const FALLBACK_COMPANY_NAME = "Your Company";
+
 const levelBoundaries: Record<number, number> = {
   2: 1,
   4: 2,
@@ -62,8 +64,9 @@ const emptyUser: DashboardUser = {
   firstName: "",
   fullName: "",
   email: "",
+  phoneNumber: "",  
   initials: "",
-  companyName: "Your Company",
+  companyName: FALLBACK_COMPANY_NAME,
   spectrumLevel: 0,
   notificationCount: 0,
 };
@@ -100,6 +103,7 @@ const DashboardMilestones = () => {
           firstName: profile.firstName,
           fullName: profile.firstName + " " + profile.lastName,
           email: profile.email,
+          phoneNumber: profile.phoneNumber,
           initials: getInitials(profile.firstName, profile.lastName),
           companyName: company?.name || "Your Company",
           spectrumLevel: trackerSummary.stagesCompleted,

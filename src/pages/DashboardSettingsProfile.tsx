@@ -178,13 +178,12 @@ const DashboardSettings = () => {
 
         <label className="text-sm font-medium">
           Phone number         
-            <div className={`${textField}`}> {formatPhoneNumber(data?.profile.phoneNumber ?? "")}</div>                    
+            <div className={`${textField}`}> {formatPhoneNumber(data?.profile.phoneNumber ?? "")}</div>            
         </label>
     
 <p className="text-sm text-slate-600 mt-6">
               <a
-              // CHANGE THE LINK!!
-                href="/signup" 
+                href="/contact" 
                 className="font-semibold text-[#2563eb] hover:underline"
               >
                 Contact us {" "}  
