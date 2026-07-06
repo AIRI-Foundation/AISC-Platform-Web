@@ -269,7 +269,7 @@ const DashboardSettings = () => {
               setOriginalPlatformUpdatesEnabled(platformUpdatesEnabled);
             }}
           >
-            Save Changes
+            SAVE Preferences
             </button>      
     
     </div>        

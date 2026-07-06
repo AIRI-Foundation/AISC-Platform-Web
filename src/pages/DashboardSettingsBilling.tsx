@@ -269,7 +269,7 @@ const DashboardSettings = () => {
               disabled={!creditInfoChanged}
               className={`${buttonSubmit} mt-6 mb-3 py-4`}
             >
-              Save Changes
+              Update Payment Method
               </button>      
     
     </div>        
