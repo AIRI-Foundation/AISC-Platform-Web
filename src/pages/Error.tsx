@@ -1,9 +1,13 @@
+import Header from "../components/general/IndividualComponents/Header";
 import Footer from "../components/general/IndividualComponents/Footer";
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 
 const Error = () => {
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
+      <div className="bg-navy text-white">
+        <Header />
+      </div>
       <div className="flex flex-1 flex-col bg-navy text-white">
         <div className="mx-auto max-w-7xl px-6 py-6 w-full"></div>
 
