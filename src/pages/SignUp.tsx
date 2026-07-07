@@ -145,7 +145,7 @@ const SignUp = () => {
             </p>
           </section>
           <div className="px-40">
-            <form onSubmit={handleSubmit} className="space-y-1">
+            <form onSubmit={handleSubmit}>
               <div className="grid gap-1 sm:grid-cols-2">
                 <label className="text-sm font-medium">
                   <span className="text-red">*</span> First name
@@ -215,7 +215,7 @@ const SignUp = () => {
                 />
                 <p className="mb-2"></p>
               </label>
-              <label className="text-sm font-medium block">
+              <label className="text-sm font-medium block mb-2">
                 <span className="text-red">*</span> Create password
                 <div className="relative">
                   <input
@@ -240,6 +240,7 @@ const SignUp = () => {
               </label>
 
               <PasswordRequirements password={formData.password} />
+              <div className="mt-2"></div>
               <label className="text-sm font-medium">
                 <span className="text-red">*</span> Confirm password
                 <div className="relative">
@@ -301,7 +302,7 @@ const SignUp = () => {
                 </label>
               </div>
 
-              <div className="flex items-start gap-3 mt-2 mb-6">
+              <div className="flex items-start gap-3 mt-3 mb-8">
                 <label
                   htmlFor="agreeTerms"
                   className="text-sm leading-6 text-slate-700 "
@@ -333,11 +334,11 @@ const SignUp = () => {
                   {error}
                 </div>
               )}
-              <p className="text-center mt-3 text-sm text-slate-600 mb-6">
+              <p className="text-center mt-6 text-sm text-slate-600 mb-6">
                 Already have an AISC account?{" "}
                 <a
                   href="/login"
-                  className="font-semibold text-[#2563eb] hover:underline"
+                  className="font-semibold text-gold hover:underline"
                 >
                   Log in
                 </a>
@@ -345,7 +346,6 @@ const SignUp = () => {
             </form>
           </div>
         </div>
-        <BottomSection />
       </div>
 
       <Footer />

@@ -375,11 +375,11 @@ export function InfoCard({
                   </div>
               </div>
           </div>
-          <div className=" flex flex-col justify-center gap-2.5">
-              <div className="mr-10 justify-start text-white text-base font-medium font-normal">
+          <div className="flex flex-col justify-start gap-2.5">
+              <div className="mr-10 justify-start text-start text-white text-base font-medium font-normal">
                 {body1}
               </div>
-              <div className="mr-10 justify-start text-white text-base font-medium font-normal ">
+              <div className="mr-10 justify-start text-start text-white text-base font-medium font-normal ">
                 {body2}
               </div>
           </div>

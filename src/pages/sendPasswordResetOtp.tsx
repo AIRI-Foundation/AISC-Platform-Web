@@ -123,16 +123,7 @@ return (
               <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
                 {error}
               </div>
-            )} 
-            <p className="text-center text-sm text-slate-600">
-              Don't have an account?{" "}
-              <a
-                href="/signup"
-                className="font-semibold text-[#2563eb] hover:underline"
-              >
-                Sign up
-              </a>
-            </p>     
+            )}     
           </form>
       </div>
       <BottomSection />

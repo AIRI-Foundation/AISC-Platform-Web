@@ -32,6 +32,7 @@ import ManageSubscriptions from "./pages/ManageSubscriptions";
 import BookDemo from "./pages/BookDemo";
 import SubmissionSent from "./pages/SubmissionSent";
 import SignUpDemo from "./pages/SignUpDemo";
+import Database from "./pages/Database";
 
 function App() {
   return (
@@ -101,7 +102,9 @@ function App() {
         <Route path="/book-demo" element={<BookDemo />} />
         <Route path="/submission-sent" element={<SubmissionSent />} />
       
-        <Route path="/contact" element={<Contact />} />        
+        <Route path="/contact" element={<Contact />} /> 
+
+        <Route path="/database" element={<Database/>} />           
 
       </Routes>
     </BrowserRouter>
