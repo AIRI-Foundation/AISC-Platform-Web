@@ -33,6 +33,7 @@ import BookDemo from "./pages/BookDemo";
 import SubmissionSent from "./pages/SubmissionSent";
 import SignUpDemo from "./pages/SignUpDemo";
 import Database from "./pages/Database";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -105,7 +106,7 @@ function App() {
         <Route path="/contact" element={<Contact />} /> 
 
         <Route path="/database" element={<Database/>} />           
-
+        <Route path="/about-us" element={<AboutUs/>} />   
       </Routes>
     </BrowserRouter>
   );

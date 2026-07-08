@@ -1,4 +1,31 @@
+import { useLocation } from "react-router-dom";
+
 export default function Header() {
+  const location = useLocation();
+
+  const navItems = [
+    {
+      name: "PRODUCT",
+      path: "/",
+    },
+    {
+      name: "DATABASE",
+      path: "/directory",
+    },
+    {
+      name: "PRICING",
+      path: "/pricing",
+    },
+    {
+      name: "ABOUT US",
+      path: "/about-us",
+    },
+    {
+      name: "FR",
+      path: "#",
+    },
+  ];
+
   return (
     //Full
     <header className="w-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] bg-dark-blue/15">
@@ -23,33 +50,43 @@ export default function Header() {
             </div>
           </div>
           </div>
-
           {/* Nav + login */}
-          <div className="flex items-center gap-8">
-          <nav className="hidden gap-8 text-sm text-slate-200 md:flex">
-            <a href="/" className="transition hover:text-white font-semibold">
-              HOME
-            </a>
-            <a href="/directory" className="transition hover:text-white font-semibold">
-              DIRECTORY
-            </a>
-            <a href="/spectrum" className="transition hover:text-white font-semibold">
-              AISC SPECTRUM
-            </a>
-            <a href="/pricing" className="transition hover:text-white font-semibold">
-              PRICING
-            </a>
-            <a href="#" className="transition hover:text-white font-semibold">
-              FR
-            </a>
-          </nav>
+          <div className="flex items-center gap-3">
+            <nav className="hidden gap-3 text-sm text-slate-200 md:flex">
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+
+                return (
+                  <a
+                    key={item.name}
+                    href={item.path}
+                    className={`
+                      transition hover:text-white text-lg font-semibold px-4 py-2.5 rounded-[14px]
+                      ${
+                        isActive
+                          ? "bg-white/8"
+                          : ""
+                      }
+                    `}
+                  >
+                    {item.name}
+                  </a>
+                );
+              })}
+            </nav>
 
             <a
-              href="/signup"
-              className="rounded-md bg-red px-3 py-2.25 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
+              href="/login"
+              className="rounded-md bg-red px-8 py-2.5 text-md font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
             >
-              SIGN UP/LOGIN
-            </a>
+              LOGIN
+            </a>  
+            <a
+              href="/signup"
+              className="rounded-md bg-red px-8 py-2.5 text-md font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
+            >
+              SIGN UP
+            </a>          
           </div>
         </div>
       </div>

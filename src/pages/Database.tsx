@@ -86,6 +86,9 @@ type SearchItemProps = {
     value: string;
     placeholder: string;
     onChange: (value: string) => void;
+    suggestions: Company[];
+    showSuggestions: boolean;
+    onSelectSuggestion: (company: Company) => void;
 };
 
 const SearchItem = ({
@@ -93,6 +96,9 @@ const SearchItem = ({
   value,
   placeholder,
   onChange,
+  suggestions,
+  showSuggestions,
+  onSelectSuggestion
 }: SearchItemProps) => {
   return (
     <div className="self-stretch flex flex-col gap-2">
@@ -100,17 +106,42 @@ const SearchItem = ({
         {title}
       </div>
 
-      <div className="w-full max-w-[496px] min-w-60 px-4 py-3 bg-white rounded-lg outline outline-[0.67px] outline-zinc-300 flex items-center gap-2">
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className="flex-1 bg-transparent text-base font-medium text-black outline-none placeholder:text-gray-400"
-        />
+<div className="relative w-full max-w-[496px] min-w-60">
 
-        <SearchIcon className="h-6 w-6 text-black" />
-      </div>
+  <div className="px-4 py-3 bg-white rounded-lg outline outline-[0.67px] outline-zinc-300 flex items-center gap-2">
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      className="flex-1 bg-transparent text-base font-medium text-black outline-none placeholder:text-gray-400"
+    />
+
+    <SearchIcon className="h-6 w-6 text-black" />
+  </div>
+
+  {showSuggestions && suggestions.length > 0 && (
+    <div className="absolute left-0 top-full mt-2 w-full bg-white rounded-lg shadow-lg border border-black/20 z-20">
+      {suggestions.map(company => (
+        <button
+          key={company.id}
+          type="button"
+          className="w-full px-4 py-3 text-left hover:bg-gray-100 text-black"
+          onClick={() => onSelectSuggestion(company)}
+        >
+          <div className="font-bold">
+            {company.name}
+          </div>
+
+          <div className="text-sm text-gray-500">
+            {company.description}
+          </div>
+        </button>
+      ))}
+    </div>
+  )}
+
+</div>
     </div>
   );
 };
@@ -384,6 +415,10 @@ const Database = () => {
   const [searching, setSearching] = useState(false);
   const [view, setView] = useState<"grid" | "list">("grid");
   
+  const [suggestions, setSuggestions] = useState<Company[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [companies, setCompanies] = useState<Company[]>([]);
+
   const [filters, setFilters] = useState({
       search: "",
       spectrum: "All",
@@ -392,8 +427,60 @@ const Database = () => {
       stage: "All Stages",
   });
 
+  useEffect(() => {
+  async function loadCompanies() {
+    const results = await searchCompanies({
+      search: "",
+      spectrum: "All",
+      category: "All Categories",
+      location: "All Canada",
+      stage: "All Stages",
+    });
 
-  const [companies, setCompanies] = useState<Company[]>([]);
+    setCompanies(results);
+  }
+
+  loadCompanies();
+}, []);
+
+  const handleSearchChange = (value: string) => {
+    setFilters(current => ({
+      ...current,
+      search: value,
+    }));
+
+    if (!value.trim()) {
+      setSuggestions([]);
+      return;
+    }
+
+    const searchTerm = value.toLowerCase();
+
+    const matches = companies
+      .filter(company => {
+      const spectrumLevel = Number(company.spectrum.replace("L", ""));
+      
+        // Hide L1 and L2 companies from autocomplete/search
+        if (spectrumLevel <= 2) {
+          return false;
+        }
+                
+        const searchableText = [
+          company.name,
+          company.description,
+          ...company.categories,
+          company.location
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return searchableText.includes(searchTerm);
+      })
+      .slice(0, 5); // only show top 5
+
+    setSuggestions(matches);
+    setShowSuggestions(true);
+  };
 
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
@@ -453,17 +540,22 @@ const Database = () => {
           <div className="mt-5 w-full p-5 bg-white rounded-[10px] justify-start items-end gap-3.5 overflow-visible">
             <form onSubmit={handleSubmit} className="space-y-4">          
                 <div className="px-3.5 py-[2px] grid grid-cols-4 justify-start items-center gap-2.5">
-                  <SearchItem
-                    title="Search"
-                    value={filters.search}
-                    placeholder="Company, technology..."
-                    onChange={(value) =>
-                      setFilters((current) => ({
-                        ...current,
-                        search: value,
-                      }))
-                    }
-                  />               
+                    <SearchItem
+                      title="Search"
+                      value={filters.search}
+                      placeholder="Company, technology..."
+                      onChange={handleSearchChange}
+                      suggestions={suggestions}
+                      showSuggestions={showSuggestions}
+                      onSelectSuggestion={(company) => {
+                        setFilters(current => ({
+                          ...current,
+                          search: company.name,
+                        }));
+
+                        setShowSuggestions(false);
+                      }}
+                    />            
                   <DropdownItem
                       title="AI Category"
                       value={filters.category}
