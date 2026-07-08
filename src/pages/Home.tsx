@@ -5,6 +5,7 @@ import { buttonSubmit, whiteButton } from "../components/general/IndividualCompo
 import { InfoCard } from "../components/general/IndividualComponents/Cards";
 import FeatureCards from "../components/general/IndividualComponents/Cards";
 import {RightArrowHeadIcon} from "../components/dashboard/icons";
+
 type DataSectionProps = {
   Attribute1: number;
   Attribute1Title: string;  
