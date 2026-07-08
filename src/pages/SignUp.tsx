@@ -4,7 +4,6 @@ import { register } from "../services/authService";
 import { getErrorMessage } from "../lib/api";
 
 import Footer from "../components/general/IndividualComponents/Footer";
-import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header";
 import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements";
 import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle";
