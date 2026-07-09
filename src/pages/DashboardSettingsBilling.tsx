@@ -21,6 +21,7 @@ const emptyUser: DashboardUser = {
   firstName: "",
   fullName: "",
   email: "",
+  phoneNumber: "",  
   initials: "",
   companyName: FALLBACK_COMPANY_NAME,
   spectrumLevel: 0,
@@ -78,7 +79,7 @@ onEdit
                   </span>
               </div>
             </div>
-            <div className="justify-start text-black text-xs font-medium font-['Inter']">
+            <div className="justify-start text-black text-xs font-medium">
               Expires {expMonth.toString().padStart(2, "0")}/{expYear % 100}
             </div>
         </div>
@@ -198,6 +199,7 @@ const DashboardSettings = () => {
         firstName: data.profile.firstName,
         fullName: data.profile.firstName + " " + data.profile.lastName,
         email: data.profile.email,
+        phoneNumber: data.profile.phoneNumber,          
         initials: getInitials(data.profile.firstName, data.profile.lastName),
         companyName: data.company?.name || FALLBACK_COMPANY_NAME,
         spectrumLevel: data.profile.spectrumLevel,
@@ -267,7 +269,7 @@ const DashboardSettings = () => {
               disabled={!creditInfoChanged}
               className={`${buttonSubmit} mt-6 mb-3 py-4`}
             >
-              Save Changes
+              Update Payment Method
               </button>      
     
     </div>        

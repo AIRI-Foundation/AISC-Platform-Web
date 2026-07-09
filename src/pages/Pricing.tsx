@@ -6,21 +6,12 @@ import { faqItems } from "../components/data/FaqData";
 import TrustedBy from "../components/general/IndividualComponents/TrustedBy";
 import Header from "../components/general/IndividualComponents/Header";
 import FeatureCards from "../components/general/IndividualComponents/Cards";
-import {
-  PriceCard,
-  SmallPriceCard,
-} from "../components/general/IndividualComponents/Cards";
+import { PriceCard, SmallPriceCard } from "../components/general/IndividualComponents/Cards";
 import placeholderImage from "../assets/placeholder.png";
-import {
-  CheckCircleIcon,
-  InformationIcon,
-  XIcon,
-} from "../components/dashboard/icons";
-import {
-  founderFeatures,
-  investorFeatures,
-} from "../components/data/PricingFeaturesData";
+import { CheckCircleIcon, InformationIcon, XIcon } from "../components/dashboard/icons";
+import { founderFeatures, investorFeatures } from "../components/data/PricingFeaturesData";
 import type { IconType } from "../components/data/PricingFeaturesData";
+
 const renderIcon = (icon: IconType) => {
   switch (icon) {
     case "check":
@@ -258,11 +249,11 @@ const Pricing = () => {
               </button>
               <button
                 onClick={() => setView("investor")}
-                className={`p-3.5 rounded-[10px] uppercase font-bold
+                className={`p-3.5 rounded-[10px] uppercase font-bold text-black
           ${
             view === "investor"
               ? "bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.25)]"
-              : "bg-white/40 text-black"
+              : "bg-white/40"
           }`}
               >
                 Investor
@@ -402,11 +393,11 @@ const Pricing = () => {
                 </button>
                 <button
                   onClick={() => setView("investor")}
-                  className={`p-3.5 rounded-[10px] uppercase font-bold
+                  className={`p-3.5 rounded-[10px] uppercase font-bold text-black
           ${
             view === "investor"
               ? "bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.25)]"
-              : "bg-white/40 text-black"
+              : "bg-white/40"
           }`}
                 >
                   Investor

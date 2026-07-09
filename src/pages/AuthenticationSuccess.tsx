@@ -8,19 +8,17 @@ const Success = () => {
         <Header />
       </div>
       <div className="flex flex-1 flex-col bg-navy text-white items-center justify-center">
-
-          <h1 className="text-center text-5xl font-bold">
+      
+          <h1 className="text-center mt-25 text-6xl font-bold">
             Welcome to <span className="text-gold">AISC</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-center text-lg text-slate-300">
-            Your company has been successfully
-            <br />
-            authenticated
+          <p className="mx-auto mt-6 max-w-xl text-center text-2xl text-slate-50">
+            Your company has been successfully authenticated.
           </p>
 
           <a
             href="/dashboard/overview"
-            className="mt-28 inline-flex items-center justify-center rounded-lg bg-red px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
+            className="mt-18 mb-10 w-[40%] inline-flex items-center justify-center rounded-lg bg-red px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
           >
             Go to dashboard
           </a>

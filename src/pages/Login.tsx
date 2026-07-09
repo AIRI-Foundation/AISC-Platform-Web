@@ -139,7 +139,7 @@ const Login = () => {
               }
               className={buttonSubmit}
             >
-              {submitting ? "Logging in..." : "Login"}
+              {submitting ? "Logging in..." : "Submit"}
             </button>
 
             {error && (
@@ -152,7 +152,7 @@ const Login = () => {
               Don't have an account?{" "}
               <a
                 href="/signup"
-                className="font-semibold text-[#2563eb] hover:underline"
+                className="font-semibold text-gold hover:underline"
               >
                 Sign up
               </a>
