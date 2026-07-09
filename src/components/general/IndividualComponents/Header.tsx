@@ -9,7 +9,7 @@ export default function Header() {
       path: "/",
     },
     {
-      name: "DATABASE",
+      name: "DIRECTORY",
       path: "/directory",
     },
     {

@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Directory from "./pages/Directory";
 import CompanyProfile from "./pages/CompanyProfile";
 import Spectrum from "./pages/Spectrum";
 import Advisory from "./pages/Advisory";
@@ -32,7 +31,7 @@ import ManageSubscriptions from "./pages/ManageSubscriptions";
 import BookDemo from "./pages/BookDemo";
 import SubmissionSent from "./pages/SubmissionSent";
 import SignUpDemo from "./pages/SignUpDemo";
-import Database from "./pages/Database";
+import Directory from "./pages/Directory";
 import AboutUs from "./pages/AboutUs";
 
 function App() {
@@ -105,7 +104,7 @@ function App() {
       
         <Route path="/contact" element={<Contact />} /> 
 
-        <Route path="/database" element={<Database/>} />           
+        <Route path="/directory" element={<Directory/>} />           
         <Route path="/about-us" element={<AboutUs/>} />   
       </Routes>
     </BrowserRouter>

@@ -99,10 +99,10 @@ const Home = () => {
                 </a>
 
                 <a
-                  href="/database"
+                  href="/directory"
                   className={`${whiteButton} max-w-60 inline-flex items-center justify-center`}
                 >
-                  explore database
+                  explore directory
                 </a>                
               </div>
             </section>
