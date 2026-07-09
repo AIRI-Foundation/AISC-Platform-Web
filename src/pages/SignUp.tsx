@@ -5,9 +5,9 @@ import { getErrorMessage } from "../lib/api";
 
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
-import Header from "../components/general/IndividualComponents/Header"
-import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements"
-import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle"
+import Header from "../components/general/IndividualComponents/Header";
+import PasswordRequirements from "../components/general/IndividualComponents/PasswordRequirements";
+import PasswordToggle from "../components/general/IndividualComponents/PasswordToggle";
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 import { textField } from "../components/general/IndividualComponents/Buttons";
 
@@ -22,7 +22,7 @@ const SignUp = () => {
     role: 1,
     agreeTerms: false,
   });
-  
+
   const navigate = useNavigate();
 
   const [submitting, setSubmitting] = useState(false);
@@ -43,12 +43,8 @@ const SignUp = () => {
     setFormData((current) => ({
       ...current,
       [name]:
-        type === "checkbox"
-          ? checked
-          : name === "role"
-            ? Number(value)
-            : value,
-    })); 
+        type === "checkbox" ? checked : name === "role" ? Number(value) : value,
+    }));
   };
 
   const handleBlur = (name: string) => {
@@ -78,17 +74,15 @@ const SignUp = () => {
   };
 
   const getInputClass = (name: string, value: string, touched: boolean) =>
-  `${textField} ${
-     touched && hasFieldError(name, value)
-      ? "!border-red focus:border-red focus:ring-red/25"
-      : ""
-  }`;
+    `${textField} ${
+      touched && hasFieldError(name, value)
+        ? "!border-red focus:border-red focus:ring-red/25"
+        : ""
+    }`;
 
-  const passwordsMatch =
-    formData.password === formData.confirmPassword;
+  const passwordsMatch = formData.password === formData.confirmPassword;
 
-  const passwordValid =
-    validatePassword(formData.password) === null;
+  const passwordValid = validatePassword(formData.password) === null;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -111,128 +105,142 @@ const SignUp = () => {
     }
     setSubmitting(true);
 
-  try {
-    await register({
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.businessEmail,
-      phoneNumber: formData.phoneNumber,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword,
-      role: formData.role,
-      agreeToTerms: formData.agreeTerms
-    }); 
+    try {
+      await register({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.businessEmail,
+        phoneNumber: formData.phoneNumber,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        role: formData.role,
+        agreeToTerms: formData.agreeTerms,
+      });
 
-    navigate("/verify-otp", {
-      state: {
-      email: formData.businessEmail,
-      password: formData.password,
-      mode: "email-verification",
-      },});
+      navigate("/verify-otp", {
+        state: {
+          email: formData.businessEmail,
+          password: formData.password,
+          mode: "email-verification",
+        },
+      });
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
       setSubmitting(false);
-    } 
+    }
   };
   return (
     <div className="flex flex-col min-h-screen bg-navy text-white">
-      <Header />      
+      <Header />
       <div className="flex-1 mx-auto max-w-7xl px-6 py-6">
-
         <div className="mx-auto mt-12 max-w-4xl rounded-[24px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
-        <section className="mt-2 text-center">
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-            Start Using <span className="text-gold">AISC</span> Today!
-          </h1>
-          <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
-            Lorem ipsum dolor sit amet consectetur. Sed nibh consequat eget in.
-          </p>
-        </section>
-        <div className="px-40">
-          <form onSubmit={handleSubmit} className="space-y-1">
-            <div className="grid gap-1 sm:grid-cols-2">
-              <label className="text-sm font-medium">
-                <span className="text-red">*</span> First name
-                <input
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  onBlur={() => handleBlur("firstName")}
-                  className={getInputClass("firstName", formData.firstName, touched.firstName)}
-                  placeholder="First name"
-                />              
-              </label>
-              <label className="text-sm font-medium">
-                <span className="text-red">*</span> Last name
-                <input
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  onBlur={() => handleBlur("lastName")}
-                  className={getInputClass("lastName", formData.lastName, touched.lastName)}
-                  type="text"
-                  placeholder="Last name"
-                />              
-              </label>
-            </div>
-
-            <label className="text-sm font-medium">
-              <span className="text-red">*</span> Business email
-              <input
-                name="businessEmail"
-                value={formData.businessEmail}
-                onChange={handleChange}
-                onBlur={() => handleBlur("businessEmail")}
-                className={getInputClass("businessEmail", formData.businessEmail, touched.businessEmail)}
-                type="email"
-                placeholder="you@business.com"
-              />  
-                <p className="mb-2">
-                  </p>                              
-            </label>
-
-            <label className="text-sm font-medium">
-              <span className="text-red">*</span> Phone number
-              <input
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                onBlur={() => handleBlur("phoneNumber")}
-                className={getInputClass("phoneNumber", formData.phoneNumber, touched.phoneNumber)}
-                type="tel"
-                placeholder="(123) 456-7890"
-              /> 
-                <p className="mb-2">
-                  </p>               
-            </label>
-            <label className= "text-sm font-medium block">
-              <span className="text-red">*</span> Create password
-              <div className="relative">
-                <input
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={`${textField} pr-10 ${
-                    touched.password && !passwordValid
-                      ? "!border-red focus:border-red focus:ring-red/25"
-                      : ""
-                  }`}
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
-                  onBlur={() => handleBlur("password")}
-                />
-
-                <PasswordToggle
-                  show={showPassword}
-                  onToggle={() =>
-                    setShowPassword(!showPassword)
-                  }
-                />
+          <section className="mt-2 text-center">
+            <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
+              Start Using <span className="text-gold">AISC</span> Today!
+            </h1>
+            <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
+              Lorem ipsum dolor sit amet consectetur. Sed nibh consequat eget
+              in.
+            </p>
+          </section>
+          <div className="px-40">
+            <form onSubmit={handleSubmit}>
+              <div className="grid gap-1 sm:grid-cols-2">
+                <label className="text-sm font-medium">
+                  <span className="text-red">*</span> First name
+                  <input
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    onBlur={() => handleBlur("firstName")}
+                    className={getInputClass(
+                      "firstName",
+                      formData.firstName,
+                      touched.firstName,
+                    )}
+                    placeholder="First name"
+                  />
+                </label>
+                <label className="text-sm font-medium">
+                  <span className="text-red">*</span> Last name
+                  <input
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    onBlur={() => handleBlur("lastName")}
+                    className={getInputClass(
+                      "lastName",
+                      formData.lastName,
+                      touched.lastName,
+                    )}
+                    type="text"
+                    placeholder="Last name"
+                  />
+                </label>
               </div>
-            </label>
 
-              <PasswordRequirements password={formData.password} />  
+              <label className="text-sm font-medium">
+                <span className="text-red">*</span> Business email
+                <input
+                  name="businessEmail"
+                  value={formData.businessEmail}
+                  onChange={handleChange}
+                  onBlur={() => handleBlur("businessEmail")}
+                  className={getInputClass(
+                    "businessEmail",
+                    formData.businessEmail,
+                    touched.businessEmail,
+                  )}
+                  type="email"
+                  placeholder="you@business.com"
+                />
+                <p className="mb-2"></p>
+              </label>
+
+              <label className="text-sm font-medium">
+                <span className="text-red">*</span> Phone number
+                <input
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  onBlur={() => handleBlur("phoneNumber")}
+                  className={getInputClass(
+                    "phoneNumber",
+                    formData.phoneNumber,
+                    touched.phoneNumber,
+                  )}
+                  type="tel"
+                  placeholder="(123) 456-7890"
+                />
+                <p className="mb-2"></p>
+              </label>
+              <label className="text-sm font-medium block mb-2">
+                <span className="text-red">*</span> Create password
+                <div className="relative">
+                  <input
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={`${textField} pr-10 ${
+                      touched.password && !passwordValid
+                        ? "!border-red focus:border-red focus:ring-red/25"
+                        : ""
+                    }`}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter password"
+                    onBlur={() => handleBlur("password")}
+                  />
+
+                  <PasswordToggle
+                    show={showPassword}
+                    onToggle={() => setShowPassword(!showPassword)}
+                  />
+                </div>
+              </label>
+
+              <PasswordRequirements password={formData.password} />
+              <div className="mt-2"></div>
               <label className="text-sm font-medium">
                 <span className="text-red">*</span> Confirm password
                 <div className="relative">
@@ -241,7 +249,9 @@ const SignUp = () => {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     className={`${textField} pr-10 ${
-                      (touched.confirmPassword && !passwordsMatch) || (touched.confirmPassword && formData.confirmPassword =="")
+                      (touched.confirmPassword && !passwordsMatch) ||
+                      (touched.confirmPassword &&
+                        formData.confirmPassword == "")
                         ? "!border-red focus:border-red focus:ring-red/25"
                         : ""
                     }`}
@@ -274,67 +284,68 @@ const SignUp = () => {
                   <option value={5}>Partner</option>
                 </select>
               </label>
-            <div className="flex items-start gap-3 mt-2">
-              <input
-                id="agreeTerms"
-                name="agreeTerms"
-                type="checkbox"
-                checked={formData.agreeTerms}
-                onChange={handleChange}
-                className="mt-1 h-4 w-4 rounded border-slate-300 text-[#2563eb] focus:ring-[#2563eb]"
-              />
-              <label
-                htmlFor="agreeTerms"
-                className="text-sm leading-6 text-slate-700 "
-              >
-                I agree to terms & conditions <span className="text-red">*</span>
-              </label>
-            </div>
-
-            <div className="flex items-start gap-3 mt-2 mb-6">
-              <label
-                htmlFor="agreeTerms"
-                className="text-sm leading-6 text-slate-700 "
-              >
-                <span className="text-red">*</span> Required Field
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              disabled={submitting || 
-                formData.firstName == "" || 
-                formData.lastName == "" ||
-                formData.businessEmail == "" ||
-                formData.phoneNumber == "" ||
-                formData.password == "" ||
-                formData.confirmPassword == "" ||
-                !passwordValid  ||  
-                !passwordsMatch ||                
-                formData.agreeTerms == false                                                                              
-              }          
-              className={buttonSubmit}
-            >
-              {submitting ? "Creating account..." : "Create Account"}
-            </button>
-            {error && (
-              <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
-                {error}
+              <div className="flex items-start gap-3 mt-2">
+                <input
+                  id="agreeTerms"
+                  name="agreeTerms"
+                  type="checkbox"
+                  checked={formData.agreeTerms}
+                  onChange={handleChange}
+                  className="mt-1 h-4 w-4 rounded border-slate-300 text-[#2563eb] focus:ring-[#2563eb]"
+                />
+                <label
+                  htmlFor="agreeTerms"
+                  className="text-sm leading-6 text-slate-700 "
+                >
+                  I agree to terms & conditions{" "}
+                  <span className="text-red">*</span>
+                </label>
               </div>
-            )} 
-            <p className="text-center mt-3 text-sm text-slate-600 mb-6">
-              Already have an AISC account?{" "}
-              <a
-                href="/login"
-                className="font-semibold text-[#2563eb] hover:underline"
+
+              <div className="flex items-start gap-3 mt-3 mb-8">
+                <label
+                  htmlFor="agreeTerms"
+                  className="text-sm leading-6 text-slate-700 "
+                >
+                  <span className="text-red">*</span> Required Field
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                disabled={
+                  submitting ||
+                  formData.firstName == "" ||
+                  formData.lastName == "" ||
+                  formData.businessEmail == "" ||
+                  formData.phoneNumber == "" ||
+                  formData.password == "" ||
+                  formData.confirmPassword == "" ||
+                  !passwordValid ||
+                  !passwordsMatch ||
+                  formData.agreeTerms == false
+                }
+                className={buttonSubmit}
               >
-                Log in
-              </a>
-            </p>
-          </form>
+                {submitting ? "Creating account..." : "Create Account"}
+              </button>
+              {error && (
+                <div className="text-center mx-auto py-1 w-full max-w-sm mt-2 mb-3 text-md text-red-dark font-semibold">
+                  {error}
+                </div>
+              )}
+              <p className="text-center mt-6 text-sm text-slate-600 mb-6">
+                Already have an AISC account?{" "}
+                <a
+                  href="/login"
+                  className="font-semibold text-gold hover:underline"
+                >
+                  Log in
+                </a>
+              </p>
+            </form>
           </div>
-      </div>
-      <BottomSection />
+        </div>
       </div>
 
       <Footer />

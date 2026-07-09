@@ -6,7 +6,7 @@ import { getErrorMessage } from "../lib/api";
 
 import Footer from "../components/general/IndividualComponents/Footer";
 import BottomSection from "../components/general/BottomSection";
-import Header from "../components/general/IndividualComponents/Header"
+import Header from "../components/general/IndividualComponents/Header";
 import { textField } from "../components/general/IndividualComponents/Buttons";
 
 const BuildCompanyProfile = () => {
@@ -73,9 +73,8 @@ const BuildCompanyProfile = () => {
 
   return (
     <div className="min-h-screen bg-navy text-white">
-      <Header />    
+      <Header />
       <div className="mx-auto max-w-7xl px-6 py-6">
-
         <section className="mt-16 text-center">
           <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
             Build your company profile
@@ -239,9 +238,8 @@ const BuildCompanyProfile = () => {
               </div>
             )}
           </form>
-        
-      </div>
-      <BottomSection />
+        </div>
+        <BottomSection />
       </div>
 
       <Footer />

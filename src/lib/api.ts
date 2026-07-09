@@ -5,6 +5,8 @@ const BASE_URL = import.meta.env.DEV
   ? ""
   : import.meta.env.VITE_API_BASE_URL || "https://aisc-platform-api.fly.dev";
 
+// Used for local testing:
+// const BASE_URL = "http://localhost:5044"
 
 // One axios object we use for all our requests.
 export const api = axios.create({

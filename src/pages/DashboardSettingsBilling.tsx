@@ -21,6 +21,7 @@ const emptyUser: DashboardUser = {
   firstName: "",
   fullName: "",
   email: "",
+  phoneNumber: "",  
   initials: "",
   companyName: FALLBACK_COMPANY_NAME,
   spectrumLevel: 0,
@@ -49,7 +50,7 @@ expYear,
 onEdit
 }: PaymentMethodProps) {
   return (
-    <div className="w-[467px] p-5 bg-gray-100 rounded-2xl inline-flex justify-between items-center">
+    <div className=" w-full p-5 bg-gray-100 rounded-2xl inline-flex justify-between items-center">
     <div className="size- flex justify-start items-center gap-3">
       {/* Alter this depending on the card brand. */}
         <div 
@@ -78,7 +79,7 @@ onEdit
                   </span>
               </div>
             </div>
-            <div className="justify-start text-black text-xs font-medium font-['Inter']">
+            <div className="justify-start text-black text-xs font-medium">
               Expires {expMonth.toString().padStart(2, "0")}/{expYear % 100}
             </div>
         </div>
@@ -198,6 +199,7 @@ const DashboardSettings = () => {
         firstName: data.profile.firstName,
         fullName: data.profile.firstName + " " + data.profile.lastName,
         email: data.profile.email,
+        phoneNumber: data.profile.phoneNumber,          
         initials: getInitials(data.profile.firstName, data.profile.lastName),
         companyName: data.company?.name || FALLBACK_COMPANY_NAME,
         spectrumLevel: data.profile.spectrumLevel,
@@ -243,7 +245,7 @@ const DashboardSettings = () => {
   </div>   
  {/* End the Current Plan */}
 
-{/* Two-Factor Authentication */}
+{/* Payment Method */}
     <div className="max-w-[650px] md:min-w-[475px] rounded-[20px] bg-white/95 shadow-[0px_4px_12px_4px_rgba(0,0,0,0.15)] text-slate-900 backdrop-blur-xl py-6 p-4">
         {/* Title */}
         <section >
@@ -267,7 +269,7 @@ const DashboardSettings = () => {
               disabled={!creditInfoChanged}
               className={`${buttonSubmit} mt-6 mb-3 py-4`}
             >
-              Save Changes
+              Update Payment Method
               </button>      
     
     </div>        

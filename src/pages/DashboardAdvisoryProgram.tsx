@@ -4,6 +4,7 @@ const mockUser = {
   fullName: "Krianna Asante",
   firstName: "Krianna",
   email: "krianna@company.com",
+  phoneNumber: "1112223333",
   initials: "KA",
   companyName: "Company",
   spectrumLevel: 5,

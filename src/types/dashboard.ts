@@ -9,6 +9,7 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
+  phoneNumber: string;  
   role: string;
   emailVerified: boolean;
   spectrumLevel: number;
@@ -87,6 +88,7 @@ export interface DashboardUser {
   firstName: string;
   fullName: string;
   email: string;
+  phoneNumber: string;  
   initials: string;
   companyName: string;
   spectrumLevel: number;

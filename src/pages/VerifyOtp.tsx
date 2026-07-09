@@ -6,6 +6,8 @@ import { setSession, isFounder } from "../lib/auth";
 import { getErrorMessage } from "../lib/api";
 
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
+import Header from "../components/general/IndividualComponents/Header";
+import Footer from "../components/general/IndividualComponents/Footer";
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
@@ -114,15 +116,16 @@ const handleChange = (index: number, value: string) => {
 
 
   return (
-    <div className="min-h-screen bg-navy text-white">  
-      <div className="mx-auto max-w-7xl px-6 py-6">
+    <div className="min-h-screen bg-navy text-white">
+      <Header />
+      <div className="mx-auto px-6 py-6">
 
-        <section className="flex min-h-[80vh] items-center justify-center text-center">
-          <div className="mx-auto w-full max-w-4xl rounded-[32px] border-2 border-dashed border-white/20 bg-white/2 p-12 shadow-[0_40px_120px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:p-16">
-            <h1 className="text-5xl font-bold text-white sm:text-6x1">
+        <section className="flex items-center justify-center text-center">
+          <div className="mx-auto w-full rounded-[32px] p-12 ">
+            <h1 className="text-6xl font-bold text-white">
               Verify Your <span className="text-gold">One Time Password</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-md text-base text-slate-300">
+            <p className="mx-auto mt-6 max-w-lg text-base text-2xl text-slate-100">
               A 5-digit code has been sent to{" "}
               <span className="font-semibold">{email ?? "your email"}</span>,
               please enter it below
@@ -184,7 +187,8 @@ const handleChange = (index: number, value: string) => {
           </div>
         </section>
           </div>
-    </div>  
+      <Footer />
+    </div>
   );
 };
 

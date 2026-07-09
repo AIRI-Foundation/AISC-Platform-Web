@@ -20,6 +20,7 @@ const emptyUser: DashboardUser = {
   firstName: "",
   fullName: "",
   email: "",
+  phoneNumber: "",    
   initials: "",
   companyName: FALLBACK_COMPANY_NAME,
   spectrumLevel: 0,
@@ -130,6 +131,7 @@ const DashboardSettings = () => {
         firstName: data.profile.firstName,
         fullName: data.profile.firstName + " " + data.profile.lastName,
         email: data.profile.email,
+        phoneNumber: data.profile.phoneNumber,          
         initials: getInitials(data.profile.firstName, data.profile.lastName),
         companyName: data.company?.name || FALLBACK_COMPANY_NAME,
         spectrumLevel: data.profile.spectrumLevel,
@@ -221,21 +223,7 @@ const DashboardSettings = () => {
             Location = "Toronto, ON"
             LastUse = "Now"
             DeviceState = "Current"
-          />
-
-          <ActiveDevices 
-            DeviceType="iPhone 15"
-            Location = "Toronto, ON"
-            LastUse = "2h ago"
-            DeviceState = "Signed Out"
-          /> 
-
-          <ActiveDevices 
-            DeviceType="iPhone 15"
-            Location = "Toronto, ON"
-            LastUse = "2h ago"
-            DeviceState = "Signed Out"
-          />                    
+          />                   
                     
         </section> 
   </div>   
