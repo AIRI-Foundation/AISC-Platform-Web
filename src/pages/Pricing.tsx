@@ -70,7 +70,7 @@ const DataLine = ({
   Data3Icon,
 }: DataLineProps) => {
   return (
-    <div className="self-stretch inline-flex justify-start items-start gap-7">
+    <div className="self-stretch inline-flex justify-start items-start gap-7">  
       <div className="w-80 pb-5 border-b-[0.67px] border-zinc-300 flex justify-start mt-1 items-center gap-2">
         <div className="justify-start text-black font-medium ">
           {FeatureName}
@@ -436,7 +436,7 @@ const Pricing = () => {
           </div>
 
           <div className="flex justify-center">
-            <div className="self-stretch p-20 bg-white rounded-[100px] max-w-full inline-flex flex-col items-center gap-12">
+            <div className="w-full max-w-7xl p-6 md:p-20 bg-white rounded-[40px] md:rounded-[100px] flex flex-col items-center gap-12">
               {/* Switch */}
               <div className="p-1.5 bg-zinc-400 rounded-2xl inline-flex gap-1">
                 <button
@@ -463,28 +463,33 @@ const Pricing = () => {
                 </button>
               </div>
 
-              <div className="self-stretch inline-flex justify-start items-start">
-                <div className="w-80 justify-start text-black text-6xl font-bold  capitalize">
-                  Compare Plans
-                </div>
-                <div className="flex justify-start items-center gap-3.5">
-                  {plansSmall.map((plansSmall) => (
-                    <SmallPriceCard
-                      key={plansSmall.Title}
-                      Featured={plansSmall.Featured}
-                      Title={plansSmall.Title}
-                      Cost={plansSmall.Cost}
-                      ButtonText={plansSmall.ButtonText}
-                      Link={plansSmall.Link}
-                    />
-                  ))}
-                </div>
-              </div>
+<div className="w-full grid grid-cols-1 md:grid-cols-4 gap-6 ">
+
+  <div className="text-black text-4xl md:text-6xl font-bold capitalize ">
+    Compare Plans
+  </div>
+
+
+  <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+    {plansSmall.map((plansSmall) => (
+      <SmallPriceCard
+        key={plansSmall.Title}
+        Featured={plansSmall.Featured}
+        Title={plansSmall.Title}
+        Cost={plansSmall.Cost}
+        ButtonText={plansSmall.ButtonText}
+        Link={plansSmall.Link}
+      />
+    ))}
+  </div>
+
+</div>
               <div className="self-stretch flex flex-col justify-start items-center gap-16">
                 <div className="self-stretch flex flex-col justify-start items-center gap-6">
                   <div className="self-stretch justify-start text-black text-4xl font-bold ">
                     Main
                   </div>
+                  <div className="overflow-x-auto w-full">
                   {features.map((features) => (
                     <DataLine
                       key={features.Id}
@@ -498,6 +503,7 @@ const Pricing = () => {
                       Data3Icon={features.Data3Icon}
                     />
                   ))}
+                  </div>
                 </div>
               </div>
             </div>
