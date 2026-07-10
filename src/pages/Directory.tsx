@@ -510,13 +510,17 @@ const Directory = () => {
             <div className="p-3.5 bg-blue-950 rounded-[10px] justify-start items-start gap-2.5">
                 <div className="px-3.5 py-[5px] flex flex-col justify-start items-start gap-2.5">
                     <div className="self-stretch inline-flex justify-center items-center gap-2.5">
-                        <div className="flex-1 justify-start text-white text-2xl font-medium ">Browse by AISC Spectrum Level</div>
+                        <div className="flex-1 justify-start text-white text-2xl font-medium ">
+                          Browse by AISC Spectrum Level
+                        </div>
                     </div>
                     <div className=" inline-flex justify-center items-center gap-2.5">
-                        <div className="text-center justify-start text-white text-sm font-bold ">Companies at Level 4–5 and AISC Certified Level 3 show full profiles. Earlier-stage companies are visible by category only — protecting founders until they are ready.<br/></div>
+                        <div className="text-center justify-start text-white text-sm font-bold ">
+                          Companies at Level 4–5 and AISC Certified Level 3 show full profiles. Earlier-stage companies are visible by category only — protecting founders until they are ready.
+                        </div>
                     </div>
                 </div>
-                <div className="mt-5 px-3.5 py-[5px] grid grid-cols-6 justify-start items-center gap-2.5">
+                <div className="mt-5 px-3.5 py-[5px] grid grid-cols-6 rid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-start items-center gap-2.5">
 
                 {spectrumLevels.map((item) => (
                   <SpectrumLevelFilter
@@ -612,7 +616,7 @@ const Directory = () => {
           </div> 
                 
                 
-          <div className="mt-3 py-[2px] grid lg:grid-cols-4 md:grid-cols-3 justify-start items-center gap-3.5">
+          <div className="mt-3 py-[2px] grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-start items-center gap-3.5">
               {companies.map(company => (
                 <CompanyCard
                   key={company.id}
