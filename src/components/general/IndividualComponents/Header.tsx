@@ -1,6 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
+import { useState } from "react";
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -51,43 +53,84 @@ export default function Header() {
           </div>
           </div>
           {/* Nav + login */}
-          <div className="flex items-center gap-3">
-            <nav className="hidden gap-3 text-sm text-slate-200 md:flex">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
+          
+<div className="flex items-center gap-3">
+  {/* Desktop Navigation */}
+  <nav className="hidden md:flex gap-3 text-sm text-slate-200">
+    {navItems.map((item) => {
+      const isActive = location.pathname === item.path;
 
-                return (
-                  <a
-                    key={item.name}
-                    href={item.path}
-                    className={`
-                      transition hover:text-white text-lg font-semibold px-4 py-2.5 rounded-[14px]
-                      ${
-                        isActive
-                          ? "bg-white/8"
-                          : ""
-                      }
-                    `}
-                  >
-                    {item.name}
-                  </a>
-                );
-              })}
-            </nav>
+      return (
+        <NavLink
+          key={item.name}
+          to={item.path}
+          className={`px-4 py-2.5 rounded-[14px] text-lg font-semibold transition
+            ${isActive ? "bg-white/10" : "hover:bg-white/5"}
+          `}
+        >
+          {item.name}
+        </NavLink>
+      );
+    })}
+  </nav>
 
-            <a
-              href="/login"
-              className="rounded-md bg-red px-8 py-2.5 text-md font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
-            >
-              LOGIN
-            </a>  
-            <a
-              href="/signup"
-              className="rounded-md bg-red px-8 py-2.5 text-md font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
-            >
-              SIGN UP
-            </a>          
-          </div>
+  {/* Desktop buttons */}
+  <div className="hidden md:flex gap-3">
+    <NavLink to="/login" className="rounded-md bg-red px-8 py-2.5">
+      LOGIN
+    </NavLink>
+
+    <NavLink to="/signup" className="rounded-md bg-red px-8 py-2.5">
+      SIGN UP
+    </NavLink>
+  </div>
+
+  {/* Hamburger */}
+  <button
+    onClick={() => setMenuOpen(!menuOpen)}
+    className="md:hidden mx-auto rounded-md p-2 hover:bg-white/10"
+  >
+    ☰
+  </button>  
+</div>
+{menuOpen && (
+  <div className="md:hidden mt-4 border-t border-white/10 pt-4">
+    <nav className="flex flex-col gap-2">
+      {navItems.map((item) => (
+        <NavLink
+          key={item.name}
+          to={item.path}
+          onClick={() => setMenuOpen(false)}
+          className={({ isActive }) =>
+            `rounded-lg px-4 py-3 font-semibold transition ${
+              isActive
+                ? "bg-white/10"
+                : "hover:bg-white/5"
+            }`
+          }
+        >
+          {item.name}
+        </NavLink>
+      ))}
+
+      <NavLink
+        to="/login"
+        onClick={() => setMenuOpen(false)}
+        className="mt-2 rounded-md bg-red px-4 py-3 text-center font-semibold"
+      >
+        LOGIN
+      </NavLink>
+
+      <NavLink
+        to="/signup"
+        onClick={() => setMenuOpen(false)}
+        className="rounded-md bg-red px-4 py-3 text-center font-semibold"
+      >
+        SIGN UP
+      </NavLink>
+    </nav>
+  </div>
+)}
         </div>
       </div>
     </header>

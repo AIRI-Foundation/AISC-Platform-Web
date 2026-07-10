@@ -520,7 +520,7 @@ const Directory = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-5 px-3.5 py-[5px] grid grid-cols-6 rid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-start items-center gap-2.5">
+                <div className="mt-5 px-3.5 py-[5px] grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] justify-start items-center gap-2.5">
 
                 {spectrumLevels.map((item) => (
                   <SpectrumLevelFilter
@@ -542,7 +542,7 @@ const Directory = () => {
 
           <div className="mt-5 w-full p-5 bg-white rounded-[10px] justify-start items-end gap-3.5 overflow-visible">
             <form onSubmit={handleSubmit} className="space-y-4">          
-                <div className="px-3.5 py-[2px] grid grid-cols-4 justify-start items-center gap-2.5">
+                <div className="px-3.5 py-[2px] grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-start items-center gap-2.5">
                     <SearchItem
                       title="Search"
                       value={filters.search}
