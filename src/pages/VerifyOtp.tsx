@@ -121,7 +121,7 @@ const handleChange = (index: number, value: string) => {
       <div className="mx-auto max-w-7xl px-6 py-6">
 
         <section className="flex min-h-[80vh] items-center justify-center text-center">
-          <div className="mx-auto w-full max-w-4xl rounded-[32px] border-2 border-dashed border-white/20 bg-white/2 p-12 shadow-[0_40px_120px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:p-16">
+          <div className="mx-auto w-full">
             <h1 className="text-5xl font-bold text-white sm:text-6x1">
               Verify Your <span className="text-gold">One Time Password</span>
             </h1>

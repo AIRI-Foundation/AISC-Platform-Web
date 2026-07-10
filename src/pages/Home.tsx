@@ -28,7 +28,7 @@ const DataSection = ({
   Attribute4Title,  
 }: DataSectionProps) => {
   return (
-    <div className="mt-8 flex justify-center gap-12 ">
+    <div className="mt-8 flex flex-wrap justify-center gap-12">
       <div className="text-center font-bold text-2xl text-base sm:text-lg">
         <span className="text-gold text-4xl">{Attribute1}+</span>
         <br />
@@ -170,12 +170,12 @@ const Home = () => {
                 <div className="self-stretch inline-flex justify-start items-center gap-2.5">
                     <a 
                     className="inline-flex text-gold text-sm font-bold mt-3 mr-1 hover:underline"
-                    href="/database"
+                    href="/directory"
                     >
                       Explore Database
                       <RightArrowHeadIcon 
                         className="h-6 w-6 justify-start text-gold text-sm font-bold" 
-                        href="/database"
+                        href="/directory"
                       />                
                     </a>
 

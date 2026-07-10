@@ -126,9 +126,11 @@ return (
             )}     
           </form>
       </div>
-      <BottomSection />
       </div>
+      <div className='px-6 py-6'>
 
+        <BottomSection />
+      </div>
       <Footer />
     </div>
   );

@@ -1,34 +1,43 @@
+import { useNavigate } from 'react-router-dom';
+import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
+
 import Header from "../components/general/IndividualComponents/Header";
 import Footer from "../components/general/IndividualComponents/Footer";
-
 const Success = () => {
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate('/dashboard/overview');
+  };  
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
-      <div className="bg-navy text-white">
-        <Header />
-      </div>
-      <div className="flex flex-1 flex-col bg-navy text-white items-center justify-center">
+    <div className="flex min-h-screen flex-col bg-navy text-white">
 
-          <h1 className="text-center text-5xl font-bold">
+      <Header />
+
+      <main className="flex flex-1 min-h-screen items-center justify-center">
+        <div className="text-center">
+
+          <h1 className="text-5xl font-bold">
             Welcome to <span className="text-gold">AISC</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-center text-lg text-slate-300">
-            Your company has been successfully
-            <br />
-            authenticated
+
+          <p className="mx-auto mt-6 max-w-xl text-lg text-slate-300">
+            Your company has been successfully authenticated
           </p>
 
-          <a
-            href="/dashboard/overview"
-            className="mt-28 inline-flex items-center justify-center rounded-lg bg-red px-8 py-3 text-base font-semibold text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark"
+        <div className="mx-auto mt-10 w-sm">
+        <button           
+          type="submit"
+          className={buttonSubmit} 
+          onClick={handleNavigation}
           >
             Go to dashboard
-          </a>
+        </button>      
+          
+      </div>
         </div>
-      <div className="bg-navy text-white">
+      </main>
 
       <Footer />
-      </div>
 
     </div>
   );

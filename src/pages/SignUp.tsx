@@ -143,8 +143,7 @@ const SignUp = () => {
               in.
             </p>
           </section>
-          <div className="px-40">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="space-y-1 mb-6 px-2 sm:px-6 md:px-12 lg:px-24">
               <div className="grid gap-1 sm:grid-cols-2">
                 <label className="text-sm font-medium">
                   <span className="text-red">*</span> First name
@@ -343,7 +342,6 @@ const SignUp = () => {
                 </a>
               </p>
             </form>
-          </div>
         </div>
       </div>
 

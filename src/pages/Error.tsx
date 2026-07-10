@@ -12,7 +12,9 @@ const Error = () => {
         <div className="mx-auto max-w-7xl px-6 py-6 w-full"></div>
 
         <div className="flex flex-1 flex-col items-center justify-center">
-          <h1 className="text-center text-5xl font-bold">Error</h1>
+          <h1 className="text-center text-5xl font-bold">
+            Error
+          </h1>
           <p className="mx-auto mt-6 max-w-xl text-center text-lg text-slate-300">
             We failed to authenticate your company.
             <br />
