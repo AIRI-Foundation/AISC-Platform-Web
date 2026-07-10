@@ -167,7 +167,7 @@ export function PriceCard({
   className={`
     p-8 bg-white rounded-2xl
     shadow-[0px_8px_50px_22px_rgba(0,0,0,0.15)]
-    inline-flex flex-col justify-start items-start gap-5
+    inline-flex flex-col justify-start items-start gap-5 max-w-[320px]
     ${Featured
       ? "relative outline-2 outline-emerald-600"
       : "outline outline-[0.67px] outline-zinc-300"}`}>
@@ -213,25 +213,25 @@ export function PriceCard({
       <div className="w-64 h-56 flex flex-col justify-between items-center">
           <div className="self-stretch h-px bg-zinc-400" />
           <div className="self-stretch inline-flex justify-start items-center gap-3">
-              <CheckCircleIcon className={`4.5 w-4.5  ${Featured ? "text-green" : "text-zinc-400"}`} />
+              <CheckCircleIcon className={`h-4.5 w-4.5  ${Featured ? "text-green" : "text-zinc-400"}`} />
               <div className="justify-start text-black text-xs font-medium ">
                 {Body1}
               </div>
           </div>
           <div className="self-stretch inline-flex justify-start items-center gap-3">            
-              <CheckCircleIcon className={`4.5 w-4.5  ${Featured ? "text-green" : "text-zinc-400"}`} />
+              <CheckCircleIcon className={`h-4.5 w-4.5  ${Featured ? "text-green" : "text-zinc-400"}`} />
               <div className="justify-start text-black text-xs font-medium ">
                 {Body2}
               </div>
           </div>
           <div className="self-stretch inline-flex justify-start items-center gap-3">
-              <CheckCircleIcon className={`4.5 w-4.5  ${Featured ? "text-green" : "text-zinc-400"}`} />
+              <CheckCircleIcon className={`h-4.5 w-4.5  ${Featured ? "text-green" : "text-zinc-400"}`} />
               <div className="justify-start text-black text-xs font-medium ">
                 {Body3}
               </div>
           </div>
           <div className="self-stretch inline-flex justify-start items-center gap-3">
-              <CheckCircleIcon className={`4.5 w-4.5 ${Featured ? "text-green" : "text-zinc-400"}`} />
+              <CheckCircleIcon className={`h-4.5 w-4.5 ${Featured ? "text-green" : "text-zinc-400"}`} />
               <div className="justify-start text-black text-xs font-medium ">
                 {Body4}
               </div>
