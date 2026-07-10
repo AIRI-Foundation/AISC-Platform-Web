@@ -10,8 +10,8 @@ export default defineConfig({
     proxy: {
       "/api": {
         // Used for local testing:
-        // target: "http://localhost:5044",
-        target: "https://aisc-platform-api.fly.dev",
+        target: "http://localhost:5044",
+        // target: "https://aisc-platform-api.fly.dev",
         changeOrigin: true,
         secure: true,
       },
