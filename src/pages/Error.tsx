@@ -9,7 +9,7 @@ const Error = () => {
         <Header />
       </div>
       <div className="flex flex-1 flex-col bg-navy text-white">
-        <div className="mx-auto max-w-7xl px-6 py-6 w-full"></div>
+        <div className="mx-auto mt-14 max-w-7xl px-6 py-6 w-full"></div>
 
         <div className="flex flex-1 flex-col items-center justify-center">
           <h1 className="text-center text-5xl font-bold">
@@ -20,10 +20,10 @@ const Error = () => {
             <br />
             Please try again
           </p>
-          <div className="mt-12 inline-flex items-center justify-center px-8 py-3" >
+          <div className="mt-16 mb-10 w-[60%] mx-auto inline-flex items-center justify-center px-8 py-3" >
                  <a
             href="/build-company-profile"
-            className={buttonSubmit}
+            className={`${buttonSubmit} text-center`}
           >
             Edit company profile
           </a>                 
