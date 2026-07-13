@@ -200,5 +200,12 @@ export const XIcon = (props: IconProps) => (
 </svg>
 );
 
+export const ChatBubbleIcon = (props: IconProps) => (
+<svg {...base} {...props} stroke-width="1" fill="none" transform="translate(5 10) scale(1.4)" >
+  <path d="M11.0833 7.58398C11.0833 7.8934 10.9603 8.19015 10.7415 8.40894C10.5228 8.62773 10.226 8.75065 9.91658 8.75065H2.91659L0.583252 11.084V1.75065C0.583252 1.44123 0.706168 1.14449 0.924961 0.925693C1.14375 0.706901 1.4405 0.583984 1.74992 0.583984H9.91658C10.226 0.583984 10.5228 0.706901 10.7415 0.925693C10.9603 1.14449 11.0833 1.44123 11.0833 1.75065V7.58398Z" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+);
+
+
 
 
