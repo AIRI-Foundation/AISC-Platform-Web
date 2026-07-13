@@ -4,7 +4,7 @@ const Contacts = [
   {
   Header: "Contact Us",
   Contact: "Contact",
-  ContactLink: "/#",
+  ContactLink: "/contact",
   About: "About",
   AboutLink: "/#",
   Privacy: "Privacy",
@@ -13,7 +13,7 @@ const Contacts = [
   {
   Header: "Contact Us",
   Contact: "Contact",
-  ContactLink: "/#",
+  ContactLink: "/contact",
   About: "About",
   AboutLink: "/#",
   Privacy: "Privacy",
@@ -22,7 +22,7 @@ const Contacts = [
   {
   Header: "Contact Us",
   Contact: "Contact",
-  ContactLink: "/#",
+  ContactLink: "/contact",
   About: "About",
   AboutLink: "/#",
   Privacy: "Privacy",
@@ -31,7 +31,7 @@ const Contacts = [
   {
   Header: "Contact Us",
   Contact: "Contact",
-  ContactLink: "/#",
+  ContactLink: "/contact",
   About: "About",
   AboutLink: "/#",
   Privacy: "Privacy",
