@@ -33,7 +33,6 @@ import BookDemo from "./pages/BookDemo";
 import SubmissionSent from "./pages/SubmissionSent";
 import SignUpDemo from "./pages/SignUpDemo";
 import Database from "./pages/Database";
-import ChangePassword from "./pages/ChangePassword";
 
 function App() {
   return (
@@ -73,7 +72,6 @@ function App() {
           path="/dashboard/advisory-program"
           element={<DashboardAdvisoryProgram />}
         />
-        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/password-reset-otp" element={<SendPasswordResetOtp />} />
         <Route path="/password-reset" element={<PasswordReset />} />
 
