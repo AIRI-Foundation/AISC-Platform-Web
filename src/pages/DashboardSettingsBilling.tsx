@@ -165,6 +165,7 @@ IsActive
 const DashboardSettings = () => {
   const [data, setData] = useState<ProfilePageData | null>(null);
   const [, setLoading] = useState(true);
+  const [, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [creditInfoChanged, setCreditInfoChanged] = useState(false);
   // const hasChanges =
