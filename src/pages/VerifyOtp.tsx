@@ -122,7 +122,7 @@ const handleChange = (index: number, value: string) => {
 
         <section className="flex items-center justify-center text-center">
           <div className="mx-auto w-full rounded-[32px] p-12 ">
-            <h1 className="text-6xl font-bold text-white">
+            <h1 className="text-5xl font-bold text-white">
               Verify Your <span className="text-gold">One Time Password</span>
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-base text-2xl text-slate-100">

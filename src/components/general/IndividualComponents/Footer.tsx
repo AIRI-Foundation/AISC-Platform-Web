@@ -1,3 +1,90 @@
+import AboutUs from "../../../pages/StubPages/AboutUs";
+
+const Contacts = [
+  {
+  Header: "Contact Us",
+  Contact: "Contact",
+  ContactLink: "/contact",
+  About: "About",
+  AboutLink: "/#",
+  Privacy: "Privacy",
+  PrivacyLink: "/#",   
+  },
+  {
+  Header: "Contact Us",
+  Contact: "Contact",
+  ContactLink: "/contact",
+  About: "About",
+  AboutLink: "/#",
+  Privacy: "Privacy",
+  PrivacyLink: "/#",   
+  },
+  {
+  Header: "Contact Us",
+  Contact: "Contact",
+  ContactLink: "/contact",
+  About: "About",
+  AboutLink: "/#",
+  Privacy: "Privacy",
+  PrivacyLink: "/#",   
+  },
+  {
+  Header: "Contact Us",
+  Contact: "Contact",
+  ContactLink: "/contact",
+  About: "About",
+  AboutLink: "/#",
+  Privacy: "Privacy",
+  PrivacyLink: "/#",   
+  }      
+];
+
+type ContactUsProps = {
+  Header: string;
+  Contact: string;  
+  ContactLink: string;    
+  About: string;
+  AboutLink: string;  
+  Privacy: string;  
+  PrivacyLink: string;         
+};
+
+const ContactUs = ({
+  Header,  
+  Contact,  
+  ContactLink,
+  About,
+  AboutLink,  
+  Privacy,
+  PrivacyLink,  
+}: ContactUsProps) => {
+  return (
+    <div className="flex flex-col w-fit">
+      <h4 className="mb-3 text-md font-semibold">
+        {Header}
+      </h4>
+      <ul className="space-y-1 text-sm text-slate-300">
+        <li>
+          <a href={ContactLink} className="transition hover:text-white">
+            {Contact}
+          </a>
+        </li>
+        <li>
+          <a href={AboutLink} className="transition hover:text-white">
+            {About}
+          </a>
+        </li>
+        <li>
+          <a href={PrivacyLink} className="transition hover:text-white">
+            {Privacy}
+          </a>
+        </li>
+      </ul>
+    </div>   
+  );
+};
+
+
 export default function Footer() {
   return (
       <footer className="mt-16 border-t border-white/10 bg-dark-blue text-white">
@@ -75,90 +162,17 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-
-            <div className="flex flex-col w-fit">
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col w-fit">
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col w-fit">
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col w-fit">
-              <h4 className="mb-4 text-sm font-semibold">Contact Us</h4>
-              <ul className="space-y-2 text-sm text-slate-300">
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
+              {Contacts.map(Contacts => (
+                <ContactUs
+                  Header={Contacts.Header}
+                  Contact={Contacts.Contact}
+                  ContactLink={Contacts.ContactLink}
+                  About={Contacts.About}
+                  AboutLink={Contacts.AboutLink}
+                  Privacy={Contacts.Privacy}
+                  PrivacyLink={Contacts.PrivacyLink}            
+                />
+              ))}   
           </div>
         </div>
       </footer>

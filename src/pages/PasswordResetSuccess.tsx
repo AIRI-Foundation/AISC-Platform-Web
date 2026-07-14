@@ -38,7 +38,6 @@ const Success = () => {
           
       </div>
       </div>
-      <BottomSection />
       </div>
 
       <Footer />
