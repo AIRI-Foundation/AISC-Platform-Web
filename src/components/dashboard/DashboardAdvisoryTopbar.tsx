@@ -4,24 +4,34 @@ import {
   AdvisoryIcon,
 } from "./icons";
 
+type DashboardSettingsTopbarProps = {
+  notifications: {
+    advisory: number;
+    investor: number;
+  };
+};
+
+const DashboardSettingsTopbar = ({
+  notifications,
+}: DashboardSettingsTopbarProps) => {
+
 const settingsPages = [
   {
     title: "Advisory Program",
     path: "/dashboard/advisory-program",
     icon: ProfileIcon,
     iconClass: "h-6 w-6",
-    notifications: 0,    
+    notifications: notifications.advisory,
   },
   {
     title: "Investor Introductions",
     path: "/dashboard/advisory-investor",
     icon: AdvisoryIcon,
     iconClass: "h-6 w-6",
-    notifications: 3,    
+    notifications: notifications.investor,
   },
 ];
 
-const DashboardSettingsTopbar = () => {
   return (
     <div className="flex mx-auto justify-center items-center gap-3 mb-14">
       {settingsPages.map((page) => {

@@ -409,7 +409,12 @@ const cards = data
               <p className="text-sm font-semibold text-slate-900 mb-14">
                 Lorem ipsum dolor sit amet consectetur.
               </p>
-              <DashboardAdvisoryTopbar />   
+              <DashboardAdvisoryTopbar
+                  notifications={{
+                      advisory: 0,
+                      investor: 0,
+                  }}
+              />
             </div>
         </div>
 

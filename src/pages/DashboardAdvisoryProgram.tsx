@@ -398,7 +398,12 @@ const DashboardAdvisoryProgram = () => {
           Lorem ipsum dolor sit amet consectetur.
         </p>
 
-        <DashboardAdvisoryTopbar />     
+        <DashboardAdvisoryTopbar
+            notifications={{
+                advisory: 0,
+                investor: 3,
+            }}
+        />
         <div className="inline-flex justify-center items-start w-full h-full gap-5">
 
         <div className="flex-1 min-w-0 space-y-6">
