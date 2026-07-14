@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import { getProfile, getUserCompany } from "../services/dashboardService";
@@ -6,9 +6,7 @@ import { getErrorMessage } from "../lib/api";
 import { isLoggedIn } from "../lib/auth";
 import { getInitials } from "../lib/format";
 import DashboardAdvisoryTopbar from "../components/dashboard/DashboardAdvisoryTopbar";
-import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
-import placeholderImage from "../assets/placeholder.png";
-import {ChatBubbleIcon} from "../components/dashboard/icons";
+import {ChatBubbleIcon, CheckIcon, CalendarIcon, LockIcon, NotesIcon, ChevronDownIcon, RightArrowHeadIcon} from "../components/dashboard/icons";
 import type {
   UserProfile,
   UserCompany,
@@ -117,38 +115,26 @@ const AdvisoryStatsCard = ({
     description,
     subtitle,
 }: AdvisoryStatsProps) => (
-        <div className="rounded-[20px] bg-blue-950 p-6 text-white">
-
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-
+        <div className="rounded-[20px] bg-navy p-6 text-white">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <div className="shrink-0">
-
                     <div className="text-6xl font-bold">
                         {percentage}%
                     </div>
-
                     <div className="text-base font-bold uppercase">
                         {title}
                     </div>
-
                 </div>
-
                 <div className="hidden h-24 w-px bg-white/20 sm:block" />
-
                 <div>
-
                     <div className="text-base font-bold uppercase leading-relaxed">
                         {description}
                     </div>
-
                     <div className="mt-2 text-xs text-zinc-300">
                         {subtitle}
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     );
 
@@ -172,6 +158,8 @@ const sessions : Session[] = [
     date: "June 12, 2026",
     duration: "45 min",
     status: "completed",
+    notes:
+      "Strong understanding of dual-gate process. Founder clear on Stage 1–2 requirements. Recommended prioritising legal entity clean-up and confirming the equity split is signed before Stage 2 submission.",      
   },
 
   {
@@ -181,6 +169,8 @@ const sessions : Session[] = [
     date: "June 19, 2026",
     duration: "45 min",
     status: "completed",
+    notes:
+      "Strong understanding of dual-gate process. Founder clear on Stage 1–2 requirements. Recommended prioritising legal entity clean-up and confirming the equity split is signed before Stage 2 submission.",      
   },
 
   {
@@ -194,10 +184,12 @@ const sessions : Session[] = [
       {
         label: "Add to Calendar",
         variant: "primary",
+        link: "/dashboard/advisory-program"
       },
       {
         label: "Reschedule",
         variant: "secondary",
+        link: "/dashboard/advisory-program"
       },
     ],      
   },
@@ -223,6 +215,7 @@ type Session = {
   actions?: {
     label: string;
     variant: "primary" | "secondary";
+    link: string;
   }[];
 };
 
@@ -235,45 +228,40 @@ export function SessionRow({
   session,
   last,
 }: SessionProps) {
+  const [showNotes, setShowNotes] = useState(false);
 
     return (
 
         <div className="flex gap-6">
-
             {/* Timeline */}
-
             <div className="flex flex-col items-center">
-
                 <div
                     className={`
                         flex h-7 w-7 items-center justify-center rounded-full
-
                         ${
                             session.status === "completed"
                                 ? "bg-emerald-600"
                                 : session.status === "scheduled"
                                 ? "bg-blue-950"
-                                : "border border-zinc-300"
+                                : "border border-1 border-zinc-3  00"
                         }
                     `}
                 >
 
-                    {/* Check Icon */}
-
-                    {/* Calendar Icon */}
-
-                    {/* Lock Icon */}
-
+                        {
+                            session.status === "completed"
+                                ? <CheckIcon className="h-4 w-4 text-white" />
+                                : session.status === "scheduled"
+                                ? <CalendarIcon className="h-4 w-4 text-white" />
+                                : <LockIcon className="h-4 w-4 text-zinc-200" />
+                        }                  
                 </div>
-
                 {!last && (
-
                     <div
                         className={`
                             mt-1 w-0.5 flex-1
-
                             ${
-                                status === "completed"
+                                session.status === "completed"
                                     ? "bg-emerald-600"
                                     : "bg-zinc-300"
                             }
@@ -281,84 +269,69 @@ export function SessionRow({
                     />
 
                 )}
-
             </div>
-
             {/* Content */}
-
             <div className="flex-1">
-
                 <h3
                     className={`font-bold ${
-                        status === "locked"
+                        session.status === "locked"
                             ? "text-black/30"
                             : "text-black"
                     }`}
                 >
                     Session {session.id}: {session.title}
                 </h3>
-
                 <p
                     className={`mt-1 text-xs ${
-                        status === "locked"
+                        session.status === "locked"
                             ? "text-black/30"
                             : "text-black/60"
                     }`}
                 >
                     {session.advisor} • {session.date} • {session.duration}
                 </p>
-
                 {session.notes && (
-
                     <div className="mt-4">
+                    <button
+                      onClick={() => setShowNotes(!showNotes)}
+                      className="flex items-center gap-2 text-xs font-bold uppercase text-gold"
+                    >
+                      <NotesIcon className="h-6 w-6 text-gold" />
 
-                        <button className="flex items-center gap-2 text-xs font-bold uppercase text-orange-500">
+                      Advisor Notes
 
-                            {/* Notes Icon */}
-
-                            Advisor Notes
-
-                            {/* Chevron */}
-
-                        </button>
-
-                        <div className="mt-2 rounded-lg border-l-4 border-orange-400 bg-amber-50 p-3 text-xs">
-
-                            {session.notes}
-
-                        </div>
-
+                      {showNotes ? (
+                        <ChevronDownIcon className="h-6 w-6 text-gold" />
+                      ) : (
+                        <RightArrowHeadIcon className="h-6 w-6 mx-1 text-gold" />
+                      )}
+                    </button>
+                    {showNotes && (
+                      <div className="mt-2 rounded-lg border-l-4 border-gold bg-amber-50 p-3 text-xs text-zinc-500">
+                        {session.notes}
+                      </div>
+                    )}
                     </div>
-
                 )}
-
                 {session.actions && (
-
                     <div className="mt-4 flex flex-wrap gap-2">
-
                         {session.actions.map((action) => (
-
-                            <button
+                            <a
                                 key={action.label}
                                 className={
                                     action.variant === "primary"
                                         ? "rounded-lg bg-red px-4 py-2 text-sm font-bold text-white"
                                         : "rounded-lg border border-red px-4 py-2 text-sm font-bold text-red"
                                 }
+                                href={action.link}
                             >
                                 {action.label}
-                            </button>
-
+                            </a>
                         ))}
-
                     </div>
-
                 )}
-
             </div>
-
         </div>
-
     );
 }
 
@@ -372,8 +345,6 @@ const DashboardAdvisoryProgram = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [creditInfoChanged, setCreditInfoChanged] = useState(false);
-  // const hasChanges =
-    // originalCard !== originalTwoFactorEnabled;  
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -415,146 +386,119 @@ const DashboardAdvisoryProgram = () => {
 
   return (
     <DashboardLayout user={user}>
-    <div className=" min-h-screen !px-8 !py-8">
-        <div className="flex-1 text-sm text-slate-400">
-          Dashboard  <span className="font-semibold text-base">/ </span> 
-            <span className="text-black font-semibold">Advisory Program</span>
-            
-          <h1 className="text-2xl font-bold text-slate-900 mt-3 mb-1">Advisory Program</h1>
-          <p className="text-sm font-semibold text-slate-900 mb-18">
-            Lorem ipsum dolor sit amet consectetur.
-          </p>
+    <div className=" min-h-screen !py-8">
+      <div className="flex-1 text-sm text-slate-400">
+        Dashboard  <span className="font-semibold text-base">/ </span> 
+        <span className="text-black font-semibold">Advisory Program</span>
+          
+        <h1 className="text-2xl font-bold text-slate-900 mt-3 mb-1">
+          Advisory Program
+        </h1>
+        <p className="text-sm font-semibold text-slate-900 mb-14">
+          Lorem ipsum dolor sit amet consectetur.
+        </p>
 
-          <DashboardAdvisoryTopbar />     
+        <DashboardAdvisoryTopbar />     
         <div className="inline-flex justify-center items-start w-full h-full gap-5">
 
-{/* Current Plan */}
         <div className="flex-1 min-w-0 space-y-6">
-  <AdvisoryStatsCard 
-    percentage ={advisoryStats.percentage}
-    title ={advisoryStats.title}
-    description ={advisoryStats.description}
-    subtitle ={advisoryStats.subtitle}
-  />
-
-<div className="overflow-hidden rounded-[20px] border border-zinc-300 bg-white">
-
-                <div className="flex flex-col gap-4 border-b border-zinc-300 p-5 md:flex-row md:items-center md:justify-between">
-                    <div>
-
-                        <h2 className="text-base font-bold uppercase">
-                            Session Tracker
-                        </h2>
-
-                        <p className="text-xs text-black/40">
-                          {completedSessions} of {sessions.length} sessions complete
-                        </p>
-
-                    </div>  
-<button className="rounded-lg bg-red px-4 py-2 text-sm font-bold text-white">
-                        Schedule Next
-                    </button>
-
-                </div>
-
-                <div className="space-y-6 p-5">
-
-                    {sessions.map((session, index) => (
-
-                        <SessionRow
-                            key={session.id}
-                            session={session}
-                            last={index === sessions.length - 1}
-                        />
-
-                    ))}
-
-                </div>
-
-            </div>   
-</div>                         
- {/* End the Current Plan */}
-
-<div className="max-w-xl space-y-5">
-
-  <div className="overflow-hidden rounded-[20px] border border-zinc-300 bg-white">
-
-    <div className="border-b border-zinc-300 p-5">
-      <h3 className="text-base font-bold uppercase text-black">
-        Program Impact
-      </h3>
-    </div>
-
-    <div className="space-y-6 p-5">
-
-      {programImpact.map((metric) => (
-        <div
-          key={metric.title}
-          className="grid grid-cols-2 gap-4"
-        >
-          <ImpactCard
-            label="Without Advisory"
-            value={metric.without}
-            unit={metric.unit}
-            unitClass={metric.unitClass}
-            title={metric.title}
+          <AdvisoryStatsCard 
+            percentage ={advisoryStats.percentage}
+            title ={advisoryStats.title}
+            description ={advisoryStats.description}
+            subtitle ={advisoryStats.subtitle}
           />
 
-          <ImpactCard
-            label="With Advisory"
-            value={metric.with}
-            unit={metric.unit}
-            unitClass={metric.unitClass}            
-            title={metric.title}
-            highlighted
-          />
+          <div className="overflow-hidden rounded-[20px] border border-zinc-300 bg-white">
+
+            <div className="flex flex-col gap-4 border-b border-zinc-300 p-5 md:flex-row md:items-center md:justify-between">
+              <h2 className="text-base font-bold uppercase">
+                  Session Tracker
+              </h2>
+
+              <p className="text-xs text-black/40">
+                {completedSessions} of {sessions.length} sessions complete
+              </p>
+              <a className="rounded-lg bg-red px-4 py-2 text-sm font-bold text-white"
+              href="/dashboard/advisory-program"
+              >
+                Schedule Next
+              </a>
+
+          </div>
+        <div className="space-y-3 p-5">
+            {sessions.map((session, index) => (
+                <SessionRow
+                    key={session.id}
+                    session={session}
+                    last={index === sessions.length - 1}
+                />
+            ))}
         </div>
-      ))}
+      </div>   
+    </div>                         
+  <div className="max-w-xl space-y-5">
+    <div className="overflow-hidden rounded-[20px] border border-zinc-300 bg-white">
+      <div className="border-b border-zinc-300 p-5">
+        <h3 className="text-base font-bold uppercase text-black">
+          Program Impact
+        </h3>
+      </div>
 
-      <p className="text-center text-[10px] text-black/20">
-        Founders with advisory support{" "}
-        <span className="font-bold text-blue-950">
-          advance 2.4× faster
-        </span>{" "}
-        through the Spectrum.
-      </p>
+      <div className="space-y-6 p-5">
 
-    </div>
+        {programImpact.map((metric) => (
+          <div
+            key={metric.title}
+            className="grid grid-cols-2 gap-4"
+          >
+            <ImpactCard
+              label="Without Advisory"
+              value={metric.without}
+              unit={metric.unit}
+              unitClass={metric.unitClass}
+              title={metric.title}
+            />
 
-  </div>
+            <ImpactCard
+              label="With Advisory"
+              value={metric.with}
+              unit={metric.unit}
+              unitClass={metric.unitClass}            
+              title={metric.title}
+              highlighted
+            />
+          </div>
+          ))}
+            <p className="text-center text-[10px] text-black/20">
+              Founders with advisory support{" "}
+              <span className="font-bold text-blue-950">
+                advance 2.4× faster
+              </span>{" "}
+              through the Spectrum.
+            </p>
+          </div>
+        </div>
+          <button
+            className="
+              flex w-full items-center mb-10
+              rounded-2xl border border-zinc-300
+              bg-white px-5
+              transition hover:bg-gray-50
+            "
+          >
+          <a
+            href="/contact"
+            className={`inline-flex items-center mt-3 mb-3 text-xs font-bold hover:underline text-black`}
+          >
+            <ChatBubbleIcon className="h-6 w-6" />       
+              Contact AISC Team      
+            </a>     
+            </button>
+          </div>
+        </div> 
 
-  <button
-    className="
-      flex w-full items-center mb-10
-      rounded-2xl border border-zinc-300
-      bg-white px-5
-      transition hover:bg-gray-50
-    "
-  >
-    {/* icon */}
-  <a
-    href="/manage-subscriptions"
-    className={`inline-flex items-center mt-3 mb-3 text-xs font-bold hover:underline text-black`}
-  >
-    <ChatBubbleIcon className="h-6 w-6" />       
-      Contact AISC Team      
-  </a>     
-
-  </button>
-
-</div>
-
-
-
-
-
-
-
-</div> 
-
-
-{/* WIP ENDS */}
-        </div>          
+      </div>          
     </div>
     </DashboardLayout>
   );

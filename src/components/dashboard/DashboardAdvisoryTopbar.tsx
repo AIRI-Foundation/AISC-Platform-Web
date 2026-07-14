@@ -10,18 +10,20 @@ const settingsPages = [
     path: "/dashboard/advisory-program",
     icon: ProfileIcon,
     iconClass: "h-6 w-6",
+    notifications: 0,    
   },
   {
     title: "Investor Introductions",
     path: "/dashboard/advisory-investor",
     icon: AdvisoryIcon,
     iconClass: "h-6 w-6",
+    notifications: 3,    
   },
 ];
 
 const DashboardSettingsTopbar = () => {
   return (
-    <div className="flex mx-auto justify-center items-center gap-3 mb-18">
+    <div className="flex mx-auto justify-center items-center gap-3 mb-14">
       {settingsPages.map((page) => {
         const Icon = page.icon;
 
@@ -52,6 +54,28 @@ const DashboardSettingsTopbar = () => {
             <div className="text-black text-base font-bold uppercase">
               {page.title}
             </div>
+
+            <div className="relative">
+              {page.notifications > 0 && (
+                <div
+                  className="
+                    flex
+                    h-5
+                    min-w-5
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-red
+                    px-1
+                    text-[10px]
+                    font-bold
+                    text-white
+                  "
+                >
+                  {page.notifications}
+                </div>
+              )}
+            </div>            
           </NavLink>
         );
       })}

@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import { getProfile, getUserCompany } from "../services/dashboardService";
@@ -6,11 +6,9 @@ import { getErrorMessage } from "../lib/api";
 import { isLoggedIn } from "../lib/auth";
 import { getInitials } from "../lib/format";
 import DashboardAdvisoryTopbar from "../components/dashboard/DashboardAdvisoryTopbar";
-import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 import placeholderImage from "../assets/placeholder.png";
 import {CheckIcon, XIcon, TrendingUpIcon, CheckCircleIcon, EyeIcon, CalendarIcon} from "../components/dashboard/icons";
 import StatCards from "../components/dashboard/StatCards";
-import { formatMemberSince } from "../lib/format";
 
 import type {
   UserProfile,
@@ -39,18 +37,20 @@ interface ProfilePageData {
 type SummaryCardProps = {
   Title: string;
   Sentences: string[];
-  BackgroundColour: string;
-  BorderColour: string;
+  Colours: {
+    BackgroundColour: string;
+    BorderColour: string;
+    TextColour: string;  
+  }
 };
 
 export function SessionRow({
   Title,
   Sentences,
-  BackgroundColour,
-  BorderColour,
+  Colours,
 }: SummaryCardProps) {
   return(
-    <div className={`w-full ml-5 p-5 bg-${BackgroundColour} rounded-2xl outline outline-[1.67px] outline-offset-[-0.67px] outline-${BorderColour} inline-flex flex-col justify-start items-start gap-3.5 overflow-hidden`}>
+    <div className={`flex-1 p-5 ${Colours.BackgroundColour} rounded-2xl outline outline-[1.67px] outline-offset-[-0.67px] ${Colours.BorderColour} inline-flex flex-col justify-start items-start gap-3.5 overflow-hidden`}>
         <div className="justify-start text-black text-base font-bold  uppercase">
           {Title}
         </div>
@@ -61,7 +61,7 @@ export function SessionRow({
               key={sentence}
               className="flex items-start gap-3"
           >
-              <div className={`mt-1 h-3 w-3 rounded-full border-2 text-${BorderColour}`}/>
+              <div className={`mt-1 h-3 w-3 rounded-full border-2 ${Colours.TextColour}`}/>
 
               <span className="text-xs text-black font-semibold">
                   {sentence}
@@ -87,6 +87,7 @@ function getMatchColour(score: number) {
 }
 
 type MatchCard = {
+  id: number
   companyName: string;
   contact: string;
   Thumbnail: string;    
@@ -100,31 +101,84 @@ type MatchCard = {
   ticketSize: string;
 };
 
-const investorMatch: MatchCard = {
-  companyName: "Company Name",
-  contact: "John Smith · Partner · Toronto",
-  Thumbnail:placeholderImage,  
-  received: "June 1, 2026",
-  score: 91,
+const investorMatches: MatchCard[] = [
+  {
+    id:0,
+    companyName: "Company Name",
+    contact: "John Smith · Partner · Toronto",
+    Thumbnail:placeholderImage,  
+    received: "June 1, 2026",
+    score: 91,
 
-  investorSummary: [
-    "Enterprise AI infrastructure fund.",
-    "Previously invested in 40+ SaaS startups.",
-    "Strong healthcare portfolio.",
-    "Leads most seed rounds.",
-  ],
+    investorSummary: [
+      "Enterprise AI infrastructure fund.",
+      "Previously invested in 40+ SaaS startups.",
+      "Strong healthcare portfolio.",
+      "Leads most seed rounds.",
+    ],
 
-  matchReasons: [
-    "Your company is currently raising Seed.",
-    "Your AI vertical matches this investor.",
-    "Your traction meets their typical range.",
-    "Your requested cheque size fits.",
-  ],
+    matchReasons: [
+      "Your company is currently raising Seed.",
+      "Your AI vertical matches this investor.",
+      "Your traction meets their typical range.",
+      "Your requested cheque size fits.",
+    ],
 
-  focus: "Enterprise SaaS · AI Infrastructure",
+    focus: "Enterprise SaaS · AI Infrastructure",
 
-  ticketSize: "$250K – $1.5M (Pre-Seed / Seed)",
-};
+    ticketSize: "$250K – $1.5M (Pre-Seed / Seed)",
+  },
+  {
+    id:1,    
+    companyName: "Catalyst Capital",
+    contact: "David Lee · Managing Partner · Calgary",
+    Thumbnail: placeholderImage,
+    received: "June 8, 2026",
+    score: 52,
+
+    investorSummary: [
+      "Pre-seed specialist.",
+      "Focus on technical founders.",
+      "Large mentor network.",
+      "Fast investment decisions.",
+    ],
+
+    matchReasons: [
+      "Strong founding team.",
+      "Technical moat identified.",
+      "Market size fits thesis.",
+      "Requested cheque size aligns.",
+    ],
+
+    focus: "AI · Deep Tech",
+    ticketSize: "$250K – $750K",
+  },
+  {
+    id:2,    
+    companyName: "Northstar Ventures",
+    contact: "Sarah Chen · Principal · Vancouver",
+    Thumbnail: placeholderImage,
+    received: "June 3, 2026",
+    score: 82,
+
+    investorSummary: [
+      "B2B SaaS specialist.",
+      "Strong AI automation portfolio.",
+      "Invests across North America.",
+      "Active follow-on investor.",
+    ],
+
+    matchReasons: [
+      "Your ARR fits their portfolio.",
+      "Seed stage aligns perfectly.",
+      "Looking for enterprise AI.",
+      "Canadian founder preference.",
+    ],
+
+    focus: "B2B SaaS · Enterprise AI",
+    ticketSize: "$500K – $2M",
+  },  
+];
 
 type LargeCompanyCardProps = {
   match: MatchCard
@@ -134,15 +188,15 @@ export function LargeCompanyCard({
   match,
 }: LargeCompanyCardProps) {
   return(
-       <div className="max-w-5xl inline-flex flex-col justify-start items-start">
-    <div className="self-stretch p-5 bg-white rounded-tl-[20px] rounded-tr-[20px] border-b-[0.67px] border-zinc-300 inline-flex justify-between items-center">
+  <div className="w-full max-w-5xl rounded-[20px] bg-white">
+    <div className="self-stretch p-5 bg-white rounded-tl-[20px] rounded-tr-[20px] border-b-[0.67px] border-zinc-300 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className=" flex justify-start items-end gap-3">
             <img
               src={match.Thumbnail}
               alt={`${match.companyName} logo`}
               className="h-10 w-10 rounded-lg object-cover"
             />
-            <div className="w-40 inline-flex flex-col justify-start items-start gap-[5px]">
+            <div className=" inline-flex flex-col justify-start items-start gap-[5px]">
                 <div className="justify-start text-black text-base font-bold  uppercase">
                   {match.companyName}
                 </div>
@@ -172,26 +226,32 @@ export function LargeCompanyCard({
         </div>
     </div>
     <div className="self-stretch px-3.5 py-7 bg-white rounded-bl-[20px] rounded-br-[20px] flex flex-col justify-start items-start gap-3.5">
-        <div className="inline-flex justify-start items-center gap-3">
-            <div className="w-[1033px] flex justify-between items-center">
+
+          <div className="grid w-full justify-start items-center gap-8 md:grid-cols-2">
                   <SessionRow 
                   Title="Investor Summary"
-                  Sentences={investorMatch.investorSummary}
-                  BackgroundColour="blue-400/20"   
-                  BorderColour="blue-950"
+                  Sentences={match.investorSummary}
+                  Colours={{
+                    BackgroundColour:"bg-blue-400/20", 
+                    BorderColour:"outline-blue-950",
+                    TextColour:"text-blue-950"}
+                  }
                   />
 
                   <SessionRow 
                   Title="Why AISC matched you"
-                  Sentences={investorMatch.matchReasons}
-                  BackgroundColour="amber-50"        
-                  BorderColour="amber-600"                      
+                  Sentences={match.matchReasons}
+                  Colours={{
+                    BackgroundColour:"bg-amber-50"  , 
+                    BorderColour:"outline-amber-600" ,
+                    TextColour:"text-amber-600" }
+                  }                                      
                   />
             </div>
-        </div>
-        <div className=" inline-flex justify-start items-center gap-4">
+
+        <div className=" flex flex-col gap-4 lg:flex-row lg:justify-between">
             <div className="self-stretch flex justify-start items-center gap-3">
-                <div className="w-60 self-stretch px-2.5 py-2 bg-gray-100 rounded-[10px] outline outline-1 outline-offset-[-1px] outline-zinc-300 inline-flex flex-col justify-between items-start">
+                <div className="flex-1 min-w-[220px] self-stretch px-2.5 py-2 bg-gray-100 rounded-[10px] outline outline-1 outline-offset-[-1px] outline-zinc-300 inline-flex flex-col justify-between items-start">
                     <div className="self-stretch justify-start text-black text-[10px] font-bold  uppercase">
                       Focus
                     </div>
@@ -199,7 +259,7 @@ export function LargeCompanyCard({
                       {match.focus}
                     </div>
                 </div>
-                <div className="w-60 self-stretch px-2.5 py-2 bg-gray-100 rounded-[10px] outline outline-1 outline-offset-[-1px] outline-zinc-300 inline-flex flex-col justify-between items-start">
+                <div className="flex-1 min-w-[220px] self-stretch px-2.5 py-2 bg-gray-100 rounded-[10px] outline outline-1 outline-offset-[-1px] outline-zinc-300 inline-flex flex-col justify-between items-start">
                     <div className="self-stretch justify-start text-black text-[10px] font-bold  uppercase">
                       Ticket Size
                     </div>
@@ -211,18 +271,22 @@ export function LargeCompanyCard({
 
 
             <div className=" flex justify-start items-center gap-3.5">
-                <div className="w-60 px-5 py-4 bg-green/10 rounded-[10px] outline outline-[0.67px] outline-offset-[-0.67px] text-emerald-600 flex justify-center items-center gap-1">
+                <a className="flex-1 min-w-[220px] px-5 py-4 bg-green/10 rounded-[10px] outline outline-[0.67px] outline-offset-[-0.67px] text-emerald-600 flex justify-center items-center gap-1"
+                  href="/dashboard/advisory-investor"
+                >
                   <CheckIcon className="h-6 w-6 text-emerald-600" />
                   <div className="justify-start text-emerald-600 text-base font-bold  uppercase">
                     Accept
                   </div>
-                </div>           
-                <div className="w-60 px-5 py-4 bg-red/10 rounded-[10px] outline outline-[0.67px] outline-offset-[-0.67px] outline-red-700 flex justify-center items-center gap-1">
+                </a>           
+                <a className="flex-1 min-w-[220px] px-5 py-4 bg-red/10 rounded-[10px] outline outline-[0.67px] outline-offset-[-0.67px] outline-red-700 flex justify-center items-center gap-1"
+                  href="/dashboard/advisory-investor"
+                >
                   <XIcon className="h-6 w-6 text-red-700 mb-1" />
                   <div className="justify-start text-red-700 text-base font-bold  uppercase">
                     Decline
                   </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -230,7 +294,9 @@ export function LargeCompanyCard({
   );
 }
 
-
+const sortedMatches = [...investorMatches].sort(
+  (a, b) => b.score - a.score
+);
 
 const DashboardAdvisoryInvestor = () => {
   const [data, setData] = useState<ProfilePageData | null>(null);
@@ -309,7 +375,7 @@ const cards = data
       {
         icon: CalendarIcon,
         label: "Introduction Requests",
-        value: `3 days`,
+        value: `3`,
         caption: "Awaiting Your Decision",
         accent: "border-l-red",
         iconBg: "bg-red-50",
@@ -321,37 +387,52 @@ const cards = data
 
   return (
     <DashboardLayout user={user}>
-    <div className=" !px-8 !mt-8">
-        <div className="flex-1 text-sm text-slate-400">
-          Dashboard  <span className="font-semibold text-base">/ </span> 
-            <span className="text-black font-semibold">Advisory Program</span>
-            
-          <h1 className="text-2xl font-bold text-slate-900 mt-3 mb-1">Advisory Program</h1>
-          <p className="text-sm font-semibold text-slate-900 mb-18">
-            Lorem ipsum dolor sit amet consectetur.
-          </p>
+      {loading && (
+        <p className="py-20 text-center text-sm text-slate-500">
+          Loading your advisory...
+        </p>
+      )}
 
-          <DashboardAdvisoryTopbar />   
-          </div>
-</div>
-            <div className="mb-6 px-0">
-              <StatCards cards={cards} />
+      {!loading && error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 px-6 py-5 text-sm text-red-700">
+          {error}
+        </div>
+      )}    
+      {!loading && !error && data && (
+        <>       
+        <div className="!pt-8">
+            <div className="flex-1 text-sm text-slate-400">
+              Dashboard  <span className="font-semibold text-base">/ </span> 
+                <span className="text-black font-semibold">Advisory Program</span>
+                
+              <h1 className="text-2xl font-bold text-slate-900 mt-3 mb-1">Advisory Program</h1>
+              <p className="text-sm font-semibold text-slate-900 mb-14">
+                Lorem ipsum dolor sit amet consectetur.
+              </p>
+              <DashboardAdvisoryTopbar />   
             </div>
-    <div className=" min-h-screen !px-8 !py-8">
+        </div>
+
+        <div className="mb-6 px-0">
+          <StatCards cards={cards} />
+        </div>
+
         <div className="flex-1 text-sm text-slate-400">
-        <div className="inline-flex justify-center items-start w-full h-full gap-5">
+          <div className="mx-auto flex w-full max-w-6xl justify-center">
 
-{/* Current Plan */}
-    <LargeCompanyCard
-      match={investorMatch}
-      />
- {/* End the Current Plan */}
-</div> 
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+            {sortedMatches.map((match) => (
+              <LargeCompanyCard
+                key={match.companyName}
+                match={match}
+              />
+            ))}
+          </div>
 
-
-{/* WIP ENDS */}
+          </div> 
         </div>          
-    </div>
+        </>
+      )}
     </DashboardLayout>
   );
 };
