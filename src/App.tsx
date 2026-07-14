@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Product from "./pages/Product";
 import Directory from "./pages/Directory";
 import CompanyProfile from "./pages/CompanyProfile";
 import Spectrum from "./pages/Spectrum";
@@ -40,6 +41,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Product />} />
         <Route path="/directory" element={<Directory />} />
         <Route path="/company/:id" element={<CompanyProfile />} />
         <Route path="/spectrum" element={<Spectrum />} />
@@ -107,7 +109,7 @@ function App() {
 
         <Route path="/database" element={<Database/>} />
 
-        <Route path="/about" element={<About />} />           
+        <Route path="/about" element={<About />} />
 
       </Routes>
     </BrowserRouter>
