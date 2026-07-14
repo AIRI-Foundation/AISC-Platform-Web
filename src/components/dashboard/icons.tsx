@@ -200,5 +200,18 @@ export const XIcon = (props: IconProps) => (
 </svg>
 );
 
+export const ChatBubbleIcon = (props: IconProps) => (
+<svg {...base} {...props} stroke-width="1" fill="none" transform="translate(5 10) scale(1.4)" >
+  <path d="M11.0833 7.58398C11.0833 7.8934 10.9603 8.19015 10.7415 8.40894C10.5228 8.62773 10.226 8.75065 9.91658 8.75065H2.91659L0.583252 11.084V1.75065C0.583252 1.44123 0.706168 1.14449 0.924961 0.925693C1.14375 0.706901 1.4405 0.583984 1.74992 0.583984H9.91658C10.226 0.583984 10.5228 0.706901 10.7415 0.925693C10.9603 1.14449 11.0833 1.44123 11.0833 1.75065V7.58398Z" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+);
 
-
+export const NotesIcon = (props: IconProps) => (
+<svg {...base} {...props} stroke-width="1" fill="none" transform="translate(7 7) scale(1.2)" >
+<path d="M8.12496 1.08398H3.24996C2.96264 1.08398 2.68709 1.19812 2.48393 1.40129C2.28076 1.60445 2.16663 1.88 2.16663 2.16732V10.834C2.16663 11.1213 2.28076 11.3969 2.48393 11.6C2.68709 11.8032 2.96264 11.9173 3.24996 11.9173H9.74996C10.0373 11.9173 10.3128 11.8032 10.516 11.6C10.7192 11.3969 10.8333 11.1213 10.8333 10.834V3.79232L8.12496 1.08398Z" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.58337 1.08398V3.25065C7.58337 3.53797 7.69751 3.81352 7.90068 4.01668C8.10384 4.21985 8.37939 4.33398 8.66671 4.33398H10.8334"  stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.41671 4.875H4.33337"  stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.66671 7.04102H4.33337" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.66671 9.20898H4.33337"  stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+);

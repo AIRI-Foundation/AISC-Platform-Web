@@ -2,9 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import StatCards from "../components/dashboard/StatCards";
+import { formatMemberSince } from "../lib/format";
 import NextActions from "../components/dashboard/NextActions";
 import StageOverview from "../components/dashboard/StageOverview";
 import RecentActivity from "../components/dashboard/RecentActivity";
+import {TrendingUpIcon, CheckCircleIcon, EyeIcon, CalendarIcon } from "../components/dashboard/icons";
+
 import {
   getProfile,
   getStats,
@@ -102,6 +105,54 @@ const FounderPortal = () => {
       }
     : emptyUser;
 
+const cards = data
+  ? [
+      {
+        icon: TrendingUpIcon,
+        label: "Spectrum Level",
+        value: data.stats.spectrumLevelLabel,
+        caption: data.stats.spectrumLevelSublabel,
+        accent: "border-l-[#102a54]",
+        iconBg: "bg-slate-100",
+        iconColor: "text-[#102a54]",
+        captionColor: "text-slate-500",
+      },
+      {
+        icon: CheckCircleIcon,
+        label: "Stages Completed",
+        value: `${data.stats.stagesCompleted} of ${data.stats.totalStages}`,
+        caption: data.stats.allStagesVerified
+          ? "All stages verified"
+          : "Verification in progress",
+        accent: "border-l-[#16a34a]",
+        iconBg: "bg-green-50",
+        iconColor: "text-[#16a34a]",
+        captionColor: "text-[#16a34a]",
+      },
+      {
+        icon: EyeIcon,
+        label: "Profile Visibility",
+        value: data.stats.profileVisibility,
+        caption: data.stats.profileVisibilitySublabel,
+        accent: "border-l-gold",
+        iconBg: "bg-amber-50",
+        iconColor: "text-amber-500",
+        captionColor: "text-amber-600",
+      },
+      {
+        icon: CalendarIcon,
+        label: "Days on Platform",
+        value: `${data.stats.daysOnPlatform} days`,
+        caption: `Member since ${formatMemberSince(
+          data.stats.memberSince
+        )}`,
+        accent: "border-l-red",
+        iconBg: "bg-red-50",
+        iconColor: "text-red",
+        captionColor: "text-red",
+      },
+    ]
+  : [];    
   return (
     <DashboardLayout user={user}>
       <div className="mx-auto max-w-6xl">
@@ -133,7 +184,7 @@ const FounderPortal = () => {
             </p>
 
             <div className="mt-6">
-              <StatCards stats={data.stats} />
+              <StatCards cards={cards} />
             </div>
 
             <div className="mt-6 grid gap-6 lg:grid-cols-3">

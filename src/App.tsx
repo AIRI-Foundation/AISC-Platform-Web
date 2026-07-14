@@ -4,6 +4,8 @@ import AuthenticationSuccess from "./pages/AuthenticationSuccess";
 import BookDemo from "./pages/BookDemo";
 import BuildCompanyProfile from "./pages/BuildCompanyProfile";
 import Contact from "./pages/Contact";
+import DashboardAdvisoryInvestor from "./pages/DashboardAdvisoryInvestor";
+import DashboardAdvisoryProgram from "./pages/DashboardAdvisoryProgram";
 import DashboardMilestones from "./pages/DashboardMilestones";
 import DashboardProfile from "./pages/DashboardProfile";
 import DashboardSettingsBilling from "./pages/DashboardSettingsBilling";
@@ -26,7 +28,6 @@ import VerifyOtp from "./pages/VerifyOtp";
 import AboutUs from "./pages/StubPages/AboutUs";
 import Advisory from "./pages/StubPages/Advisory";
 import CompanyProfile from "./pages/StubPages/CompanyProfile";
-import DashboardAdvisoryProgram from "./pages/StubPages/DashboardAdvisoryProgram";
 import InvestorHub from "./pages/StubPages/InvestorHub";
 import LearnMoreCorporations from "./pages/StubPages/LearnMoreCorporations";
 import LearnMoreFounders from "./pages/StubPages/LearnMoreFounders";
@@ -35,6 +36,7 @@ import LearnMoreInvestors from "./pages/StubPages/LearnMoreInvestors";
 import ManageSubscriptions from "./pages/StubPages/ManageSubscriptions";
 import Product from "./pages/StubPages/Product";
 import Spectrum from "./pages/StubPages/Spectrum";
+
 function App() {
   return (
     <BrowserRouter>
@@ -42,7 +44,9 @@ function App() {
         <Route path="/authentication-success" element={<AuthenticationSuccess />}/>       
         <Route path="/book-demo" element={<BookDemo />} />         
         <Route path="/build-company-profile" element={<BuildCompanyProfile />}/>
-        <Route path="/contact" element={<Contact />} />   
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/dashboard/advisory-investor" element={<DashboardAdvisoryInvestor />}/>             
+        <Route path="/dashboard/advisory-program" element={<DashboardAdvisoryProgram />}/>            
         <Route path="/dashboard/milestone-tracker" element={<DashboardMilestones />} />
         <Route path="/dashboard/milestone-tracker/:stage" element={<DashboardMilestones />}/> 
         <Route path="/dashboard/profile" element={<DashboardProfile />} />      
@@ -65,8 +69,7 @@ function App() {
 
         <Route path="/about-us" element={<AboutUs/>} /> 
         <Route path="/advisory" element={<Advisory />} />        
-        <Route path="/company/:id" element={<CompanyProfile />} />        
-        <Route path="/dashboard/advisory-program" element={<DashboardAdvisoryProgram />}/>  
+        <Route path="/company/:id" element={<CompanyProfile />} />         
         <Route path="/investor-hub" element={<InvestorHub />} />
         <Route path="/learn-corporations" element={<LearnMoreCorporations />} />
         <Route path="/learn-founders" element={<LearnMoreFounders />} />
