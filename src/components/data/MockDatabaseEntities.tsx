@@ -1,106 +1,103 @@
 import type { Company } from "../../types/api";
 
+// Dev-only fixture data, shaped to match the real GET /api/Directory/search
+// response (see services/directoryService.ts). No longer used by Directory.tsx
+// directly (it now calls the real API) - kept around for local component dev/tests.
 export const mockCompanies: Company[] = [
   {
-    id: 1,
+    id: "1",
     name: "NorthLight AI",
     description: "Enterprise AI risk intelligence platform",
     logoUrl: "",
-    spectrum: "L5",
+    hasFullProfile: true,
+    isVerified: true,
+    levelBadge: "L5 Champion",
     stage: "Series A",
     location: "Toronto, ON",
-    categories: [
-      "AISC Champion",
-      "Predictive Analytics"
-    ],
+    categories: ["AISC Champion", "Predictive Analytics"],
     revenue: 4200000,
     funding: 18000000,
     aiscScore: 92,
-    profileLink: "/company/northlight"
+    profileLink: "/company/1",
   },
   {
-    id: 2,
+    id: "2",
     name: "Proxima Health AI",
     description: "Clinical decision support using NLP",
     logoUrl: "",
-    spectrum: "L4",
+    hasFullProfile: true,
+    isVerified: true,
+    levelBadge: "L4 Scaler",
     stage: "Seed",
     location: "Montreal, QC",
-    categories: [
-      "AISC Certified",
-      "NLP - Health"
-    ],
+    categories: ["AISC Certified", "NLP - Health"],
     revenue: 1800000,
     funding: 6500000,
     aiscScore: 86,
-    profileLink: "/company/proxima-health"
+    profileLink: "/company/2",
   },
   {
-    id: 3,
+    id: "3",
     name: "Fieldvision Robotics",
     description: "AI-powered precision agriculture robotics",
     logoUrl: "",
-    spectrum: "L3",
+    hasFullProfile: true,
+    isVerified: true,
+    levelBadge: "L3 Deployer",
     stage: "Pre-Seed",
     location: "Waterloo, ON",
-    categories: [
-      "AISC Certified",
-      "Robotics - AgTech"
-    ],
+    categories: ["AISC Certified", "Robotics - AgTech"],
     revenue: 380000,
     funding: 6500000,
     aiscScore: 78,
-    profileLink: "/company/fieldvision"
+    profileLink: "/company/3",
   },
   {
-    id: 4,
+    id: "4",
     name: "Strata Finance AI",
     description: "AI-driven SMB credit decisioning",
     logoUrl: "",
-    spectrum: "L4",
+    hasFullProfile: true,
+    isVerified: true,
+    levelBadge: "L4 Scaler",
     stage: "Raising",
     location: "Vancouver, BC",
-    categories: [
-      "AISC Certified",
-      "FinTech-ML"
-    ],
+    categories: ["AISC Certified", "FinTech-ML"],
     revenue: 2400000,
     funding: 9000000,
     aiscScore: 89,
-    profileLink: "/company/strata-finance"
+    profileLink: "/company/4",
   },
   {
-    id: 5,
+    id: "5",
     name: "Quantum Sense",
     description: "AI-powered drug discovery platform",
     logoUrl: "",
-    spectrum: "L5",
+    hasFullProfile: true,
+    isVerified: true,
+    levelBadge: "L5 Champion",
     stage: "Series B",
     location: "Toronto, ON",
-    categories: [
-      "AISC Champion",
-      "BioAI - Health"
-    ],
+    categories: ["AISC Champion", "BioAI - Health"],
     revenue: 12100000,
     funding: 47000000,
     aiscScore: 96,
-    profileLink: "/company/quantum-sense"
+    profileLink: "/company/5",
   },
   {
-    id: 6,
-    name: "NorthLight AI",
-    description: "Enterprise AI risk intelligence platform",
+    id: "6",
+    name: "",
+    description: "",
     logoUrl: "",
-    spectrum: "L1",
-    stage: "Series A",
+    hasFullProfile: false,
+    isVerified: true,
+    levelBadge: null,
+    stage: "",
     location: "Toronto, ON",
-    categories: [
-      "AISC Champion",
-      "Predictive Analytics"
-    ],
-    revenue: 4200000,
-    funding: 18000000,
-    aiscScore: 92,
-    profileLink: "/company/northlight"
-  },  
+    categories: ["Predictive Analytics"],
+    revenue: 0,
+    funding: 0,
+    aiscScore: 0,
+    profileLink: "/company/6",
+  },
 ];

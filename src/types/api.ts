@@ -100,20 +100,57 @@ export interface CompanySearchRequest {
     stage: string;
 }
 
+// Raw shape returned by GET /api/Directory/search and GET /api/Directory/{id}.
+// Fields are null when the company doesn't have a full public profile yet
+// (Level 1-2, or Level 3 without AISC certification) - see backend
+// SpectrumHelper.HasFullProfile / DirectoryMapper for the masking rule.
+export interface DirectoryCompanyDto {
+  id: string;
+  name: string | null;
+  description: string | null;
+  logoUrl: string | null;
+  website: string | null;
+  city: string;
+  province: string;
+  categoryTag: string;
+  isVerified: boolean;
+  hasFullProfile: boolean;
+  levelBadge: string | null;
+  certificationBadge: string | null;
+  stage: string | null;
+  annualRevenue: number | null;
+  fundingRaised: number | null;
+  aiscScore: number | null;
+}
+
+// Raw shape returned by GET /api/Directory/filters.
+export interface DirectoryFiltersDto {
+  totalCount: number;
+  countsByLevel: Record<string, number>;
+  categories: string[];
+  locations: string[];
+  stages: string[];
+}
+
 export interface Company {
-  id: number;
+  id: string;
 
   // Header information
   name: string;
   description: string;
   logoUrl: string;
 
+  // Whether this card shows full details, or is locked to category-only
+  // (Level 1-2, or Level 3 without AISC certification).
+  hasFullProfile: boolean;
+  isVerified: boolean;
+
   // Filter information
-  spectrum: "L1" | "L2" | "L3" | "L4" | "L5";
+  levelBadge: string | null;
   stage: string;
   location: string;
 
-  // The 2 badges
+  // Badges shown under the name, e.g. ["AISC Certified", "NLP · Health"]
   categories: string[];
 
   // Financial information
