@@ -18,16 +18,16 @@ const Success = () => {
         <div className="mx-auto w-full mt-8 max-w-3xl rounded-[20px] bg-white/95 p-8 shadow-[0_5px_10px_rgba(0,0,0,0.6)] text-slate-900 backdrop-blur-xl sm:p-10">
          {/* Title */}
         <section className="mt-2 text-center">
-          <h1 className="mx-auto mt-4 max-w-4xl text-4xl font-bold leading-tight text-navy sm:text-5xl">
-            Password updated!
+          <h1 className="mx-auto mt-4 max-w-4xl text-6xl font-bold leading-tight text-navy">
+            Password <span className="text-gold">Updated!</span>
           </h1>
-          <p className="mx-auto mt-5 mb-5 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
+          <p className="mx-auto mt-2 mb-10 max-w-2xl text-navy text-slate-800 font-semibold text-lg">
              Your password has been successfully updated.
              <br />
              Click continue to log in.
           </p>
         </section>          
-        <div className="mx-auto w-sm">
+        <div className="mx-auto w-[80%]">
         <button           
           type="submit"
           className={buttonSubmit} 
@@ -38,7 +38,6 @@ const Success = () => {
           
       </div>
       </div>
-      <BottomSection />
       </div>
 
       <Footer />

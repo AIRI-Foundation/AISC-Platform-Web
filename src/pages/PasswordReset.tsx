@@ -114,7 +114,7 @@ return (
             </p>
           </section>          
 
-              <form onSubmit={handleSubmit} className="space-y-1 px-25 mb-6">
+              <form onSubmit={handleSubmit} className="space-y-1 mb-6 px-2 sm:px-6 md:px-12 lg:px-24">
 
           <label className= "text-sm font-medium block">
               <div className= "px-2.5"> New password </div>
@@ -188,9 +188,11 @@ return (
 
         </form>
       </div>
-      <BottomSection />
       </div>
+      <div className='px-6 py-6'>
 
+        <BottomSection />
+      </div>
       <Footer />
     </div>
     
