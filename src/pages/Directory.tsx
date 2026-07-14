@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FormEvent, useState, useEffect, useRef, } from "react";
+import { type FormEvent, useState, useEffect, useRef, } from "react";
 import { searchCompanies } from "../services/companyService";
 import type { Company } from "../types/api";
 

@@ -1,4 +1,3 @@
-import AboutUs from "../../../pages/StubPages/AboutUs";
 
 const Contacts = [
   {

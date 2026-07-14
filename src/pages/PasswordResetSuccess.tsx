@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
 import Footer from "../components/general/IndividualComponents/Footer"
-import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header"
 import { buttonSubmit } from "../components/general/IndividualComponents/Buttons";
 

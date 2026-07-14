@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import { getProfile, getUserCompany } from "../services/dashboardService";
@@ -97,11 +97,8 @@ const DashboardSettings = () => {
     twoFactorEnabled !== originalTwoFactorEnabled;
     
   const [data, setData] = useState<ProfilePageData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (!isLoggedIn()) {
