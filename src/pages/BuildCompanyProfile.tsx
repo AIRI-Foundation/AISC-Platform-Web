@@ -5,9 +5,154 @@ import { isLoggedIn } from "../lib/auth";
 import { getErrorMessage } from "../lib/api";
 
 import Footer from "../components/general/IndividualComponents/Footer";
-import BottomSection from "../components/general/BottomSection";
 import Header from "../components/general/IndividualComponents/Header";
-import { textField } from "../components/general/IndividualComponents/Buttons";
+
+const provinceOptions = [
+  "Alberta",
+  "British Columbia",
+  "Manitoba",
+  "New Brunswick",
+  "Newfoundland and Labrador",
+  "Northwest Territories",
+  "Nova Scotia",
+  "Nunavut",
+  "Ontario",
+  "Prince Edward Island",
+  "Quebec",
+  "Saskatchewan",
+  "Yukon",
+];
+
+const industryOptions = [
+  "Aerospace & Defense",
+  "Agriculture & Agritech",
+  "Automotive & Autonomous Vehicles",
+  "Biotech & Life Sciences",
+  "Cleantech, Climate & Environment",
+  "Cybersecurity & Privacy",
+  "E-Commerce & Retail",
+  "EdTech & Education",
+  "Energy, Utilities & Mining",
+  "Fintech, Banking & Insurance",
+  "Gaming & Entertainment",
+  "Government & Public Sector",
+  "Healthcare & MedTech",
+  "HR & Workforce Tech (Future of Work)",
+  "LegalTech & Compliance",
+  "Logistics, Supply Chain & Transportation",
+  "Manufacturing & Industrial Automation",
+  "Real Estate & Proptech",
+  "Software & IT Infrastructure",
+  "Telecom & Communications",
+  "Media, Advertising & MarTech",
+  "Sports & Fitness Technology",
+  "Travel, Hospitality & Tourism",
+  "Nonprofit & Social Impact",
+  "Food & Beverage / Agrifood Tech",
+  "Construction & Heavy Engineering",
+  "Others (please specify)",
+];
+
+const aiCategoryOptions = [
+  "Generative AI (LLMs, text, image, audio, video generation)",
+  "Machine Learning & Deep Learning (general)",
+  "Natural Language Processing (NLP) & Computational Linguistics",
+  "Computer Vision & Image/Video Recognition",
+  "Predictive Analytics & Forecasting",
+  "Robotics & Edge AI",
+  "Autonomous Systems & Drones",
+  "Reinforcement Learning",
+  "AI Infrastructure, MLOps & Developer Tools",
+  "AI Security, Ethics & Governance (Responsible AI)",
+  "Speech Recognition & Conversational AI (Chatbots/Voice)",
+  "Recommendation Systems & Personalization Engines",
+  "Bioinformatics & Computational Biology",
+  "Synthetic Data Generation",
+  "Knowledge Graphs & Semantic Reasoning",
+  "Graph Neural Networks & Geometric Deep Learning",
+  "Time-Series Analysis & Anomaly Detection",
+  "Federated Learning & Privacy-Preserving AI",
+  "Causal AI & Inference",
+  "Multi-Agent Systems & Swarm Intelligence",
+  "Explainable AI (XAI) & Interpretability",
+  "AI for Code Generation & Software Automation",
+  "Neural Symbolic AI",
+  "Others (please specify)",
+];
+
+const productStageOptions = [
+  "Idea / Concept",
+  "Prototype",
+  "MVP",
+  "Beta",
+  "Live / Commercial",
+  "Scaling",
+];
+
+const teamSizeOptions = ["Solo Founder", "2–5", "6–10", "11–25", "26–50", "50+"];
+
+const teamSizeValues: Record<string, number> = {
+  "Solo Founder": 1,
+  "2–5": 2,
+  "6–10": 6,
+  "11–25": 11,
+  "26–50": 26,
+  "50+": 50,
+};
+
+const revenueBandOptions = [
+  "Pre-revenue ($0)",
+  "Early ($0–$50K)",
+  "Seed ($50K–$1M ARR)",
+  "Growth ($1M–$10M ARR)",
+  "Scale ($10M+ ARR)",
+];
+
+const inputClass =
+  "mt-2 w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-light-blue focus:ring-2 focus:ring-light-blue/25";
+
+const chevron = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`;
+
+type SelectFieldProps = {
+  label: string;
+  name: string;
+  value: string;
+  options: string[];
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+};
+
+const SelectField = ({
+  label,
+  name,
+  value,
+  options,
+  onChange,
+}: SelectFieldProps) => (
+  <label className="block text-sm font-medium text-slate-900">
+    {label} <span className="text-red">*</span>
+    <select
+      name={name}
+      value={value}
+      onChange={onChange}
+      className={`${inputClass} appearance-none bg-no-repeat pr-9 ${
+        value ? "text-slate-900" : "text-slate-400"
+      }`}
+      style={{
+        backgroundImage: chevron,
+        backgroundPosition: "right 0.75rem center",
+      }}
+    >
+      <option value="" disabled hidden>
+        Select Option
+      </option>
+      {options.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  </label>
+);
 
 const BuildCompanyProfile = () => {
   const navigate = useNavigate();
@@ -35,14 +180,17 @@ const BuildCompanyProfile = () => {
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const target = event.target;
-    const { name, value } = target;
+    const { name, value } = event.target;
 
     setFormData((current) => ({
       ...current,
       [name]: value,
     }));
   };
+
+  const isComplete = Object.values(formData).every(
+    (value) => value.trim() !== "",
+  );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,7 +206,7 @@ const BuildCompanyProfile = () => {
         industry: formData.industry,
         aiCategory: formData.aiCategory,
         productStage: formData.productStage,
-        teamSize: formData.teamSize ? Number(formData.teamSize) : null,
+        teamSize: teamSizeValues[formData.teamSize] ?? null,
         fundingYear: formData.fundingYear ? Number(formData.fundingYear) : null,
         revenueBand: formData.revenueBand,
       });
@@ -74,172 +222,136 @@ const BuildCompanyProfile = () => {
   return (
     <div className="min-h-screen bg-navy text-white">
       <Header />
-      <div className="mx-auto max-w-7xl px-6 py-6">
-        <section className="mt-16 text-center">
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
-            Build your company profile
+      <div className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mx-auto max-w-4xl rounded-[24px] bg-white px-6 pb-12 pt-16 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 sm:px-12">
+          <h1 className="text-center text-4xl font-bold leading-tight text-navy sm:text-5xl">
+            Build Your <span className="text-gold">Company</span> Profile
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
-            Lorem ipsum dolor sit amet consectetur.
-            <br />
-            Sed nibh consequat eget in.
+          <p className="mx-auto mt-8 max-w-lg text-center text-lg text-navy">
+            Lorem ipsum dolor sit amet consectetur. Sed nibh consequat eget in.
           </p>
-        </section>
 
-        <div className="mx-auto mt-12 max-w-2xl rounded-[32px] bg-white/95 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.18)] text-slate-900 backdrop-blur-xl sm:p-10">
-          <form onSubmit={handleSubmit} className="space-y-1">
-            <label className="text-sm font-medium text-slate-800">
-              <span className="text-red">*</span>Company name
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto mt-12 w-full max-w-[450px] space-y-7"
+          >
+            <label className="block text-sm font-medium text-slate-900">
+              Company Name <span className="text-red">*</span>
               <input
                 name="companyName"
                 value={formData.companyName}
                 onChange={handleChange}
-                className={textField}
+                className={inputClass}
                 type="text"
-                placeholder="Enter company name"
+                placeholder="Company Name"
               />
             </label>
 
-            <label className="text-sm font-medium text-slate-800">
-              <span className="text-red">*</span>Website URL
-              <input
-                name="websiteUrl"
-                value={formData.websiteUrl}
+            <div className="grid gap-x-2.5 gap-y-7 sm:grid-cols-2">
+              <SelectField
+                label="Location"
+                name="province"
+                value={formData.province}
+                options={provinceOptions}
                 onChange={handleChange}
-                className={textField}
-                type="url"
-                placeholder="https://example.com"
               />
-            </label>
-
-            <div className="grid gap-x-4 sm:grid-cols-2">
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>City
+              <label className="block text-sm font-medium text-slate-900">
+                City <span className="text-red">*</span>
                 <input
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  className={textField}
+                  className={inputClass}
                   type="text"
-                  placeholder="Enter city"
-                />
-              </label>
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>Province
-                <input
-                  name="province"
-                  value={formData.province}
-                  onChange={handleChange}
-                  className={textField}
-                  type="text"
-                  placeholder="Enter province"
+                  placeholder="City"
                 />
               </label>
             </div>
 
-            <div className="grid gap-x-4 sm:grid-cols-2">
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>Industry
-                <input
-                  name="industry"
-                  value={formData.industry}
-                  onChange={handleChange}
-                  className={textField}
-                  type="text"
-                  placeholder="e.g. Healthcare"
-                />
-              </label>
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>AI Category
-                <input
-                  name="aiCategory"
-                  value={formData.aiCategory}
-                  onChange={handleChange}
-                  className={textField}
-                  type="text"
-                  placeholder="e.g. Generative AI"
-                />
-              </label>
+            <div className="grid gap-x-2.5 gap-y-7 sm:grid-cols-2">
+              <SelectField
+                label="Industry"
+                name="industry"
+                value={formData.industry}
+                options={industryOptions}
+                onChange={handleChange}
+              />
+              <SelectField
+                label="AI Category"
+                name="aiCategory"
+                value={formData.aiCategory}
+                options={aiCategoryOptions}
+                onChange={handleChange}
+              />
             </div>
 
-            <div className="grid gap-x-4 sm:grid-cols-2">
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>Product stage
-                <input
-                  name="productStage"
-                  value={formData.productStage}
-                  onChange={handleChange}
-                  className={textField}
-                  type="text"
-                  placeholder="e.g. MVP"
-                />
-              </label>
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>Team Size
-                <input
-                  name="teamSize"
-                  value={formData.teamSize}
-                  onChange={handleChange}
-                  className={textField}
-                  type="number"
-                  min={1}
-                  max={100000}
-                  placeholder="Number of people"
-                />
-              </label>
+            <div className="grid gap-x-2.5 gap-y-7 sm:grid-cols-2">
+              <SelectField
+                label="Product Stage"
+                name="productStage"
+                value={formData.productStage}
+                options={productStageOptions}
+                onChange={handleChange}
+              />
+              <SelectField
+                label="Team Size"
+                name="teamSize"
+                value={formData.teamSize}
+                options={teamSizeOptions}
+                onChange={handleChange}
+              />
             </div>
 
-            <div className="grid gap-x-4 sm:grid-cols-2">
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>Funding year
-                <select
+            <div className="grid gap-x-2.5 gap-y-7 sm:grid-cols-2">
+              <label className="block text-sm font-medium text-slate-900">
+                Funding Year <span className="text-red">*</span>
+                <input
                   name="fundingYear"
                   value={formData.fundingYear}
                   onChange={handleChange}
-                  className={textField}
-                >
-                  <option value="">Select year</option>
-                  {Array.from(
-                    { length: 2026 - 2000 + 1 },
-                    (_, i) => 2026 - i,
-                  ).map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="text-sm font-medium text-slate-800">
-                <span className="text-red">*</span>Revenue band
-                <input
-                  name="revenueBand"
-                  value={formData.revenueBand}
-                  onChange={handleChange}
-                  className={textField}
+                  className={inputClass}
                   type="text"
-                  placeholder="e.g. $100K - $1M"
+                  inputMode="numeric"
+                  maxLength={4}
+                  placeholder="Funding Year"
                 />
               </label>
+              <SelectField
+                label="Revenue Band"
+                name="revenueBand"
+                value={formData.revenueBand}
+                options={revenueBandOptions}
+                onChange={handleChange}
+              />
             </div>
 
-            <div className="pt-6 text-center">
-              <button
-                type="submit"
-                disabled={submitting || formData.companyName.trim() === ""}
-                className="inline-block rounded-[8px] bg-red px-12 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-red-500/20 transition hover:bg-red-dark disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {submitting ? "Submitting..." : "Submit"}
-              </button>
-            </div>
+            <label className="block text-sm font-medium text-slate-900">
+              Company Website <span className="text-red">*</span>
+              <input
+                name="websiteUrl"
+                value={formData.websiteUrl}
+                onChange={handleChange}
+                className={inputClass}
+                type="url"
+                placeholder="Company Website"
+              />
+            </label>
+
+            <button
+              type="submit"
+              disabled={submitting || !isComplete}
+              className="!mt-9 w-full rounded-lg bg-red py-3.5 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:bg-red-dark disabled:cursor-not-allowed disabled:bg-grey"
+            >
+              {submitting ? "Submitting..." : "Submit"}
+            </button>
 
             {error && (
-              <div className="mx-auto mt-3 w-full max-w-sm rounded-[6px] border-2 border border-red/20 bg-red/10 py-1 text-center text-sm font-semibold text-red-dark">
+              <div className="mx-auto w-full rounded-[6px] border-2 border-red/20 bg-red/10 py-1 text-center text-sm font-semibold text-red-dark">
                 {error}
               </div>
             )}
           </form>
         </div>
-        <BottomSection />
       </div>
 
       <Footer />
