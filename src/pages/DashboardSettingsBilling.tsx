@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import { getProfile, getUserCompany } from "../services/dashboardService";
@@ -164,8 +164,8 @@ IsActive
 
 const DashboardSettings = () => {
   const [data, setData] = useState<ProfilePageData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [, setLoading] = useState(true);
+  const [, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [creditInfoChanged, setCreditInfoChanged] = useState(false);
   // const hasChanges =

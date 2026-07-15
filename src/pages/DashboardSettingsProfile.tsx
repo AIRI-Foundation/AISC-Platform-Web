@@ -44,7 +44,7 @@ function formatPhoneNumber(phone: string) {
 
 const DashboardSettings = () => {
   const [data, setData] = useState<ProfilePageData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 

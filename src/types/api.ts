@@ -91,3 +91,38 @@ export interface BookDemoRequest {
 export interface ValidatePasswordRequest {
   password: string;
 }
+
+export interface CompanySearchRequest {
+    search: string;
+    spectrum: string;
+    category: string;
+    location: string;
+    stage: string;
+}
+
+export interface Company {
+  id: number;
+
+  // Header information
+  name: string;
+  description: string;
+  logoUrl: string;
+
+  // Filter information
+  spectrum: "L1" | "L2" | "L3" | "L4" | "L5";
+  stage: string;
+  location: string;
+
+  // The 2 badges
+  categories: string[];
+
+  // Financial information
+  revenue: number;
+  funding: number;
+
+  // Score
+  aiscScore: number;
+
+  // Navigation
+  profileLink: string;
+}
